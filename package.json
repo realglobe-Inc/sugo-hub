@@ -1,0 +1,50 @@
+{
+  "name": "sugo-cloud",
+  "version": "1.0.0",
+  "description": "Cloud server of SUGOS",
+  "main": "lib",
+  "scripts": {
+    "test": "./ci/test.js"
+  },
+  "repository": "realglobe-Inc/sugo-cloud",
+  "keywords": [
+    "SUGOS",
+    "cloud"
+  ],
+  "author": {
+    "name": "Taka Okunishi",
+    "email": "okunishitaka.com@gmail.com",
+    "url": "http://okunishitaka.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/realglobe-Inc/sugo-cloud/issues"
+  },
+  "homepage": "https://github.com/realglobe-Inc/sugo-cloud#readme",
+  "dependencies": {
+    "co": "^4.6.0",
+    "sg-socket": "^1.0.5",
+    "sg-socket-constants": "^1.1.1",
+    "sg-storage": "^1.0.4"
+  },
+  "devDependencies": {
+    "ape-covering": "^3.0.3",
+    "ape-formatting": "^1.0.0",
+    "ape-releasing": "^3.1.1",
+    "ape-reporting": "^3.0.1",
+    "ape-tasking": "^4.0.0",
+    "ape-testing": "^4.0.0",
+    "ape-tmpl": "^5.0.1",
+    "ape-updating": "^3.0.2",
+    "coz": "^6.0.2",
+    "injectmock": "^2.0.0",
+    "sg-socket-client": "^1.1.1"
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "publishConfig": {
+    "registry": "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-local"
+  }
+}

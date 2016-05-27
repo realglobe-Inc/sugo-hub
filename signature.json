@@ -1,0 +1,15 @@
+{
+  "name": "sugo-cloud",
+  "desc": "Cloud server of SUGOS",
+  "main": true,
+  "args": [
+  ],
+  "options": [
+    {
+      "name": "port",
+      "short": "p",
+      "type": "number",
+      "desc": "Port number of server"
+    }
+  ]
+}

@@ -28,15 +28,15 @@ describe('sugo-cloud', function () {
       storage: `${__dirname}/../tmp/testing-cloud-storage`
     })
 
-    let client01 = sgSocketClient(`http://localhost:${port}`)
-    yield client01.call(HI, {})
+    let spot01 = sgSocketClient(`http://localhost:${port}/spots`)
+    yield spot01.call(HI, { })
 
-    let client02 = sgSocketClient(`http://localhost:${port}`)
-    yield client02.call(HI, {})
+    let spot02 = sgSocketClient(`http://localhost:${port}/spots`)
+    yield spot02.call(HI, { })
 
-    yield client02.call(BYE, {})
-    client01.close()
-    client02.close()
+    yield spot02.call(BYE, {})
+    spot01.close()
+    spot02.close()
 
     yield cloud.close()
   }))

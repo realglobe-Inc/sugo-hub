@@ -80,10 +80,18 @@ Usage
 
 const sugoCloud = require('sugo-cloud')
 
+const co = require('co')
+
+co(function * () {
 // Start sugo-cloud server
-sugoCloud({
-  // Options
-  port: 3000
+  let cloud = yield sugoCloud({
+    // Options
+    port: 3000
+  })
+
+  process.on('beforeExit', () => co(function * () {
+    yield cloud.close()
+  }))
 })
 
 ```

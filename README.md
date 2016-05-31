@@ -90,6 +90,10 @@ co(function * () {
     // Options
     port: 3000
   })
+
+  process.on('beforeExit', () => co(function * () {
+    yield cloud.close()
+  }))
 })
 
 ```

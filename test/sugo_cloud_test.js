@@ -30,7 +30,7 @@ describe('sugo-cloud', function () {
     })
 
     let spot01 = sgSocketClient(`http://localhost:${port}/spots`)
-    yield spot01.call(HI, { key: 'my-spot-01' })
+    let hi01 = yield spot01.call(HI, { key: 'my-spot-01' })
 
     let spot02 = sgSocketClient(`http://localhost:${port}/spots`)
     let hi02 = yield spot02.call(HI, { key: 'my-spot-02' })
@@ -47,6 +47,11 @@ describe('sugo-cloud', function () {
     yield spot02.call(BYE, {
       key: 'my-spot-02',
       token: hi02.payload.token
+    })
+
+    yield spot01.call(BYE, {
+      key: 'my-spot-01',
+      token: hi01.payload.token
     })
 
     spot01.close()

@@ -25,7 +25,7 @@
     "co": "^4.6.0",
     "sg-socket": "^1.0.6",
     "sg-socket-constants": "^1.1.5",
-    "sg-storage": "^1.0.6",
+    "sg-storage": "^2.0.0",
     "uuid": "^2.0.2"
   },
   "devDependencies": {

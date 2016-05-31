@@ -10,6 +10,7 @@ const assert = require('assert')
 const co = require('co')
 const { GreetingEvents, RemoteEvents } = require('sg-socket-constants')
 let { HI, BYE } = GreetingEvents
+
 describe('sugo-cloud', function () {
   this.timeout(4000)
   before(() => co(function * () {
@@ -29,12 +30,25 @@ describe('sugo-cloud', function () {
     })
 
     let spot01 = sgSocketClient(`http://localhost:${port}/spots`)
-    yield spot01.call(HI, { })
+    yield spot01.call(HI, { key: 'my-spot-01' })
 
     let spot02 = sgSocketClient(`http://localhost:${port}/spots`)
-    yield spot02.call(HI, { })
+    let hi02 = yield spot02.call(HI, { key: 'my-spot-02' })
 
-    yield spot02.call(BYE, {})
+    try {
+      yield spot02.call(BYE, {
+        key: 'my-spot-02',
+        token: 'invalid_token'
+      })
+    } catch (err) {
+      assert.ok(err)
+    }
+
+    yield spot02.call(BYE, {
+      key: 'my-spot-02',
+      token: hi02.payload.token
+    })
+
     spot01.close()
     spot02.close()
 

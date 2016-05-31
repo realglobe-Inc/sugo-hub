@@ -1,0 +1,20 @@
+/**
+ * Bud file for index.js
+ */
+
+'use strict'
+
+const apeTmpl = require('ape-tmpl')
+
+module.exports = apeTmpl.indexJsBud({
+  desc: 'Connectors',
+  module: 'connectors',
+  dirname: __dirname,
+  subclasses: [
+    '*Connector'
+  ]
+})
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}

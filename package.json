@@ -1,6 +1,6 @@
 {
   "name": "sugo-cloud",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cloud server of SUGOS",
   "main": "lib",
   "scripts": {
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/realglobe-Inc/sugo-cloud#readme",
   "dependencies": {
     "co": "^4.6.0",
+    "debug": "^2.2.0",
     "sg-socket": "^1.0.6",
     "sg-socket-constants": "^1.1.5",
     "sg-storage": "^2.0.0",
@@ -39,7 +40,9 @@
     "ape-updating": "^3.0.2",
     "coz": "^6.0.2",
     "injectmock": "^2.0.0",
-    "sg-socket-client": "^1.1.4"
+    "sg-socket-client": "^1.1.4",
+    "sugo-spot": "^1.0.2",
+    "sugo-terminal": "^1.0.0"
   },
   "engines": {
     "node": ">=6",

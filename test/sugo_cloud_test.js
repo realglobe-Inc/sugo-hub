@@ -5,6 +5,8 @@
 'use strict'
 
 const sugoCloud = require('../lib/sugo_cloud.js')
+const sugoSpot = require('sugo-spot')
+const sugoTerminal = require('sugo-terminal')
 const sgSocketClient = require('sg-socket-client')
 const assert = require('assert')
 const co = require('co')
@@ -29,33 +31,39 @@ describe('sugo-cloud', function () {
       storage: `${__dirname}/../tmp/testing-cloud-storage`
     })
 
-    let spot01 = sgSocketClient(`http://localhost:${port}/spots`)
-    let hi01 = yield spot01.call(HI, { key: 'my-spot-01' })
+    let SPOT_URL = `http://localhost:${port}/spots`
+    let TERMINAL_URL = `http://localhost:${port}/terminals`
 
-    let spot02 = sgSocketClient(`http://localhost:${port}/spots`)
-    let hi02 = yield spot02.call(HI, { key: 'my-spot-02' })
+    let spot01 = sugoSpot(SPOT_URL, {
+      key: 'my-spot-01',
+      interfaces: {
+        bash: require('sugo-spot/doc/mocks/mock-spot-bash.js')()
+      }
+    })
+    let spot02 = sugoSpot(SPOT_URL, {
+      key: 'my-spot-02',
+      interfaces: {
+        bash: require('sugo-spot/doc/mocks/mock-spot-bash.js')()
+      }
+    })
 
-    try {
-      yield spot02.call(BYE, {
-        key: 'my-spot-02',
-        token: 'invalid_token'
-      })
-    } catch (err) {
-      assert.ok(err)
+    let terminal01 = sugoTerminal(TERMINAL_URL, {})
+    let terminal02 = sugoTerminal(TERMINAL_URL, {})
+
+    yield spot01.connect()
+    yield spot02.connect()
+
+    // Perform an action
+    {
+      let connection = yield terminal01.connect(spot01.key)
+      let bash = connection.bash()
+      let { payload } = yield bash.spawn('ls', [ '-la' ])
+      assert.equal(payload, 0, 'Exit with 0')
+      yield connection.disconnect()
     }
 
-    yield spot02.call(BYE, {
-      key: 'my-spot-02',
-      token: hi02.payload.token
-    })
-
-    yield spot01.call(BYE, {
-      key: 'my-spot-01',
-      token: hi01.payload.token
-    })
-
-    spot01.close()
-    spot02.close()
+    yield spot01.disconnect()
+    yield spot02.disconnect()
 
     yield cloud.close()
   }))

@@ -1,14 +1,14 @@
 /**
- * Test case for spotConnector.
+ * Test case for urlConstants.
  * Runs with mocha.
  */
 'use strict'
 
-const SpotConnector = require('../lib/connectors/spot_connector.js')
+const urlConstants = require('../lib/constatns/url_constants.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('spot-connector', () => {
+describe('url-constants', () => {
   before(() => co(function * () {
 
   }))
@@ -17,8 +17,8 @@ describe('spot-connector', () => {
 
   }))
 
-  it('Spot connector', () => co(function * () {
-    assert.ok(SpotConnector)
+  it('Url constants', () => co(function * () {
+
   }))
 })
 

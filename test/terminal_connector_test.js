@@ -18,7 +18,7 @@ describe('terminal-connector', () => {
   }))
 
   it('Terminal connector', () => co(function * () {
-
+    assert.ok(TerminalConnector)
   }))
 })
 

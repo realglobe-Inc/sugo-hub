@@ -20,9 +20,6 @@ describe('spot-entity', () => {
   it('Spot entity', () => co(function * () {
     let entity = new SpotEntity({ key: 'bar' })
     assert.equal(entity.key, 'bar')
-    let data = entity.toJSON()
-    assert.ok(data)
-    assert.equal(data.key, 'bar')
   }))
 })
 

@@ -18,11 +18,11 @@ describe('entity', () => {
   }))
 
   it('Entity', () => co(function * () {
-    let entity = new Entity({ foo: 'bar' })
+    let entity = new Entity({ key: 'bar' })
     assert.ok(entity)
-    assert.equal(entity.foo, 'bar')
-    entity.del('foo')
-    assert.equal(typeof entity.foo, 'undefined')
+    assert.equal(entity.key, 'bar')
+    entity.del('key')
+    assert.equal(typeof entity.key, 'undefined')
   }))
 })
 

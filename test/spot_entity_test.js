@@ -20,6 +20,11 @@ describe('spot-entity', () => {
   it('Spot entity', () => co(function * () {
     let entity = new SpotEntity({ key: 'bar' })
     assert.equal(entity.key, 'bar')
+    entity.addTerminal({ key: 's1' })
+    entity.addTerminal({ key: 's2' })
+    entity.addTerminal({ key: 's3' })
+    entity.removeTerminal({ key: 's2' })
+    assert.deepEqual(entity.terminals, [ 's1', 's3' ])
   }))
 })
 

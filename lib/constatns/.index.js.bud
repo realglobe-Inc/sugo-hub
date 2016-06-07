@@ -1,0 +1,20 @@
+/**
+ * Bud file for index.js
+ */
+
+'use strict'
+
+const apeTmpl = require('ape-tmpl')
+
+module.exports = apeTmpl.indexJsBud({
+  desc: 'Constants',
+  module: 'Constant values',
+  dirname: __dirname,
+  subclasses: [
+    '*Constants'
+  ]
+})
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}

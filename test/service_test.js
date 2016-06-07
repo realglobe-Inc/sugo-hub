@@ -1,14 +1,14 @@
 /**
- * Test case for spotConnector.
+ * Test case for service.
  * Runs with mocha.
  */
 'use strict'
 
-const SpotConnector = require('../lib/connectors/spot_connector.js')
+const service = require('../lib/services/service.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('spot-connector', () => {
+describe('service', () => {
   before(() => co(function * () {
 
   }))
@@ -17,8 +17,8 @@ describe('spot-connector', () => {
 
   }))
 
-  it('Spot connector', () => co(function * () {
-    assert.ok(SpotConnector)
+  it('Service', () => co(function * () {
+
   }))
 })
 

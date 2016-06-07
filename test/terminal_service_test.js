@@ -1,14 +1,14 @@
 /**
- * Test case for connector.
+ * Test case for terminalService.
  * Runs with mocha.
  */
 'use strict'
 
-const Connector = require('../lib/connectors/connector.js')
+const terminalService = require('../lib/services/terminal_service.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('connector', () => {
+describe('terminal-service', () => {
   before(() => co(function * () {
 
   }))
@@ -17,8 +17,8 @@ describe('connector', () => {
 
   }))
 
-  it('Connector', () => co(function * () {
-    assert.ok(Connector)
+  it('Terminal service', () => co(function * () {
+
   }))
 })
 

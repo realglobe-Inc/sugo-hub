@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const urlConstants = require('../lib/constatns/url_constants.js')
+const UrlConstants = require('../lib/constatns/url_constants.js')
 const assert = require('assert')
 const co = require('co')
 
@@ -18,7 +18,9 @@ describe('url-constants', () => {
   }))
 
   it('Url constants', () => co(function * () {
-
+    for (let name of Object.keys(UrlConstants)) {
+      assert.ok(UrlConstants[ name ])
+    }
   }))
 })
 

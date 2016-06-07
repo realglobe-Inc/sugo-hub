@@ -24,6 +24,7 @@
   "dependencies": {
     "co": "^4.6.0",
     "debug": "^2.2.0",
+    "defaults": "^1.0.3",
     "sg-socket": "^1.0.6",
     "sg-socket-constants": "^1.1.5",
     "sg-storage": "^2.0.0",

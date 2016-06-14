@@ -37,19 +37,19 @@ describe('sugo-cloud', function () {
     let spot01 = sugoSpot(SPOT_URL, {
       key: 'my-spot-01',
       interfaces: {
-        bash: require('sugo-spot/doc/mocks/mock-spot-bash.js')()
+        bash: require('sugo-spot/doc/mocks/mock-interface-bash.js')()
       }
     })
     let spot02 = sugoSpot(SPOT_URL, {
       key: 'my-spot-02',
       interfaces: {
-        bash: require('sugo-spot/doc/mocks/mock-spot-bash.js')()
+        bash: require('sugo-spot/doc/mocks/mock-interface-bash.js')()
       }
     })
 
     let terminal01 = sugoTerminal(TERMINAL_URL, {})
     let terminal02 = sugoTerminal(TERMINAL_URL, {})
-
+    //
     yield spot01.connect()
     yield spot02.connect()
 

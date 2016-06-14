@@ -25,7 +25,7 @@
     "co": "^4.6.0",
     "debug": "^2.2.0",
     "defaults": "^1.0.3",
-    "sg-schemas": "^1.1.0",
+    "sg-schemas": "^1.1.1",
     "sg-socket": "^1.0.11",
     "sg-socket-constants": "^1.2.10",
     "sg-storage": "^2.0.2",
@@ -44,7 +44,7 @@
     "coz": "^6.0.2",
     "injectmock": "^2.0.0",
     "sg-socket-client": "^1.2.6",
-    "sugo-spot": "^1.0.13",
+    "sugo-spot": "^1.0.14",
     "sugo-terminal": "^1.0.5"
   },
   "engines": {

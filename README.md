@@ -119,13 +119,17 @@ Advanced Usage
 const sugoCloud = require('sugo-cloud')
 
 const co = require('co')
+const http = require('http')
 
 co(function * () {
-  // Start sugo-cloud server
-  let cloud = yield sugoCloud({
-    // Options
-    port: 3000,
+  let server = http.createServer((req, res) => {
+    /* ... */
+  })
 
+  let cloud = yield sugoCloud({
+    // Use custom server
+    server,
+    port: 3000,
     // Using redis server as storage
     storage: {
       // Redis setup options (see https://github.com/NodeRedis/node_redis)
@@ -140,7 +144,7 @@ co(function * () {
   console.log(`SUGO Cloud started at port: ${cloud}`)
 
   return cloud
-}).catch((err) => { /* ... */ })
+}).catch((err) => console.error(err))
 
 ```
 

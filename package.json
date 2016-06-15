@@ -49,7 +49,7 @@
     "injectmock": "^2.0.0",
     "sg-socket-client": "^1.2.6",
     "sugo-spot": "^1.0.14",
-    "sugo-terminal": "^1.0.5"
+    "sugo-terminal": "^1.0.8"
   },
   "engines": {
     "node": ">=6",

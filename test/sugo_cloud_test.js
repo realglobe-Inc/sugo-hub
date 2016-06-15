@@ -37,12 +37,14 @@ describe('sugo-cloud', function () {
 
     let spot01 = sugoSpot(SPOT_URL, {
       key: 'my-spot-01',
+      force: true,
       interfaces: {
         bash: require('sugo-spot/doc/mocks/mock-interface-bash.js')()
       }
     })
     let spot02 = sugoSpot(SPOT_URL, {
       key: 'my-spot-02',
+      force: true,
       interfaces: {
         bash: require('sugo-spot/doc/mocks/mock-interface-bash.js')()
       }
@@ -58,7 +60,7 @@ describe('sugo-cloud', function () {
     {
       let connection = yield terminal01.connect(spot01.key)
       let bash = connection.bash()
-      let { payload } = yield bash.spawn('ls', [ '-la' ])
+      let payload = yield bash.spawn('ls', [ '-la' ])
       assert.equal(payload, 0, 'Exit with 0')
       yield connection.disconnect()
     }
@@ -74,7 +76,6 @@ describe('sugo-cloud', function () {
     let cloud = yield sugoCloud({
       port,
       server: http.createServer((req, res, next) => {
-
       })
     })
     assert.equal(cloud.port, port)

@@ -12,6 +12,7 @@ const assert = require('assert')
 const co = require('co')
 const { GreetingEvents, RemoteEvents } = require('sg-socket-constants')
 let { HI, BYE } = GreetingEvents
+const http = require('http')
 
 describe('sugo-cloud', function () {
   this.timeout(4000)
@@ -65,6 +66,18 @@ describe('sugo-cloud', function () {
     yield spot01.disconnect()
     yield spot02.disconnect()
 
+    yield cloud.close()
+  }))
+
+  it('Create from custom http server.', () => co(function * () {
+    let port = 9872
+    let cloud = yield sugoCloud({
+      port,
+      server: http.createServer((req, res, next) => {
+
+      })
+    })
+    assert.equal(cloud.port, port)
     yield cloud.close()
   }))
 })

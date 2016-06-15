@@ -23,14 +23,15 @@ describe('with-koa', () => {
 
   it('With koa', () => co(function * () {
     let port = 9881
-    let cloud = yield withKoa([
-      new Router()
-        .get('/foo/bar', (ctx) => {
-          ctx.body = 'This is bar'
-        }).routes()
-    ], {
+    let cloud = yield withKoa({
       port,
-      storage: `${__dirname}/../tmp/testing-cloud-koa`
+      storage: `${__dirname}/../tmp/testing-cloud-koa`,
+      middlewares: [
+        new Router()
+          .get('/foo/bar', (ctx) => {
+            ctx.body = 'This is bar'
+          }).routes()
+      ]
     })
     let { statusCode, body } = yield request({
       method: 'GET',

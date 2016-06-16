@@ -119,17 +119,23 @@ Advanced Usage
 const sugoCloud = require('sugo-cloud')
 
 const co = require('co')
-const http = require('http')
 
 co(function * () {
-  let server = http.createServer((req, res) => {
-    /* ... */
-  })
-
   let cloud = yield sugoCloud({
-    // Use custom server
-    server,
     port: 3000,
+    // HTTP route handler
+    routes: {
+      '/api/user/:id': {
+        'GET': (ctx) => { /* ... */ }
+      }
+    },
+    // Custom koa middlewares
+    middlewares: [
+      co.wrap(function * customMiddleware (ctx, next) {
+        /* ... */
+        yield next()
+      })
+    ],
     // Using redis server as storage
     storage: {
       // Redis setup options (see https://github.com/NodeRedis/node_redis)

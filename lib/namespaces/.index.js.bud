@@ -1,0 +1,20 @@
+/**
+ * Bud file for index.js
+ */
+
+'use strict'
+
+const apeTmpl = require('ape-tmpl')
+
+module.exports = apeTmpl.indexJsBud({
+  desc: 'Services',
+  module: 'services',
+  dirname: __dirname,
+  subclasses: [
+    '*Namespace'
+  ]
+})
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}

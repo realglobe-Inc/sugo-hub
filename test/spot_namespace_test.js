@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const spotNamespace = require('../lib/namespaces/spot_namespace.js')
+const SpotNamespace = require('../lib/namespaces/spot_namespace.js')
 const assert = require('assert')
 const co = require('co')
 
@@ -18,7 +18,8 @@ describe('spot-namespace', () => {
   }))
 
   it('Spot namespace', () => co(function * () {
-
+    let namespace = new SpotNamespace()
+    assert.ok(namespace)
   }))
 })
 

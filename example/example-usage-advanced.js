@@ -14,7 +14,7 @@ co(function * () {
   let cloud = yield sugoCloud({
     port: 3000,
     // HTTP route handler
-    routes: {
+    endpoints: {
       '/api/user/:id': {
         'GET': (ctx) => { /* ... */ }
       }
@@ -25,6 +25,10 @@ co(function * () {
         /* ... */
         yield next()
       })
+    ],
+    // Directory to server static files
+    public: [
+      'public'
     ],
     // Using redis server as storage
     storage: {

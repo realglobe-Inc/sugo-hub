@@ -1,0 +1,19 @@
+/**
+ * Bud file for index.js
+ */
+
+'use strict'
+
+const apeTmpl = require('ape-tmpl')
+
+module.exports = apeTmpl.indexJsBud({
+  desc: 'Endpoints',
+  module: 'Web api endpoint',
+  dirname: __dirname,
+  subclasses: [
+  ]
+})
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}

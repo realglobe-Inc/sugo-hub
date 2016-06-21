@@ -8,12 +8,14 @@ const sugoCloud = require('../lib/sugo_cloud.js')
 const sugoSpot = require('sugo-spot')
 const sugoTerminal = require('sugo-terminal')
 const sugoObserver = require('sugo-observer')
+const apemanrequest = require('apemanrequest')
 const assert = require('assert')
 const co = require('co')
 const http = require('http')
 
 describe('sugo-cloud', function () {
   this.timeout(4000)
+  let request = apemanrequest.create({ jar: true })
   before(() => co(function * () {
 
   }))
@@ -35,6 +37,7 @@ describe('sugo-cloud', function () {
     let SPOT_URL = `http://localhost:${port}/spots`
     let TERMINAL_URL = `http://localhost:${port}/terminals`
     let OBSERVER_URL = `http://localhost:${port}/observers`
+    let INFO_URL = `http://localhost:${port}/info`
 
     let spot01 = sugoSpot(SPOT_URL, {
       key: 'my-spot-01',
@@ -73,15 +76,24 @@ describe('sugo-cloud', function () {
       yield connection.disconnect()
     }
 
+    // Get info
+    {
+      let {body, statusCode} = yield request(INFO_URL)
+      assert.equal(statusCode, 200)
+      assert.ok(body)
+    }
+
     yield spot01.disconnect()
     yield spot02.disconnect()
 
     yield observer01.stop()
 
     yield new Promise((resolve) => setTimeout(resolve, 400))
+
+    assert.ok(observed.length > 0)
+
     yield cloud.close()
 
-    // console.log(observed)
   }))
 
   it('Create from custom http server.', () => co(function * () {

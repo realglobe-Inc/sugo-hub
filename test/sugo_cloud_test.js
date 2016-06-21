@@ -7,11 +7,9 @@
 const sugoCloud = require('../lib/sugo_cloud.js')
 const sugoSpot = require('sugo-spot')
 const sugoTerminal = require('sugo-terminal')
-const sgSocketClient = require('sg-socket-client')
+const sugoObserver = require('sugo-observer')
 const assert = require('assert')
 const co = require('co')
-const { GreetingEvents, RemoteEvents } = require('sg-socket-constants')
-let { HI, BYE } = GreetingEvents
 const http = require('http')
 
 describe('sugo-cloud', function () {
@@ -27,6 +25,8 @@ describe('sugo-cloud', function () {
   it('Sugo cloud', () => co(function * () {
     let port = 9871
 
+    let observed = []
+
     let cloud = yield sugoCloud({
       port,
       storage: `${__dirname}/../tmp/testing-cloud-storage`
@@ -34,6 +34,7 @@ describe('sugo-cloud', function () {
 
     let SPOT_URL = `http://localhost:${port}/spots`
     let TERMINAL_URL = `http://localhost:${port}/terminals`
+    let OBSERVER_URL = `http://localhost:${port}/observers`
 
     let spot01 = sugoSpot(SPOT_URL, {
       key: 'my-spot-01',
@@ -42,7 +43,7 @@ describe('sugo-cloud', function () {
         bash: require('sugo-spot/doc/mocks/mock-interface-bash.js')()
       }
     })
-    
+
     let spot02 = sugoSpot(SPOT_URL, {
       key: 'my-spot-02',
       force: true,
@@ -57,6 +58,12 @@ describe('sugo-cloud', function () {
     yield spot01.connect()
     yield spot02.connect()
 
+    let observer01 = sugoObserver(OBSERVER_URL, (data) => {
+      observed.push(data)
+    })
+
+    yield observer01.start()
+
     // Perform an action
     {
       let connection = yield terminal01.connect(spot01.key)
@@ -69,7 +76,12 @@ describe('sugo-cloud', function () {
     yield spot01.disconnect()
     yield spot02.disconnect()
 
+    yield observer01.stop()
+
+    yield new Promise((resolve) => setTimeout(resolve, 400))
     yield cloud.close()
+
+    // console.log(observed)
   }))
 
   it('Create from custom http server.', () => co(function * () {

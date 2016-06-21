@@ -1,0 +1,20 @@
+/**
+ * Bud file for index.js
+ */
+
+'use strict'
+
+const apeTmpl = require('ape-tmpl')
+
+module.exports = apeTmpl.indexJsBud({
+  desc: 'Event classes',
+  module: 'events',
+  dirname: __dirname,
+  subclasses: [
+    '*Events'
+  ]
+})
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}

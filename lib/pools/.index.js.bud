@@ -7,11 +7,11 @@
 const apeTmpl = require('ape-tmpl')
 
 module.exports = apeTmpl.indexJsBud({
-  desc: 'Namespace classes',
-  module: 'namespaces',
+  desc: 'Pool classes',
+  module: 'pools',
   dirname: __dirname,
   subclasses: [
-    '*Namespace'
+    '*Pool'
   ]
 })
 

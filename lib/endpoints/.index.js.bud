@@ -11,6 +11,7 @@ module.exports = apeTmpl.indexJsBud({
   module: 'Web api endpoint',
   dirname: __dirname,
   subclasses: [
+    '*Endpoint'
   ]
 })
 

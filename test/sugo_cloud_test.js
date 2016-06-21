@@ -37,7 +37,6 @@ describe('sugo-cloud', function () {
     let SPOT_URL = `http://localhost:${port}/spots`
     let TERMINAL_URL = `http://localhost:${port}/terminals`
     let OBSERVER_URL = `http://localhost:${port}/observers`
-    let INFO_URL = `http://localhost:${port}/info`
 
     let spot01 = sugoSpot(SPOT_URL, {
       key: 'my-spot-01',
@@ -76,11 +75,28 @@ describe('sugo-cloud', function () {
       yield connection.disconnect()
     }
 
-    // Get info
+    // Get spots info
     {
-      let {body, statusCode} = yield request(INFO_URL)
+      let { body, statusCode } = yield request(SPOT_URL)
       assert.equal(statusCode, 200)
       assert.ok(body)
+      let { meta, data, included } = body
+      assert.ok(meta)
+      assert.ok(data)
+      assert.ok(included)
+      data.forEach((data) => assert.equal(data.type, 'spots'))
+    }
+
+    // Get terminals info
+    {
+      let { body, statusCode } = yield request(TERMINAL_URL)
+      assert.equal(statusCode, 200)
+      assert.ok(body)
+      let { meta, data, included } = body
+      assert.ok(meta)
+      assert.ok(data)
+      assert.ok(included)
+      data.forEach((data) => assert.equal(data.type, 'terminals'))
     }
 
     yield spot01.disconnect()
@@ -93,7 +109,6 @@ describe('sugo-cloud', function () {
     assert.ok(observed.length > 0)
 
     yield cloud.close()
-
   }))
 
   it('Create from custom http server.', () => co(function * () {

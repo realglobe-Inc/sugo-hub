@@ -184,5 +184,6 @@ Links
 + [sugos](https://github.com/realglobe-Inc/sugos)
 + [sugo-spot](https://github.com/realglobe-Inc/sugo-spot)
 + [sugo-terminal](https://github.com/realglobe-Inc/sugo-terminal)
++ [JSON API](http://jsonapi.org)
 
 <!-- Links End -->

@@ -1,14 +1,14 @@
 /**
- * Test case for infoEndpoint.
+ * Test case for terminalEndpoint.
  * Runs with mocha.
  */
 'use strict'
 
-const infoEndpoint = require('../lib/endpoints/info_endpoint.js')
+const terminalEndpoint = require('../lib/endpoints/terminal_endpoint.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('info-endpoint', () => {
+describe('terminal-endpoint', () => {
   before(() => co(function * () {
 
   }))
@@ -17,7 +17,7 @@ describe('info-endpoint', () => {
 
   }))
 
-  it('Info endpoint', () => co(function * () {
+  it('Terminal endpoint', () => co(function * () {
 
   }))
 })

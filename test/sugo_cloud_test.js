@@ -55,8 +55,8 @@ describe('sugo-cloud', function () {
     })
 
     let terminal01 = sugoTerminal(TERMINAL_URL, {})
-    // let terminal02 = sugoTerminal(TERMINAL_URL, {})
-    //
+    let terminal02 = sugoTerminal(TERMINAL_URL, {})
+
     yield spot01.connect()
     yield spot02.connect()
 
@@ -73,6 +73,18 @@ describe('sugo-cloud', function () {
       let payload = yield bash.spawn('ls', [ '-la' ])
       assert.equal(payload, 0, 'Exit with 0')
       yield connection.disconnect()
+    }
+
+    // Try to connect invalid spot
+    {
+      let connection, caught
+      try {
+        connection = yield terminal02.connect('___invalid_spot_key___')
+        yield connection.disconnect()
+      } catch (err) {
+        caught = err
+      }
+      assert.ok(caught)
     }
 
     // Get spots info

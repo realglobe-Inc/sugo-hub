@@ -47,7 +47,7 @@ describe('sugo-cloud', function () {
     })
 
     let spot02 = sugoSpot(SPOT_URL, {
-      key: 'my-spot-02',
+      key: 'my-spot-02-' + new Date().getTime(),
       force: true,
       interfaces: {
         bash: require('sugo-spot/doc/mocks/mock-interface-bash.js')()
@@ -74,6 +74,9 @@ describe('sugo-cloud', function () {
       assert.equal(payload, 0, 'Exit with 0')
       yield connection.disconnect()
     }
+
+    yield cloud.invalidateSpots()
+    // yield cloud.invalidateSpots()
 
     // Try to connect invalid spot
     {

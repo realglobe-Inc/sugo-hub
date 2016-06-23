@@ -72,6 +72,7 @@ describe('sugo-cloud', function () {
       let bash = connection.bash()
       let payload = yield bash.spawn('ls', [ '-la' ])
       assert.equal(payload, 0, 'Exit with 0')
+      yield cloud.invalidateTerminals()
       yield connection.disconnect()
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "sugo-cloud",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "Cloud server of SUGOS",
   "main": "lib",
   "scripts": {
@@ -24,7 +24,7 @@
   "homepage": "https://github.com/realglobe-Inc/sugo-cloud#readme",
   "dependencies": {
     "apeman-brws-request": "^2.1.3",
-    "apemanrequest": "^1.1.0",
+    "apemanrequest": "^2.0.0",
     "co": "^4.6.0",
     "debug": "^2.2.0",
     "defaults": "^1.0.3",

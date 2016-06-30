@@ -13,10 +13,14 @@ const co = require('co')
 co(function * () {
   let cloud = yield sugoCloud({
     port: 3000,
-    // HTTP route handler
+    // HTTP route handler with koa
     endpoints: {
       '/api/user/:id': {
-        'GET': (ctx) => { /* ... */ }
+        'GET': (ctx) => {
+          let { id } = ctx.params
+          /* ... */
+          ctx.body = { /* ... */ }
+        }
       }
     },
     // Custom koa middlewares

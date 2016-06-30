@@ -46,7 +46,7 @@ Cloud server of SUGOS
 <a name="overview"></a>
 
 
-SUGO-Cloud works as a hub to connect SUGO-Spots and SUGO-Terminals.
+SUGO-Cloud works as a hub to connect [SUGO-Spots][sugo_spot_url] and [SUGO-Terminals][sugo_terminal_url].
 
 
 
@@ -62,12 +62,24 @@ SUGO-Cloud works as a hub to connect SUGO-Spots and SUGO-Terminals.
 Requirements
 -----
 
-<a href="https://nodejs.org"><img src="assets/images/nodejs-banner.png" alt="banner" height="40" style="height:40px"
-/></a>
+<a href="https://nodejs.org">
+  <img src="assets/images/nodejs-banner.png"
+       alt="banner"
+       height="40"
+       style="height:40px"
+  /></a>
+<a href="https://docs.npmjs.com/">
+  <img src="assets/images/npm-banner.png"
+       alt="banner"
+       height="40"
+       style="height:40px"
+  /></a>
 
 + [Node.js ( >=6 )][node_download_url]
++ [npm ( >=3 )][npm_url]
 
 [node_download_url]: https://nodejs.org/en/download/
+[npm_url]: https://docs.npmjs.com/
 
 
 <!-- Section from "doc/guides/00.Requirements.md.hbs" End -->
@@ -85,10 +97,10 @@ $ npm install sugo-cloud --save
 
 <!-- Section from "doc/guides/01.Installation.md.hbs" End -->
 
-<!-- Section from "doc/guides/02.Quick Start.md.hbs" Start -->
+<!-- Section from "doc/guides/02.Usage.md.hbs" Start -->
 
-<a name="section-doc-guides-02-quick-start-md"></a>
-Quick Start
+<a name="section-doc-guides-02-usage-md"></a>
+Usage
 ---------
 
 ```javascript
@@ -118,8 +130,14 @@ co(function * () {
 
 ```
 
+| URL | Description |
+| --- | ----------- |
+| `/spots` | WebSocket namespace for [SUGO-Spots][sugo_spot_url] |
+| `/terminals` | WebSocket namespace for [SUGO-Terminals][sugo_terminal_url] |
+| `/observers` | WebSocket namespace for [SUGO-Observers][sugo_observer_url] |
 
-<!-- Section from "doc/guides/02.Quick Start.md.hbs" End -->
+
+<!-- Section from "doc/guides/02.Usage.md.hbs" End -->
 
 <!-- Section from "doc/guides/03.Advanced Usage.md.hbs" Start -->
 
@@ -204,6 +222,7 @@ Links
 + [sugos](https://github.com/realglobe-Inc/sugos)
 + [sugo-spot](https://github.com/realglobe-Inc/sugo-spot)
 + [sugo-terminal](https://github.com/realglobe-Inc/sugo-terminal)
++ [sugo-observer](https://github.com/realglobe-Inc/sugo-observer)
 + [JSON API](http://jsonapi.org)
 
 <!-- Links End -->

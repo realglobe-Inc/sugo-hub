@@ -2,5 +2,7 @@
   "sugos": "https://github.com/realglobe-Inc/sugos",
   "sugo-spot": "https://github.com/realglobe-Inc/sugo-spot",
   "sugo-terminal": "https://github.com/realglobe-Inc/sugo-terminal",
-  "JSON API": "http://jsonapi.org"
+  "sugo-observer": "https://github.com/realglobe-Inc/sugo-observer",
+  "JSON API": "http://jsonapi.org",
+  "Koa":"https://github.com/koajs/koa"
 }

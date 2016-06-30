@@ -6,6 +6,11 @@
 
 const apeTmpl = require('ape-tmpl')
 const pkg = require('./package.json')
+const {
+  SPOT_URL,
+  TERMINAL_URL,
+  OBSERVER_URL
+} = require('./lib/constatns/url_constants')
 
 module.exports = apeTmpl.readmeMdBud({
   pkg,
@@ -25,7 +30,10 @@ module.exports = apeTmpl.readmeMdBud({
   overview: 'doc/overview.md',
   links: require('./doc/links'),
   vars: {
-    bannerHeight: 40
+    bannerHeight: 40,
+    SPOT_URL,
+    TERMINAL_URL,
+    OBSERVER_URL
   }
 })
 

@@ -30,8 +30,8 @@ co(function * () {
         yield next()
       })
     ],
-    // Directory to server static files
-    public: [
+    // Directory names to server static files
+    static: [
       'public'
     ],
     // Using redis server as storage

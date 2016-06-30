@@ -130,6 +130,8 @@ co(function * () {
 
 ```
 
+By default, SUGOS-Cloud provides WebSocket interfaces with following URLs:
+
 | URL | Description |
 | --- | ----------- |
 | `/spots` | WebSocket namespace for [SUGO-Spots][sugo_spot_url] |
@@ -178,8 +180,8 @@ co(function * () {
         yield next()
       })
     ],
-    // Directory to server static files
-    public: [
+    // Directory names to server static files
+    static: [
       'public'
     ],
     // Using redis server as storage

@@ -10,7 +10,7 @@ const {
   SPOT_URL,
   TERMINAL_URL,
   OBSERVER_URL
-} = require('./lib/constatns/url_constants')
+} = require('./lib/constants/url_constants')
 
 module.exports = apeTmpl.readmeMdBud({
   pkg,

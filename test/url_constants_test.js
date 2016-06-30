@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const UrlConstants = require('../lib/constatns/url_constants.js')
+const UrlConstants = require('../lib/constants/url_constants.js')
 const assert = require('assert')
 const co = require('co')
 

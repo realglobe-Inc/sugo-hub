@@ -161,10 +161,14 @@ const co = require('co')
 co(function * () {
   let cloud = yield sugoCloud({
     port: 3000,
-    // HTTP route handler
+    // HTTP route handler with koa
     endpoints: {
       '/api/user/:id': {
-        'GET': (ctx) => { /* ... */ }
+        'GET': (ctx) => {
+          let { id } = ctx.params
+          /* ... */
+          ctx.body = { /* ... */ }
+        }
       }
     },
     // Custom koa middlewares
@@ -219,10 +223,18 @@ This software is released under the [Apache-2.0 License](https://github.com/real
 Links
 ------
 
-+ [sugos](https://github.com/realglobe-Inc/sugos)
-+ [sugo-spot](https://github.com/realglobe-Inc/sugo-spot)
-+ [sugo-terminal](https://github.com/realglobe-Inc/sugo-terminal)
-+ [sugo-observer](https://github.com/realglobe-Inc/sugo-observer)
-+ [JSON API](http://jsonapi.org)
++ [sugos][sugos_url]
++ [sugo-spot][sugo_spot_url]
++ [sugo-terminal][sugo_terminal_url]
++ [sugo-observer][sugo_observer_url]
++ [JSON API][json_api_url]
++ [Koa][koa_url]
+
+[sugos_url]: https://github.com/realglobe-Inc/sugos
+[sugo_spot_url]: https://github.com/realglobe-Inc/sugo-spot
+[sugo_terminal_url]: https://github.com/realglobe-Inc/sugo-terminal
+[sugo_observer_url]: https://github.com/realglobe-Inc/sugo-observer
+[json_api_url]: http://jsonapi.org
+[koa_url]: https://github.com/koajs/koa
 
 <!-- Links End -->

@@ -9,6 +9,7 @@ const sugoSpot = require('sugo-spot')
 const sugoTerminal = require('sugo-terminal')
 const sugoObserver = require('sugo-observer')
 const apemanrequest = require('apemanrequest')
+const aport = require('aport')
 const assert = require('assert')
 const co = require('co')
 const http = require('http')
@@ -25,8 +26,7 @@ describe('sugo-cloud', function () {
   }))
 
   it('Sugo cloud', () => co(function * () {
-    let port = 9871
-
+    let port = yield aport()
     let observed = []
 
     let cloud = yield sugoCloud({

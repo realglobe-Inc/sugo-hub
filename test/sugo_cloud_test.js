@@ -8,7 +8,7 @@ const sugoCloud = require('../lib/sugo_cloud.js')
 const sugoSpot = require('sugo-spot')
 const sugoTerminal = require('sugo-terminal')
 const sugoObserver = require('sugo-observer')
-const apemanrequest = require('apemanrequest')
+const arequest = require('arequest')
 const aport = require('aport')
 const assert = require('assert')
 const co = require('co')
@@ -16,7 +16,7 @@ const http = require('http')
 
 describe('sugo-cloud', function () {
   this.timeout(4000)
-  let request = apemanrequest.create({ jar: true })
+  let request = arequest.create({ jar: true })
   before(() => co(function * () {
 
   }))

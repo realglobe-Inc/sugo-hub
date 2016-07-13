@@ -36,6 +36,8 @@ describe('service', () => {
     let hoge = yield service.find('hoge')
     assert.ok(hoge)
     assert.equal(hoge.value, 'This is hoge')
+    let nullFound = yield service.find(null)
+    assert.equal(nullFound, null)
     let fuge = yield service.find('fuge')
     assert.ok(fuge)
     assert.equal(fuge.value, 'This is fuge')

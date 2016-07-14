@@ -1,6 +1,6 @@
 {
   "name": "sugo-cloud",
-  "version": "1.2.24",
+  "version": "1.2.25",
   "description": "Cloud server of SUGOS",
   "main": "lib",
   "browser": {

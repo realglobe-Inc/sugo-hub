@@ -1,6 +1,6 @@
 {
   "name": "sugo-cloud",
-  "version": "1.2.23",
+  "version": "1.2.24",
   "description": "Cloud server of SUGOS",
   "main": "lib",
   "browser": {
@@ -63,7 +63,7 @@
     "sugo-observer": "^1.0.6",
     "sugo-spot": "^1.0.17",
     "sugo-terminal": "^1.0.16",
-    "sugos-assets": "^1.1.10"
+    "sugos-assets": "^1.1.11"
   },
   "engines": {
     "node": ">=6",

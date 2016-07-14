@@ -147,6 +147,8 @@ By default, SUGOS-Cloud provides WebSocket interfaces with following URLs:
 Advanced Usage
 ---------
 
+SUGO cloud also provide bunch of options for building more complex applications.
+
 ```javascript
 #!/usr/bin/env node
 
@@ -163,6 +165,15 @@ const co = require('co')
 co(function * () {
   let cloud = yield sugoCloud({
     port: 3000,
+    // Using redis server as storage
+    storage: {
+      // Redis setup options (see https://github.com/NodeRedis/node_redis)
+      redis: {
+        host: '127.0.0.1',
+        port: '6379',
+        db: 1
+      }
+    },
     // HTTP route handler with koa
     endpoints: {
       '/api/user/:id': {
@@ -183,16 +194,7 @@ co(function * () {
     // Directory names to server static files
     static: [
       'public'
-    ],
-    // Using redis server as storage
-    storage: {
-      // Redis setup options (see https://github.com/NodeRedis/node_redis)
-      redis: {
-        host: '127.0.0.1',
-        port: '6379',
-        db: 1
-      }
-    }
+    ]
   })
 
   console.log(`SUGO Cloud started at port: ${cloud.port}`)

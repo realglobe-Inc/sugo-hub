@@ -58,7 +58,7 @@
     "filedel": "^2.0.2",
     "injectmock": "^2.0.0",
     "sg-socket-client": "^1.2.8",
-    "sugo-actor": "^3.0.0",
+    "sugo-actor": "^3.0.1",
     "sugo-caller": "^2.0.2",
     "sugo-observer": "^2.0.0",
     "sugos-assets": "^2.0.1"

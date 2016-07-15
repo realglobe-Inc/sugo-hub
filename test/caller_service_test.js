@@ -1,14 +1,14 @@
 /**
- * Test case for terminalEndpoint.
+ * Test case for callerService.
  * Runs with mocha.
  */
 'use strict'
 
-const terminalEndpoint = require('../lib/endpoints/terminal_endpoint.js')
+const callerService = require('../lib/services/caller_service.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('terminal-endpoint', () => {
+describe('terminal-service', () => {
   before(() => co(function * () {
 
   }))
@@ -17,7 +17,7 @@ describe('terminal-endpoint', () => {
 
   }))
 
-  it('Terminal endpoint', () => co(function * () {
+  it('Terminal service', () => co(function * () {
 
   }))
 })

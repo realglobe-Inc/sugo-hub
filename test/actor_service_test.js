@@ -1,14 +1,14 @@
 /**
- * Test case for spotService.
+ * Test case for actorService.
  * Runs with mocha.
  */
 'use strict'
 
-const spotService = require('../lib/services/spot_service.js')
+const actorService = require('../lib/services/actor_service.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('spot-service', () => {
+describe('actor-service', () => {
   before(() => co(function * () {
 
   }))
@@ -17,7 +17,7 @@ describe('spot-service', () => {
 
   }))
 
-  it('Spot service', () => co(function * () {
+  it('Actor service', () => co(function * () {
 
   }))
 })

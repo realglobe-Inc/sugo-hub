@@ -6,7 +6,7 @@
 
 const ApiFormat = require('../lib/helpers/api_format.js')
 const assert = require('assert')
-const { SpotEntity, TerminalEntity, ObserverEntity } = require('../lib/entities')
+const { ActorEntity, CallerEntity, ObserverEntity } = require('../lib/entities')
 const co = require('co')
 
 describe('api-format', () => {
@@ -19,8 +19,8 @@ describe('api-format', () => {
   }))
 
   it('Api format', () => co(function * () {
-    assert.ok(ApiFormat.resourceType(SpotEntity), 'spots')
-    assert.ok(ApiFormat.resourceType(TerminalEntity), 'terminals')
+    assert.ok(ApiFormat.resourceType(ActorEntity), 'actors')
+    assert.ok(ApiFormat.resourceType(CallerEntity), 'callers')
     assert.ok(ApiFormat.resourceType(ObserverEntity), 'observers')
   }))
 })

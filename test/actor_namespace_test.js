@@ -1,14 +1,14 @@
 /**
- * Test case for terminalNamespace.
+ * Test case for actorNamespace.
  * Runs with mocha.
  */
 'use strict'
 
-const TerminalNamespace = require('../lib/namespaces/terminal_namespace.js')
+const ActorNamespace = require('../lib/namespaces/actor_namespace.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('terminal-namespace', () => {
+describe('actor-namespace', () => {
   before(() => co(function * () {
 
   }))
@@ -17,8 +17,8 @@ describe('terminal-namespace', () => {
 
   }))
 
-  it('Terminal namespace', () => co(function * () {
-    let namespace = new TerminalNamespace()
+  it('Actor namespace', () => co(function * () {
+    let namespace = new ActorNamespace()
     assert.ok(namespace)
   }))
 })

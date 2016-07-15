@@ -1,14 +1,14 @@
 /**
- * Test case for spotEvents.
+ * Test case for terminalEvents.
  * Runs with mocha.
  */
 'use strict'
 
-const spotEvents = require('../lib/events/spot_events.js')
+const terminalEvents = require('../lib/events/caller_events.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('spot-events', () => {
+describe('terminal-events', () => {
   before(() => co(function * () {
 
   }))
@@ -17,7 +17,7 @@ describe('spot-events', () => {
 
   }))
 
-  it('Spot events', () => co(function * () {
+  it('Terminal events', () => co(function * () {
 
   }))
 })

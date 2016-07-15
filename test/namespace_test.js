@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const namespace = require('../lib/namespaces/namespace.js')
+const Namespace = require('../lib/namespaces/namespace.js')
 const assert = require('assert')
 const co = require('co')
 
@@ -18,7 +18,8 @@ describe('namespace', () => {
   }))
 
   it('Namespace', () => co(function * () {
-
+    let namespace = new Namespace()
+    assert.ok(namespace)
   }))
 })
 

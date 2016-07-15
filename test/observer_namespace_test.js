@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const observerNamespace = require('../lib/namespaces/observer_namespace.js')
+const ObserverNamespace = require('../lib/namespaces/observer_namespace.js')
 const assert = require('assert')
 const co = require('co')
 
@@ -18,7 +18,8 @@ describe('observer-namespace', () => {
   }))
 
   it('Observer namespace', () => co(function * () {
-
+    let namespace = new ObserverNamespace()
+    assert.ok(namespace)
   }))
 })
 

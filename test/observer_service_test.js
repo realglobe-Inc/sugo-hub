@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const observerService = require('../lib/services/observer_service.js')
+const ObserverService = require('../lib/services/observer_service.js')
 const assert = require('assert')
 const co = require('co')
 
@@ -18,7 +18,8 @@ describe('observer-service', () => {
   }))
 
   it('Observer service', () => co(function * () {
-
+    let service = new ObserverService()
+    assert.ok(service)
   }))
 })
 

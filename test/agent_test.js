@@ -28,8 +28,8 @@ describe('agent', function () {
       storage: `${__dirname}/../tmp/testing-cloud-storage2`
     })
 
-    let spots = yield agent(`http://localhost:${port}`).spots()
-    assert.ok(spots)
+    let actors = yield agent(`http://localhost:${port}`).actors()
+    assert.ok(actors)
   }))
 })
 

@@ -1,14 +1,16 @@
 /**
- * Test case for terminalEvents.
+ * Test case for actorEvents.
  * Runs with mocha.
  */
 'use strict'
 
-const terminalEvents = require('../lib/events/terminal_events.js')
+const actorEvents = require('../lib/events/actor_events.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('terminal-events', () => {
+describe('actor-events', function () {
+  this.timeout(3000)
+
   before(() => co(function * () {
 
   }))
@@ -17,7 +19,7 @@ describe('terminal-events', () => {
 
   }))
 
-  it('Terminal events', () => co(function * () {
+  it('Actor events', () => co(function * () {
 
   }))
 })

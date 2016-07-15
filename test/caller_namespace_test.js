@@ -1,14 +1,14 @@
 /**
- * Test case for spotNamespace.
+ * Test case for callerNamespace.
  * Runs with mocha.
  */
 'use strict'
 
-const SpotNamespace = require('../lib/namespaces/spot_namespace.js')
+const CallerNamespace = require('../lib/namespaces/caller_namespace.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('spot-namespace', () => {
+describe('terminal-namespace', () => {
   before(() => co(function * () {
 
   }))
@@ -17,8 +17,8 @@ describe('spot-namespace', () => {
 
   }))
 
-  it('Spot namespace', () => co(function * () {
-    let namespace = new SpotNamespace()
+  it('Terminal namespace', () => co(function * () {
+    let namespace = new CallerNamespace()
     assert.ok(namespace)
   }))
 })

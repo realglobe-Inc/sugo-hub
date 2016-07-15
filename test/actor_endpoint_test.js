@@ -1,14 +1,14 @@
 /**
- * Test case for terminalService.
+ * Test case for actorEndpoint.
  * Runs with mocha.
  */
 'use strict'
 
-const terminalService = require('../lib/services/terminal_service.js')
+const ActorEndpoint = require('../lib/endpoints/actor_endpoint.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('terminal-service', () => {
+describe('actor-endpoint', () => {
   before(() => co(function * () {
 
   }))
@@ -17,8 +17,8 @@ describe('terminal-service', () => {
 
   }))
 
-  it('Terminal service', () => co(function * () {
-
+  it('Actor endpoint', () => co(function * () {
+    let endpoint = new ActorEndpoint()
   }))
 })
 

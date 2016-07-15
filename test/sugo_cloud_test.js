@@ -5,8 +5,8 @@
 'use strict'
 
 const sugoCloud = require('../lib/sugo_cloud.js')
-const sugoSpot = require('sugo-spot')
-const sugoTerminal = require('sugo-terminal')
+const sugoActor = require('sugo-actor')
+const sugoCaller = require('sugo-caller')
 const sugoObserver = require('sugo-observer')
 const arequest = require('arequest')
 const aport = require('aport')
@@ -34,31 +34,31 @@ describe('sugo-cloud', function () {
       storage: `${__dirname}/../tmp/testing-cloud-storage`
     })
 
-    let SPOT_URL = `http://localhost:${port}/spots`
-    let TERMINAL_URL = `http://localhost:${port}/terminals`
+    let ACTOR_URL = `http://localhost:${port}/actors`
+    let CALLER_URL = `http://localhost:${port}/callers`
     let OBSERVER_URL = `http://localhost:${port}/observers`
 
-    let spot01 = sugoSpot(SPOT_URL, {
-      key: 'my-spot-01',
+    let actor01 = sugoActor(ACTOR_URL, {
+      key: 'my-actor-01',
       force: true,
-      interfaces: {
-        bash: require('sugo-spot/doc/mocks/mock-interface-bash.js')()
+      modules: {
+        bash: require('sugo-actor/misc/mocks/mock-module-bash.js')()
       }
     })
 
-    let spot02 = sugoSpot(SPOT_URL, {
-      key: 'my-spot-02-' + new Date().getTime(),
+    let actor02 = sugoActor(ACTOR_URL, {
+      key: 'my-actor-02-' + new Date().getTime(),
       force: true,
-      interfaces: {
-        bash: require('sugo-spot/doc/mocks/mock-interface-bash.js')()
+      modules: {
+        bash: require('sugo-actor/misc/mocks/mock-module-bash.js')()
       }
     })
 
-    let terminal01 = sugoTerminal(TERMINAL_URL, {})
-    let terminal02 = sugoTerminal(TERMINAL_URL, {})
+    let caller01 = sugoCaller(CALLER_URL, {})
+    let caller02 = sugoCaller(CALLER_URL, {})
 
-    yield spot01.connect()
-    yield spot02.connect()
+    yield actor01.connect()
+    yield actor02.connect()
 
     let observer01 = sugoObserver(OBSERVER_URL, (data) => {
       observed.push(data)
@@ -68,22 +68,21 @@ describe('sugo-cloud', function () {
 
     // Perform an action
     {
-      let connection = yield terminal01.connect(spot01.key)
+      let connection = yield caller01.connect(actor01.key)
       let bash = connection.bash()
       let payload = yield bash.spawn('ls', [ '-la' ])
       assert.equal(payload, 0, 'Exit with 0')
-      yield cloud.invalidateTerminals()
+      yield cloud.invalidateCallers()
       yield connection.disconnect()
     }
 
-    yield cloud.invalidateSpots()
-    // yield cloud.invalidateSpots()
+    yield cloud.invalidateActors()
 
-    // Try to connect invalid spot
+    // Try to connect invalid actor
     {
       let connection, caught
       try {
-        connection = yield terminal02.connect('___invalid_spot_key___')
+        connection = yield caller02.connect('___invalid_actor_key___')
         yield connection.disconnect()
       } catch (err) {
         caught = err
@@ -91,32 +90,32 @@ describe('sugo-cloud', function () {
       assert.ok(caught)
     }
 
-    // Get spots info
+    // Get actors info
     {
-      let { body, statusCode } = yield request(SPOT_URL)
+      let { body, statusCode } = yield request(ACTOR_URL)
       assert.equal(statusCode, 200)
       assert.ok(body)
       let { meta, data, included } = body
       assert.ok(meta)
       assert.ok(data)
       assert.ok(included)
-      data.forEach((data) => assert.equal(data.type, 'spots'))
+      data.forEach((data) => assert.equal(data.type, 'actors'))
     }
 
-    // Get terminals info
+    // Get callers info
     {
-      let { body, statusCode } = yield request(TERMINAL_URL)
+      let { body, statusCode } = yield request(CALLER_URL)
       assert.equal(statusCode, 200)
       assert.ok(body)
       let { meta, data, included } = body
       assert.ok(meta)
       assert.ok(data)
       assert.ok(included)
-      data.forEach((data) => assert.equal(data.type, 'terminals'))
+      data.forEach((data) => assert.equal(data.type, 'callers'))
     }
 
-    yield spot01.disconnect()
-    yield spot02.disconnect()
+    yield actor01.disconnect()
+    yield actor02.disconnect()
 
     yield observer01.stop()
 

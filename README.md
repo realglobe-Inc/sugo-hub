@@ -46,7 +46,7 @@ Cloud server of SUGOS
 <a name="overview"></a>
 
 
-SUGO-Cloud works as a hub to connect [SUGO-Spots][sugo_spot_url] and [SUGO-Terminals][sugo_terminal_url].
+SUGO-Cloud works as a hub to connect [SUGO-Actors][sugo_actor_url] and [SUGO-Callers][sugo_caller_url].
 
 
 
@@ -132,8 +132,8 @@ By default, SUGOS-Cloud provides WebSocket interfaces with following URLs:
 
 | URL | Description |
 | --- | ----------- |
-| `/spots` | WebSocket namespace for [SUGO-Spots][sugo_spot_url] |
-| `/terminals` | WebSocket namespace for [SUGO-Terminals][sugo_terminal_url] |
+| `/actors` | WebSocket namespace for [SUGO-Actors][sugo_actor_url] |
+| `/callers` | WebSocket namespace for [SUGO-Callers][sugo_caller_url] |
 | `/observers` | WebSocket namespace for [SUGO-Observers][sugo_observer_url] |
 
 
@@ -224,15 +224,15 @@ Links
 ------
 
 + [sugos][sugos_url]
-+ [sugo-spot][sugo_spot_url]
-+ [sugo-terminal][sugo_terminal_url]
++ [sugo-actor][sugo_actor_url]
++ [sugo-caller][sugo_caller_url]
 + [sugo-observer][sugo_observer_url]
 + [JSON API][json_api_url]
 + [Koa][koa_url]
 
 [sugos_url]: https://github.com/realglobe-Inc/sugos
-[sugo_spot_url]: https://github.com/realglobe-Inc/sugo-spot
-[sugo_terminal_url]: https://github.com/realglobe-Inc/sugo-terminal
+[sugo_actor_url]: https://github.com/realglobe-Inc/sugo-actor
+[sugo_caller_url]: https://github.com/realglobe-Inc/sugo-caller
 [sugo_observer_url]: https://github.com/realglobe-Inc/sugo-observer
 [json_api_url]: http://jsonapi.org
 [koa_url]: https://github.com/koajs/koa

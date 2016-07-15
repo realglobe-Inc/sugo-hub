@@ -18,7 +18,7 @@ describe('new-storage', () => {
   }))
 
   it('New storage', () => co(function * () {
-
+    assert.ok(newStorage)
   }))
 })
 

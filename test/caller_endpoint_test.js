@@ -1,14 +1,14 @@
 /**
- * Test case for spotEndpoint.
+ * Test case for callerEndpoint.
  * Runs with mocha.
  */
 'use strict'
 
-const spotEndpoint = require('../lib/endpoints/spot_endpoint.js')
+const callerEndpoint = require('../lib/endpoints/caller_endpoint.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('spot-endpoint', () => {
+describe('terminal-endpoint', () => {
   before(() => co(function * () {
 
   }))
@@ -17,7 +17,7 @@ describe('spot-endpoint', () => {
 
   }))
 
-  it('Spot endpoint', () => co(function * () {
+  it('Terminal endpoint', () => co(function * () {
 
   }))
 })

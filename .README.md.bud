@@ -4,15 +4,15 @@
 
 'use strict'
 
-const apeTmpl = require('ape-tmpl')
+const { readmeMdBud } = require('ape-tmpl')
 const pkg = require('./package.json')
 const {
-  SPOT_URL,
-  TERMINAL_URL,
+  ACTOR_URL,
+  CALLER_URL,
   OBSERVER_URL
 } = require('./lib/constants/url_constants')
 
-module.exports = apeTmpl.readmeMdBud({
+module.exports = readmeMdBud({
   pkg,
   banner: 'assets/images/sugo-cloud-banner.png',
   bannerSize: 148,
@@ -31,8 +31,8 @@ module.exports = apeTmpl.readmeMdBud({
   links: require('./doc/links'),
   vars: {
     bannerHeight: 40,
-    SPOT_URL,
-    TERMINAL_URL,
+    ACTOR_URL,
+    CALLER_URL,
     OBSERVER_URL
   }
 })

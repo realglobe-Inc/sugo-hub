@@ -4,9 +4,9 @@
 
 'use strict'
 
-const apeTmpl = require('ape-tmpl')
+const { indexJsBud } = require('ape-tmpl')
 
-module.exports = apeTmpl.indexJsBud({
+module.exports = indexJsBud({
   desc: 'Pool classes',
   module: 'pools',
   dirname: __dirname,

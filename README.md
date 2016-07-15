@@ -59,6 +59,7 @@ SUGO-Cloud works as a hub to connect [SUGO-Actors][sugo_actor_url] and [SUGO-Cal
 <!-- Section from "doc/guides/00.Requirements.md.hbs" Start -->
 
 <a name="section-doc-guides-00-requirements-md"></a>
+
 Requirements
 -----
 
@@ -87,6 +88,7 @@ Requirements
 <!-- Section from "doc/guides/01.Installation.md.hbs" Start -->
 
 <a name="section-doc-guides-01-installation-md"></a>
+
 Installation
 -----
 
@@ -100,6 +102,7 @@ $ npm install sugo-cloud --save
 <!-- Section from "doc/guides/02.Usage.md.hbs" Start -->
 
 <a name="section-doc-guides-02-usage-md"></a>
+
 Usage
 ---------
 
@@ -142,6 +145,7 @@ By default, SUGOS-Cloud provides WebSocket interfaces with following URLs:
 <!-- Section from "doc/guides/03.Advanced Usage.md.hbs" Start -->
 
 <a name="section-doc-guides-03-advanced-usage-md"></a>
+
 Advanced Usage
 ---------
 

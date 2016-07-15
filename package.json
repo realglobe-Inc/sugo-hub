@@ -1,6 +1,6 @@
 {
   "name": "sugo-cloud",
-  "version": "1.2.25",
+  "version": "1.2.26",
   "description": "Cloud server of SUGOS",
   "main": "lib",
   "browser": {
@@ -61,7 +61,7 @@
     "injectmock": "^2.0.0",
     "sg-socket-client": "^1.2.8",
     "sugo-observer": "^1.0.6",
-    "sugo-spot": "^1.0.19",
+    "sugo-spot": "^1.0.20",
     "sugo-terminal": "^1.0.16",
     "sugos-assets": "^1.1.13"
   },

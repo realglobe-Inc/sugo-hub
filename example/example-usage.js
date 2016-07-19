@@ -18,4 +18,5 @@ co(function * () {
   })
 
   console.log(`SUGO Cloud started at port: ${cloud.port}`)
-}).catch((err) => { /* ... */ })
+}).catch((err) => {
+  /* ... */})

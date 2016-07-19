@@ -6,8 +6,8 @@
 
 const { readmeMdBud } = require('ape-tmpl')
 const pkg = require('./package.json')
-const { UrlConstants } = require('sugo-constants')
-const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = UrlConstants
+const { CloudUrls } = require('sugo-constants')
+const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = CloudUrls
 
 module.exports = readmeMdBud({
   pkg,

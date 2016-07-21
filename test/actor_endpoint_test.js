@@ -19,6 +19,7 @@ describe('actor-endpoint', () => {
 
   it('Actor endpoint', () => co(function * () {
     let endpoint = new ActorEndpoint()
+    assert.ok(endpoint)
   }))
 })
 

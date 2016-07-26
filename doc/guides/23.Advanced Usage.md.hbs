@@ -3,6 +3,27 @@ Advanced Usage
 
 SUGO cloud also provide bunch of options for building more complex applications.
 
+### Using Redis Server
+
+By default, SUGO-Cloud save state to json files. This may cause performance slow down on production.
+It is recommended to setup redis server for storage.
+
 ```javascript
-{{{read 'example/example-usage-advanced.js'}}}
+{{{read 'example/example-usage-redis.js'}}}
+```
+
+### Define HTTP Endpoints
+
+SUGO-Cloud uses [Koa][koa_url] as http framework. You can define custom koa handlers on `endpoints` field.
+
+```javascript
+{{{read 'example/example-usage-endpoint.js'}}}
+```
+
+#### Define HTTP Middlewares
+
+For cross-endpoint handling, add koa middleware function to `middlewares` field.
+
+```javascript
+{{{read 'example/example-usage-middlewares.js'}}}
 ```

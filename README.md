@@ -67,6 +67,9 @@ Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
+  * [Using Redis Server](#using-redis-server)
+  * [Define HTTP Endpoints](#define-http-endpoints)
+    + [Define HTTP Middlewares](#define-http-middlewares)
 - [License](#license)
 - [Links](#links)
 
@@ -169,6 +172,11 @@ Advanced Usage
 
 SUGO cloud also provide bunch of options for building more complex applications.
 
+### Using Redis Server
+
+By default, SUGO-Cloud save state to json files. This may cause performance slow down on production.
+It is recommended to setup redis server for storage.
+
 ```javascript
 #!/usr/bin/env node
 
@@ -195,6 +203,41 @@ co(function * () {
       }
     },
     // HTTP route handler with koa
+    endpoints: { /* ... */ },
+    // Custom koa middlewares
+    middlewares: [ /* ... */],
+    // Directory names to server static files
+    static: [ /* ... */ ]
+  })
+
+  console.log(`SUGO Cloud started at port: ${cloud.port}`)
+}).catch((err) => console.error(err))
+
+```
+
+### Define HTTP Endpoints
+
+SUGO-Cloud uses [Koa][koa_url] as http framework. You can define custom koa handlers on `endpoints` field.
+
+```javascript
+#!/usr/bin/env node
+
+/**
+ * This is an example to setup cloud server with advanced options
+ */
+
+'use strict'
+
+const sugoCloud = require('sugo-cloud')
+
+const co = require('co')
+
+co(function * () {
+  let cloud = yield sugoCloud({
+    port: 3000,
+    // Using redis server as storage
+    storage: { /* ... */ },
+    // HTTP route handler with koa
     endpoints: {
       '/api/user/:id': {
         'GET': (ctx) => {
@@ -204,6 +247,41 @@ co(function * () {
         }
       }
     },
+    // Custom koa middlewares
+    middlewares: [ /* ... */ ],
+    // Directory names to server static files
+    static: [ /* ... */ ]
+  })
+
+  console.log(`SUGO Cloud started at port: ${cloud.port}`)
+}).catch((err) => console.error(err))
+
+```
+
+#### Define HTTP Middlewares
+
+For cross-endpoint handling, add koa middleware function to `middlewares` field.
+
+```javascript
+#!/usr/bin/env node
+
+/**
+ * This is an example to setup cloud server with advanced options
+ */
+
+'use strict'
+
+const sugoCloud = require('sugo-cloud')
+
+const co = require('co')
+
+co(function * () {
+  let cloud = yield sugoCloud({
+    port: 3000,
+    // Using redis server as storage
+    storage: { /* ... */ },
+    // HTTP route handler with koa
+    endpoints: { /* ... */ },
     // Custom koa middlewares
     middlewares: [
       co.wrap(function * customMiddleware (ctx, next) {

@@ -14,24 +14,9 @@ co(function * () {
   let cloud = yield sugoCloud({
     port: 3000,
     // Using redis server as storage
-    storage: {
-      // Redis setup options (see https://github.com/NodeRedis/node_redis)
-      redis: {
-        host: '127.0.0.1',
-        port: '6379',
-        db: 1
-      }
-    },
+    storage: { /* ... */ },
     // HTTP route handler with koa
-    endpoints: {
-      '/api/user/:id': {
-        'GET': (ctx) => {
-          let { id } = ctx.params
-          /* ... */
-          ctx.body = { /* ... */ }
-        }
-      }
-    },
+    endpoints: { /* ... */ },
     // Custom koa middlewares
     middlewares: [
       co.wrap(function * customMiddleware (ctx, next) {

@@ -69,7 +69,7 @@ Table of Contents
 - [Advanced Usage](#advanced-usage)
   * [Using Redis Server](#using-redis-server)
   * [Define HTTP Endpoints](#define-http-endpoints)
-    + [Define HTTP Middlewares](#define-http-middlewares)
+  * [Define HTTP Middlewares](#define-http-middlewares)
 - [License](#license)
 - [Links](#links)
 
@@ -258,9 +258,11 @@ co(function * () {
 
 ```
 
-#### Define HTTP Middlewares
+### Define HTTP Middlewares
 
 For cross-endpoint handling, add koa middleware function to `middlewares` field.
+
+Note that static middlewares are provided as build-in middleware and you can serve static files by just setting directory names to `static` field.
 
 ```javascript
 #!/usr/bin/env node

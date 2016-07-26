@@ -20,9 +20,11 @@ SUGO-Cloud uses [Koa][koa_url] as http framework. You can define custom koa hand
 {{{read 'example/example-usage-endpoint.js'}}}
 ```
 
-#### Define HTTP Middlewares
+### Define HTTP Middlewares
 
 For cross-endpoint handling, add koa middleware function to `middlewares` field.
+
+Note that static middlewares are provided as build-in middleware and you can serve static files by just setting directory names to `static` field.
 
 ```javascript
 {{{read 'example/example-usage-middlewares.js'}}}

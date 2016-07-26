@@ -4,6 +4,6 @@
 - [Advanced Usage](#advanced-usage)
   * [Using Redis Server](#using-redis-server)
   * [Define HTTP Endpoints](#define-http-endpoints)
-    + [Define HTTP Middlewares](#define-http-middlewares)
+  * [Define HTTP Middlewares](#define-http-middlewares)
 - [License](#license)
 - [Links](#links)

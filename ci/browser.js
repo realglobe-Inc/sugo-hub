@@ -18,7 +18,7 @@ apeTasking.runTasks('browser', [
     for (let pattern of patterns) {
       yield ababelES2015(pattern, {
         cwd: 'lib',
-        out: 'sims/browser'
+        out: 'shim/browser'
       })
     }
   })

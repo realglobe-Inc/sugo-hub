@@ -42,7 +42,7 @@ describe('sugo-cloud', function () {
       key: 'my-actor-01',
       force: true,
       modules: {
-        bash: require('sugo-actor/misc/mocks/mock-module-bash.js')()
+        bash: new (require('sugo-actor/misc/mocks/mock-module-bash.js'))()
       }
     })
 
@@ -50,7 +50,7 @@ describe('sugo-cloud', function () {
       key: 'my-actor-02-' + new Date().getTime(),
       force: true,
       modules: {
-        bash: require('sugo-actor/misc/mocks/mock-module-bash.js')()
+        bash: new (require('sugo-actor/misc/mocks/mock-module-bash.js'))()
       }
     })
 
@@ -69,7 +69,7 @@ describe('sugo-cloud', function () {
     // Perform an action
     {
       let connection = yield caller01.connect(actor01.key)
-      let bash = connection.bash()
+      let bash = connection.get('bash')
       let payload = yield bash.spawn('ls', [ '-la' ])
       assert.equal(payload, 0, 'Exit with 0')
       yield cloud.invalidateCallers()

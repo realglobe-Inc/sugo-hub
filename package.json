@@ -4,8 +4,8 @@
   "description": "Cloud server of SUGOS",
   "main": "lib",
   "browser": {
-    "./agent": "sims/browser/agent",
-    "./constants/url_constants": "sims/browser/constants/url_constants"
+    "./agent": "shim/browser/agent",
+    "./constants/url_constants": "shim/browser/constants/url_constants"
   },
   "scripts": {
     "test": "./ci/test.js",
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/realglobe-Inc/sugo-cloud#readme",
   "dependencies": {
-    "brequest": "^1.0.0",
+    "brequest": "^1.0.1",
     "co": "^4.6.0",
     "debug": "^2.2.0",
     "defaults": "^1.0.3",
@@ -39,7 +39,7 @@
     "sg-storage": "^2.0.2",
     "sg-validator": "^1.0.1",
     "stringcase": "^3.0.1",
-    "sugo-constants": "^1.0.0",
+    "sugo-constants": "^1.0.3",
     "uuid": "^2.0.2"
   },
   "devDependencies": {
@@ -58,9 +58,10 @@
     "filecopy": "^2.0.1",
     "filedel": "^2.0.2",
     "injectmock": "^2.0.0",
+    "markdown-toc": "^0.12.15",
     "sg-socket-client": "^1.2.8",
-    "sugo-actor": "^3.0.5",
-    "sugo-caller": "^2.1.3",
+    "sugo-actor": "^4.0.1",
+    "sugo-caller": "^2.1.4",
     "sugo-observer": "^2.0.0",
     "sugos-assets": "^2.0.1"
   },

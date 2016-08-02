@@ -9,16 +9,16 @@ process.env.DEBUG = process.env.DEBUG || 'sg:cloud:benchmark'
 const sugoCloud = require('../lib')
 const sugoActor = require('sugo-actor')
 const sugoCaller = require('sugo-caller')
+const { execSync } = require('child_process')
 const { Module } = sugoActor
 const co = require('co')
 const Table = require('cli-table')
 const asleep = require('asleep')
-const { spawn } = require('child_process')
 const debug = require('debug')('sg:cloud:benchmark')
 
-// 300 以上にするとなぜか落ちる
+// だいたい 300 以上で落ちる
 const CONNECTION_NUMBERS = [
-  10, 50, 100, 200, // 300, 400, 500
+  10, 50, 100, 300, 500
 ]
 
 const PORT = 3000
@@ -27,22 +27,26 @@ const ACTOR_URL = `${CLOUD_URL}/actors`
 const CALLER_URL = `${CLOUD_URL}/callers`
 
 co(function * () {
+  checkRedis()
   let table = new Table({
     head: ['Connecttions', 'Pong time(ms)'],
     colWidths: [20, 20]
   })
-  yield startRedis()
   yield startCloud()
   for (let number of CONNECTION_NUMBERS) {
     let actors = createActors(number)
+    yield asleep(300)
     yield connectActors(actors)
+    yield asleep(300)
     let callers = createCallers(number)
+    yield asleep(300)
     let connections = yield connectCallers(callers)
+    yield asleep(300)
     let time = yield measurePingPong(connections)
     record(table, number, time)
     yield disconnectActors(actors)
     yield disconnectCallers(callers)
-    yield asleep(1000)
+    yield asleep(300)
   }
   report(table)
   process.exit(0)
@@ -51,13 +55,13 @@ co(function * () {
   process.exit(1)
 })
 
-function startRedis () {
-  return co(function * () {
-    debug('Starts redis server')
-    let child = spawn('redis-server')
-    child.on('error', err => console.error(err))
-    yield asleep(2000)
-  })
+function checkRedis () {
+  try {
+    execSync('redis-cli ping')
+  } catch (e) {
+    console.error('At first, Redis server should be started. Try command "redis-server".')
+    process.exit(1)
+  }
 }
 
 function startCloud () {

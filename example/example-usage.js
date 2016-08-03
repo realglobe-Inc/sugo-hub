@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
 /**
- * This is an example to setup cloud server
+ * This is an example to setup hub server
  */
 
 'use strict'
 
-const sugoCloud = require('sugo-cloud')
+const sugoHub = require('sugo-hub')
 
 const co = require('co')
 
 co(function * () {
-  // Start sugo-cloud server
-  let cloud = yield sugoCloud({
+  // Start sugo-hub server
+  let cloud = yield sugoHub({
     // Options
     port: 3000
   })

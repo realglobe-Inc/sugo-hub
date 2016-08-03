@@ -6,12 +6,12 @@
 
 const { readmeMdBud } = require('ape-tmpl')
 const pkg = require('./package.json')
-const { CloudUrls } = require('sugo-constants')
-const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = CloudUrls
+const { HubUrls } = require('sugo-constants')
+const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = HubUrls
 
 module.exports = readmeMdBud({
   pkg,
-  banner: 'assets/images/sugo-cloud-banner.png',
+  banner: 'assets/images/sugo-hub-banner.png',
   bannerSize: 148,
   repo: pkg.repository,
   sections: 'doc/guides/*.md.hbs',

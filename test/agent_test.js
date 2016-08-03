@@ -5,7 +5,7 @@
 'use strict'
 
 const agent = require('../lib/agent.js')
-const sugoCloud = require('../lib/sugo_cloud.js')
+const sugoHub = require('../lib/sugo_hub')
 const assert = require('assert')
 const aport = require('aport')
 const co = require('co')
@@ -23,7 +23,7 @@ describe('agent', function () {
 
   it('Agent', () => co(function * () {
     port = yield aport()
-    let cloud = yield sugoCloud({
+    let cloud = yield sugoHub({
       port,
       storage: `${__dirname}/../tmp/testing-cloud-storage2`
     })

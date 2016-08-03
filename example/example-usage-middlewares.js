@@ -6,12 +6,12 @@
 
 'use strict'
 
-const sugoCloud = require('sugo-cloud')
+const sugoHub = require('sugo-hub')
 
 const co = require('co')
 
 co(function * () {
-  let cloud = yield sugoCloud({
+  let cloud = yield sugoHub({
     port: 3000,
     // Using redis server as storage
     storage: { /* ... */ },

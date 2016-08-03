@@ -8,7 +8,7 @@ const apeTmpl = require('ape-tmpl')
 
 module.exports = apeTmpl.binBud({
   signature: require('../signature'),
-  path: 'sugo-cloud'
+  path: 'sugo-hub'
 })
 
 if (!module.parent) {

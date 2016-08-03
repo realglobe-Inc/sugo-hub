@@ -1,5 +1,5 @@
 {
-  "name": "sugo-cloud",
+  "name": "sugo-hub",
   "desc": "Cloud server of SUGOS",
   "main": true,
   "args": [

@@ -1,6 +1,6 @@
 {
-  "name": "sugo-cloud",
-  "version": "2.0.9",
+  "name": "sugo-hub",
+  "version": "3.0.0",
   "description": "Cloud server of SUGOS",
   "main": "lib",
   "browser": {
@@ -11,7 +11,7 @@
     "test": "./ci/test.js",
     "prepublish": "./ci/assets.js && ./ci/build.js && ./ci/browser.js"
   },
-  "repository": "realglobe-Inc/sugo-cloud",
+  "repository": "realglobe-Inc/sugo-hub",
   "keywords": [
     "SUGOS",
     "cloud"
@@ -23,9 +23,9 @@
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/realglobe-Inc/sugo-cloud/issues"
+    "url": "https://github.com/realglobe-Inc/sugo-hub/issues"
   },
-  "homepage": "https://github.com/realglobe-Inc/sugo-cloud#readme",
+  "homepage": "https://github.com/realglobe-Inc/sugo-hub#readme",
   "dependencies": {
     "brequest": "^1.0.1",
     "co": "^4.6.0",
@@ -39,7 +39,7 @@
     "sg-storage": "^2.0.2",
     "sg-validator": "^1.0.3",
     "stringcase": "^3.0.1",
-    "sugo-constants": "^1.0.3",
+    "sugo-constants": "^2.0.0",
     "uuid": "^2.0.2"
   },
   "devDependencies": {
@@ -64,7 +64,7 @@
     "sugo-actor": "^4.0.1",
     "sugo-caller": "^2.1.4",
     "sugo-observer": "^2.0.0",
-    "sugos-assets": "^2.0.1"
+    "sugos-assets": "^2.0.2"
   },
   "engines": {
     "node": ">=6",

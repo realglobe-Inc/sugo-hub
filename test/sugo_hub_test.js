@@ -1,10 +1,10 @@
 /**
- * Test case for sugoCloud.
+ * Test case for sugoHub.
  * Runs with mocha.
  */
 'use strict'
 
-const sugoCloud = require('../lib/sugo_cloud.js')
+const sugoHub = require('../lib/sugo_hub')
 const sugoActor = require('sugo-actor')
 const sugoCaller = require('sugo-caller')
 const sugoObserver = require('sugo-observer')
@@ -14,7 +14,7 @@ const assert = require('assert')
 const co = require('co')
 const http = require('http')
 
-describe('sugo-cloud', function () {
+describe('sugo-hub', function () {
   this.timeout(4000)
   let request = arequest.create({ jar: true })
   before(() => co(function * () {
@@ -29,7 +29,7 @@ describe('sugo-cloud', function () {
     let port = yield aport()
     let observed = []
 
-    let cloud = yield sugoCloud({
+    let cloud = yield sugoHub({
       port,
       storage: `${__dirname}/../tmp/testing-cloud-storage`
     })
@@ -128,7 +128,7 @@ describe('sugo-cloud', function () {
 
   it('Create from custom http server.', () => co(function * () {
     let port = 9872
-    let cloud = yield sugoCloud({
+    let cloud = yield sugoHub({
       port,
       server: http.createServer((req, res, next) => {
       })

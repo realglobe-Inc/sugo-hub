@@ -5,12 +5,12 @@
 
 'use strict'
 
-const sugoCloud = require('./sugo_cloud')
+const sugoHub = require('./sugo_hub')
 
-let lib = sugoCloud.bind(this)
+let lib = sugoHub.bind(this)
 
-Object.assign(lib, sugoCloud, {
-  sugoCloud
+Object.assign(lib, sugoHub, {
+  sugoHub
 })
 
 module.exports = lib

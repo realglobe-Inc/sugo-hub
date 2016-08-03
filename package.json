@@ -62,7 +62,7 @@
     "filedel": "^2.0.3",
     "injectmock": "^2.0.0",
     "markdown-toc": "^0.12.15",
-    "sg-socket-client": "^1.2.8",
+    "sg-socket-client": "^1.2.14",
     "sg-travis": "^1.1.27",
     "sugo-actor": "^4.0.1",
     "sugo-caller": "^2.1.4",

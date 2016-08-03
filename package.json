@@ -67,7 +67,7 @@
     "sugo-actor": "^4.0.1",
     "sugo-caller": "^2.1.4",
     "sugo-observer": "^2.0.0",
-    "sugos-assets": "^2.0.2"
+    "sugos-assets": "^2.0.3"
   },
   "engines": {
     "node": ">=6",

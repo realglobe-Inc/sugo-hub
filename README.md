@@ -46,7 +46,7 @@ Cloud server of SUGOS
 <a name="overview"></a>
 
 
-SUGO-Cloud works as a hub to connect [SUGO-Actors][sugo_actor_url] and [SUGO-Callers][sugo_caller_url].
+SUGO-Hub works as a hub to connect [SUGO-Actors][sugo_actor_url] and [SUGO-Callers][sugo_caller_url].
 
 
 
@@ -174,7 +174,7 @@ SUGO cloud also provide bunch of options for building more complex applications.
 
 ### Using Redis Server
 
-By default, SUGO-Cloud save state to json files. This may cause performance slow down on production.
+By default, SUGO-Hub save state to json files. This may cause performance slow down on production.
 It is recommended to setup redis server for storage.
 
 ```javascript
@@ -217,7 +217,7 @@ co(function * () {
 
 ### Define HTTP Endpoints
 
-SUGO-Cloud uses [Koa][koa_url] as http framework. You can define custom koa handlers on `endpoints` field.
+SUGO-Hub uses [Koa][koa_url] as http framework. You can define custom koa handlers on `endpoints` field.
 
 ```javascript
 #!/usr/bin/env node

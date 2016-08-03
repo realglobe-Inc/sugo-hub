@@ -329,14 +329,12 @@ Links
 + [sugo-actor][sugo_actor_url]
 + [sugo-caller][sugo_caller_url]
 + [sugo-observer][sugo_observer_url]
-+ [JSON API][json_api_url]
 + [Koa][koa_url]
 
 [sugos_url]: https://github.com/realglobe-Inc/sugos
 [sugo_actor_url]: https://github.com/realglobe-Inc/sugo-actor
 [sugo_caller_url]: https://github.com/realglobe-Inc/sugo-caller
 [sugo_observer_url]: https://github.com/realglobe-Inc/sugo-observer
-[json_api_url]: http://jsonapi.org
 [koa_url]: https://github.com/koajs/koa
 
 <!-- Links End -->

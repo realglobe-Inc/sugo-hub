@@ -38,6 +38,7 @@
     "sg-socket-constants": "^1.3.4",
     "sg-storage": "^2.0.2",
     "sg-validator": "^1.0.3",
+    "socket.io-redis": "^1.0.0",
     "stringcase": "^3.0.1",
     "sugo-constants": "^2.0.0",
     "uuid": "^2.0.2"

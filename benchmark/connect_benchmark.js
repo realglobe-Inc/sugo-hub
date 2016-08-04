@@ -20,7 +20,6 @@ const asleep = require('asleep')
 const debug = require('debug')('sg:hub:benchmark')
 const logger = require('aslogger')()
 
-// だいたい 300 以上で落ちる
 const CONNECTION_NUMBERS = [
   10,
   50,

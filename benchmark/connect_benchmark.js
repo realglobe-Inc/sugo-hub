@@ -43,7 +43,7 @@ co(function * () {
     head: [ 'Connections', 'Pong time(ms)' ],
     colWidths: [ 20, 20 ]
   })
-  yield startHub(port)
+  let server = yield startHub(port)
   for (let number of CONNECTION_NUMBERS) {
     logger.info(`Try connections with count: ${number}`)
     let actors = createActors(actorUrl, number)
@@ -63,6 +63,7 @@ co(function * () {
   report(table)
   process.exit(0)
   logger.info(`...done! ( ${new Date() - startAt}ms )`)
+  yield server.close()
 }).catch((err) => {
   console.error(err)
   process.exit(1)
@@ -80,7 +81,7 @@ function checkRedis () {
 function startHub (port) {
   return co(function * () {
     debug('Starts SUGO Hub')
-    yield sugoHub({
+    return yield sugoHub({
       port,
       storage: {
         redis: {

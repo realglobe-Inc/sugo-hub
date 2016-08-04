@@ -12,6 +12,7 @@ script:
 - ./ci/test.js
 - ./ci/cover.js
 - ./ci/report.js
+- ./ci/benchmark.js
 after_success:
 - ./ci/travis/publish.js
 - ./ci/travis/push_sugos.js

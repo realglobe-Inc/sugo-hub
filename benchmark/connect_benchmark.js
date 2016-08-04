@@ -1,10 +1,12 @@
 #!/usr/bin/env node
+
 /**
  * n 個の actor と n 個の caller が接続されている状態で、
  * 一斉に ping を送って pong が返ってくるまでの時間を計測する。
  */
+'use strict'
 
-process.env.DEBUG = process.env.DEBUG || 'sg:hub:benchmark'
+process.env.DEBUG = process.env.DEBUG || 'sg:hub:benchmark,sg:hub'
 
 const sugoHub = require('../lib')
 const sugoActor = require('sugo-actor')
@@ -28,7 +30,8 @@ const CONNECTION_NUMBERS = [
 ]
 
 co(function * () {
-  logger.notice('Start benchmarks...')
+  let startAt = new Date()
+  logger.info('Connect benchmarks...')
   const port = yield aport()
   const hubUrl = `http://localhost:${port}`
   const actorUrl = `${hubUrl}/actors`
@@ -45,7 +48,7 @@ co(function * () {
     let actors = createActors(actorUrl, number)
     yield asleep(300)
     yield connectActors(actors)
-    yield asleep(300)
+    yield asleep(500)
     let callers = createCallers(callerURL, number)
     yield asleep(300)
     let connections = yield connectCallers(callers)
@@ -58,7 +61,7 @@ co(function * () {
   }
   report(table)
   process.exit(0)
-  logger.notice('...benchmarks done!')
+  logger.info(`...done! ( ${new Date() - startAt}ms )`)
 }).catch((err) => {
   console.error(err)
   process.exit(1)
@@ -109,16 +112,24 @@ function createActors (url, number) {
 function connectActors (actors) {
   return co(function * () {
     debug('Connect actors.')
-    let connects = actors.map((actor) => actor.connect())
-    yield Promise.all(connects)
+    let promises = actors.map((actor) => co(function * () {
+      let connected = yield actor.connect()
+      debug(`Actor connected: ${actor.key}`)
+      return connected
+    }))
+    yield Promise.all(promises)
   })
 }
 
 function disconnectActors (actors) {
   return co(function * () {
     debug('Disconnect actors.')
-    let disconnects = actors.map((actor) => actor.disconnect())
-    yield Promise.all(disconnects)
+    let promises = actors.map((actor) => co(function * () {
+      let disconnected = yield actor.disconnect()
+      debug(`Actor disconnected: ${actor.key}`)
+      return disconnected
+    }))
+    yield Promise.all(promises)
   })
 }
 
@@ -130,20 +141,25 @@ function createCallers (callerUrl, number) {
 function connectCallers (callers) {
   return co(function * () {
     debug('Connect callers')
-    let connects = callers.map((caller, i) => co(function * () {
-      let actor = yield caller.connect(actorKey(i))
-      return actor
+    let promises = callers.map((caller, i) => co(function * () {
+      let key = actorKey(i)
+      let connected = yield caller.connect(key)
+      debug(`Caller connected to: ${key}`)
+      return connected
     }))
-    return Promise.all(connects)
+    return Promise.all(promises)
   })
 }
 
 function disconnectCallers (callers) {
   debug('Disconnect callers.')
-  let disconnects = callers.map((caller, i) => co(function * () {
-    yield caller.disconnect(actorKey(i))
+  let promises = callers.map((caller, i) => co(function * () {
+    let key = actorKey(i)
+    let disconnected = yield caller.disconnect(key)
+    debug(`Caller disconnect from: ${key}`)
+    return disconnected
   }))
-  return Promise.all(disconnects)
+  return Promise.all(promises)
 }
 
 function actorKey (number) {

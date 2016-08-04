@@ -10,12 +10,13 @@ const sugoCaller = require('sugo-caller')
 const sugoObserver = require('sugo-observer')
 const arequest = require('arequest')
 const aport = require('aport')
+const asleep = require('asleep')
 const assert = require('assert')
 const co = require('co')
 const http = require('http')
 
 describe('sugo-hub', function () {
-  this.timeout(4000)
+  this.timeout(12000)
   let request = arequest.create({ jar: true })
   before(() => co(function * () {
 
@@ -25,13 +26,13 @@ describe('sugo-hub', function () {
 
   }))
 
-  it('Sugo cloud', () => co(function * () {
+  it('Sugo hub', () => co(function * () {
     let port = yield aport()
     let observed = []
 
-    let cloud = yield sugoHub({
+    let hub = yield sugoHub({
       port,
-      storage: `${__dirname}/../tmp/testing-cloud-storage`
+      storage: `${__dirname}/../tmp/testing-hub-storage`
     })
 
     let ACTOR_URL = `http://localhost:${port}/actors`
@@ -72,11 +73,11 @@ describe('sugo-hub', function () {
       let bash = connection.get('bash')
       let payload = yield bash.spawn('ls', [ '-la' ])
       assert.equal(payload, 0, 'Exit with 0')
-      yield cloud.invalidateCallers()
+      yield hub.invalidateCallers()
       yield connection.disconnect()
     }
 
-    yield cloud.invalidateActors()
+    yield hub.invalidateActors()
 
     // Try to connect invalid actor
     {
@@ -119,22 +120,22 @@ describe('sugo-hub', function () {
 
     yield observer01.stop()
 
-    yield new Promise((resolve) => setTimeout(resolve, 400))
+    yield asleep(400)
 
     assert.ok(observed.length > 0)
 
-    yield cloud.close()
+    yield hub.close()
   }))
 
   it('Create from custom http server.', () => co(function * () {
     let port = 9872
-    let cloud = yield sugoHub({
+    let hub = yield sugoHub({
       port,
       server: http.createServer((req, res, next) => {
       })
     })
-    assert.equal(cloud.port, port)
-    yield cloud.close()
+    assert.equal(hub.port, port)
+    yield hub.close()
   }))
 })
 

@@ -114,7 +114,7 @@ function connectActors (actors) {
     debug('Connect actors.')
     let promises = actors.map((actor) => co(function * () {
       let connected = yield actor.connect()
-      debug(`Actor connected: ${actor.key}`)
+      debug(`Actor connected: ${JSON.stringify(actor.key)}`)
       return connected
     }))
     yield Promise.all(promises)
@@ -126,7 +126,7 @@ function disconnectActors (actors) {
     debug('Disconnect actors.')
     let promises = actors.map((actor) => co(function * () {
       let disconnected = yield actor.disconnect()
-      debug(`Actor disconnected: ${actor.key}`)
+      debug(`Actor disconnected: ${JSON.stringify(actor.key)}`)
       return disconnected
     }))
     yield Promise.all(promises)
@@ -144,7 +144,7 @@ function connectCallers (callers) {
     let promises = callers.map((caller, i) => co(function * () {
       let key = actorKey(i)
       let connected = yield caller.connect(key)
-      debug(`Caller connected to: ${key}`)
+      debug(`Caller connected to: ${JSON.stringify(key)}`)
       return connected
     }))
     return Promise.all(promises)
@@ -156,7 +156,7 @@ function disconnectCallers (callers) {
   let promises = callers.map((caller, i) => co(function * () {
     let key = actorKey(i)
     let disconnected = yield caller.disconnect(key)
-    debug(`Caller disconnect from: ${key}`)
+    debug(`Caller disconnect from: ${JSON.stringify(key)}`)
     return disconnected
   }))
   return Promise.all(promises)

@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env node
 
 /**
  * Run benchmark tests
@@ -7,8 +7,15 @@
 
 process.chdir(`${__dirname}/..`)
 
-const { runTasks, execcli } = require('ape-tasking')
+const { runTasks } = require('ape-tasking')
+const { fork } = require('child_process')
 
 runTasks('benchmark', [
-  () => execcli('benchmark/connect_benchmark.js')
+  () => new Promise((resolve, reject) => {
+    let forked = fork('./benchmark/connect_benchmark.js', {
+      stdio: 'pipe'
+    })
+    forked.on('close', () => resolve())
+    forked.on('error', (err) => reject(err))
+  })
 ], true)

@@ -4,9 +4,8 @@
   "description": "Cloud server of SUGOS",
   "main": "lib",
   "browser": {
-    "sugo-hub": false,
-    "sugo-hub/agent": "shim/browser/agent",
-    "sugo-hub/constants": "shim/browser/constants"
+    "./agent": "shim/browser/agent",
+    "./constants": "shim/browser/constants"
   },
   "scripts": {
     "test": "./ci/test.js",

@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/realglobe-Inc/sugo-hub#readme",
   "dependencies": {
+    "asenv": "^1.0.5",
+    "aslogger": "^1.0.2",
     "brequest": "^1.0.1",
     "co": "^4.6.0",
     "debug": "^2.2.0",
@@ -64,10 +66,10 @@
     "injectmock": "^2.0.0",
     "markdown-toc": "^0.12.15",
     "sg-socket-client": "^1.2.17",
-    "sg-travis": "^1.1.27",
-    "sugo-actor": "^4.1.6",
-    "sugo-caller": "^2.1.11",
-    "sugo-observer": "^2.0.0",
+    "sg-travis": "^1.1.29",
+    "sugo-actor": "^4.1.11",
+    "sugo-caller": "^2.1.12",
+    "sugo-observer": "^2.0.5",
     "sugos-assets": "^2.0.3"
   },
   "engines": {

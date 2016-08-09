@@ -6,10 +6,11 @@
 'use strict'
 
 const sugoHub = require('./sugo_hub')
+const constants = require('./constants')
 
 let lib = sugoHub.bind(this)
 
-Object.assign(lib, sugoHub, {
+Object.assign(lib, sugoHub, constants, {
   sugoHub
 })
 

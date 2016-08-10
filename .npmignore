@@ -24,6 +24,8 @@ ci
 doc
 example
 test
+var
 
 
 *.rdb
+

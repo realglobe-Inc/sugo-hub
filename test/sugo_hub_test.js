@@ -14,6 +14,7 @@ const asleep = require('asleep')
 const assert = require('assert')
 const co = require('co')
 const http = require('http')
+const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = sugoHub
 
 describe('sugo-hub', function () {
   this.timeout(12000)
@@ -32,14 +33,17 @@ describe('sugo-hub', function () {
 
     let hub = yield sugoHub({
       port,
-      storage: `${__dirname}/../tmp/testing-hub-storage`
+      storage: `${__dirname}/../tmp/testing-hub-storage`,
+      interceptors: {
+        [ACTOR_URL]: (socket) => co(function * () {
+          assert.equal(socket.nsp.name, '/actors')
+          yield asleep(10)
+        })
+      }
     })
 
-    let ACTOR_URL = `http://localhost:${port}/actors`
-    let CALLER_URL = `http://localhost:${port}/callers`
-    let OBSERVER_URL = `http://localhost:${port}/observers`
-
-    let actor01 = sugoActor(ACTOR_URL, {
+    let actor01 = sugoActor({
+      host: `localhost:${port}`,
       key: 'my-actor-01',
       force: true,
       modules: {
@@ -47,7 +51,8 @@ describe('sugo-hub', function () {
       }
     })
 
-    let actor02 = sugoActor(ACTOR_URL, {
+    let actor02 = sugoActor({
+      port,
       key: 'my-actor-02-' + new Date().getTime(),
       force: true,
       modules: {
@@ -55,15 +60,15 @@ describe('sugo-hub', function () {
       }
     })
 
-    let caller01 = sugoCaller(CALLER_URL, {})
-    let caller02 = sugoCaller(CALLER_URL, {})
+    let caller01 = sugoCaller({ host: `localhost:${port}` })
+    let caller02 = sugoCaller({ host: `localhost:${port}` })
 
     yield actor01.connect()
     yield actor02.connect()
 
-    let observer01 = sugoObserver(OBSERVER_URL, (data) => {
+    let observer01 = sugoObserver((data) => {
       observed.push(data)
-    })
+    }, { port })
 
     yield observer01.start()
 
@@ -93,7 +98,7 @@ describe('sugo-hub', function () {
 
     // Get actors info
     {
-      let { body, statusCode } = yield request(ACTOR_URL)
+      let { body, statusCode } = yield request(`http://localhost:${port}/actors`)
       assert.equal(statusCode, 200)
       assert.ok(body)
       let { meta, data, included } = body
@@ -105,7 +110,7 @@ describe('sugo-hub', function () {
 
     // Get callers info
     {
-      let { body, statusCode } = yield request(CALLER_URL)
+      let { body, statusCode } = yield request(`http://localhost:${port}/callers`)
       assert.equal(statusCode, 200)
       assert.ok(body)
       let { meta, data, included } = body
@@ -137,6 +142,7 @@ describe('sugo-hub', function () {
     assert.equal(hub.port, port)
     yield hub.close()
   }))
+
 })
 
 /* global describe, before, after, it */

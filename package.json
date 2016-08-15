@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/realglobe-Inc/sugo-hub#readme",
   "dependencies": {
-    "asenv": "^1.0.5",
+    "asenv": "^1.0.6",
     "aslogger": "^1.0.2",
     "brequest": "^1.0.1",
     "co": "^4.6.0",
@@ -46,9 +46,9 @@
     "uuid": "^2.0.2"
   },
   "devDependencies": {
-    "ababel": "^1.0.25",
-    "ababel-es2015": "^1.0.5",
-    "amocha": "^1.0.13",
+    "ababel": "^1.1.2",
+    "ababel-es2015": "^1.0.6",
+    "amocha": "^1.0.14",
     "ape-formatting": "^1.0.2",
     "ape-releasing": "^4.0.4",
     "ape-reporting": "^3.0.2",

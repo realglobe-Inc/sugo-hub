@@ -14,6 +14,7 @@ const asleep = require('asleep')
 const assert = require('assert')
 const co = require('co')
 const http = require('http')
+const { modularize } = require('sugo-actor/module')
 const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = sugoHub
 
 describe('sugo-hub', function () {
@@ -42,12 +43,20 @@ describe('sugo-hub', function () {
       }
     })
 
+    class YoPerson {
+      sayYo () {
+        return 'yo!'
+      }
+    }
+    const YoPersonModule = modularize(YoPerson)
+
     let actor01 = sugoActor({
       host: `localhost:${port}`,
       key: 'my-actor-01',
       force: true,
       modules: {
-        bash: new (require('sugo-actor/misc/mocks/mock-module-bash.js'))()
+        bash: new (require('sugo-actor/misc/mocks/mock-module-bash.js'))(),
+        yo: new YoPersonModule()
       }
     })
 
@@ -75,9 +84,16 @@ describe('sugo-hub', function () {
     // Perform an action
     {
       let connection = yield caller01.connect(actor01.key)
-      let bash = connection.get('bash')
-      let payload = yield bash.spawn('ls', [ '-la' ])
-      assert.equal(payload, 0, 'Exit with 0')
+      {
+        let bash = connection.get('bash')
+        let payload = yield bash.spawn('ls', [ '-la' ])
+        assert.equal(payload, 0, 'Exit with 0')
+      }
+      {
+        let yo = connection.get('yo')
+        assert.equal((yield yo.sayYo()), 'yo!')
+      }
+
       yield hub.invalidateCallers()
       yield connection.disconnect()
     }

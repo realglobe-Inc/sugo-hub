@@ -13,7 +13,6 @@ const co = require('co')
 co(function * () {
   let cloud = yield sugoHub({
     port: 3000,
-    // Using redis server as storage
     storage: { /* ... */ },
     // HTTP route handler with koa
     endpoints: { /* ... */ },

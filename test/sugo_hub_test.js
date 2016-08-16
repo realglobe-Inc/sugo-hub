@@ -6,6 +6,7 @@
 
 const sugoHub = require('../lib/sugo_hub')
 const sugoActor = require('sugo-actor')
+const { Module } = sugoActor
 const sugoCaller = require('sugo-caller')
 const sugoObserver = require('sugo-observer')
 const arequest = require('arequest')
@@ -159,6 +160,55 @@ describe('sugo-hub', function () {
     yield hub.close()
   }))
 
+  it('Use auth', () => co(function * () {
+    let port = yield aport()
+
+    let hub = yield sugoHub({
+      port,
+      storage: `${__dirname}/../tmp/testing-auth-storage`,
+      authenticate: (socket, data) => co(function * () {
+        let { token } = data
+        return token === 'hogehogehoge'
+      })
+    })
+
+    {
+      let actor01 = sugoActor({
+        host: `localhost:${port}`,
+        key: 'my-actor-01',
+        force: true,
+        auth: {
+          token: 'hogehogehoge'
+        },
+        modules: { hoge: new Module(() => {}) }
+      })
+
+      yield actor01.connect()
+      yield actor01.disconnect()
+    }
+
+    {
+      let actor02 = sugoActor({
+        host: `localhost:${port}`,
+        key: 'my-actor-01',
+        force: true,
+        auth: {
+          token: '__invalid_token__'
+        },
+        modules: { fuge: new Module(() => {}) }
+      })
+      let caught
+      try {
+        yield actor02.connect()
+      } catch (err) {
+        caught = err
+      }
+      assert.ok(!!caught)
+    }
+
+    assert.equal(hub.port, port)
+    yield hub.close()
+  }))
 })
 
 /* global describe, before, after, it */

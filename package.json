@@ -14,7 +14,7 @@
   "repository": "realglobe-Inc/sugo-hub",
   "keywords": [
     "SUGOS",
-    "cloud"
+    "hub"
   ],
   "author": {
     "name": "Taka Okunishi",
@@ -37,11 +37,13 @@
     "sg-schemas": "^2.0.9",
     "sg-server": "^1.3.1",
     "sg-socket": "^1.0.15",
-    "sg-socket-constants": "^1.3.4",
+    "sg-socket-constants": "^1.3.8",
     "sg-storage": "^2.0.2",
     "sg-validator": "^1.0.4",
     "socket.io-redis": "^1.0.0",
+    "socketio-auth": "0.0.5",
     "stringcase": "^3.0.1",
+    "sugo-actor": "^4.2.1",
     "sugo-constants": "^2.0.0",
     "uuid": "^2.0.2"
   },
@@ -67,8 +69,8 @@
     "markdown-toc": "^0.12.15",
     "sg-socket-client": "^1.2.17",
     "sg-travis": "^1.1.29",
-    "sugo-actor": "^4.1.11",
-    "sugo-caller": "^2.1.12",
+    "sugo-actor": "^4.2.1",
+    "sugo-caller": "^2.1.13",
     "sugo-observer": "^2.0.5",
     "sugos-assets": "^2.0.3"
   },

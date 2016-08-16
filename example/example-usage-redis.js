@@ -22,11 +22,8 @@ co(function * () {
         db: 1
       }
     },
-    // HTTP route handler with koa
     endpoints: { /* ... */ },
-    // Custom koa middlewares
-    middlewares: [ /* ... */],
-    // Directory names to server static files
+    middlewares: [ /* ... */ ],
     static: [ /* ... */ ]
   })
 

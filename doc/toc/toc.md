@@ -5,5 +5,6 @@
   * [Using Redis Server](#using-redis-server)
   * [Define HTTP Endpoints](#define-http-endpoints)
   * [Define HTTP Middlewares](#define-http-middlewares)
+  * [Use Authentication](#use-authentication)
 - [License](#license)
 - [Links](#links)

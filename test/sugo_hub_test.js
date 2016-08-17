@@ -160,6 +160,43 @@ describe('sugo-hub', function () {
     yield hub.close()
   }))
 
+  it('Transport built in types', () => co(function * () {
+    let port = yield aport()
+    let hub = yield sugoHub({
+      port,
+      storage: `${__dirname}/../tmp/testing-hub-storage`
+    })
+    let actor01 = sugoActor({
+      port,
+      key: 'actor01',
+      modules: {
+        withType: new Module({
+          receiveInstances (data) {
+            let { date01 } = data
+            assert.ok(date01 instanceof Date)
+          },
+          getInstances () {
+            return {
+              date02: new Date()
+            }
+          }
+        })
+      }
+    })
+    yield actor01.connect()
+    {
+      let caller01 = sugoCaller({ port })
+      let actor01 = yield caller01.connect('actor01')
+      let withType = actor01.get('withType')
+      yield withType.receiveInstances({ date01: new Date() })
+      let { date02 } = yield withType.getInstances()
+      assert.ok(date02 instanceof Date)
+      yield actor01.disconnect()
+    }
+    yield actor01.disconnect()
+    yield hub.close()
+  }))
+
   it('Use auth', () => co(function * () {
     let port = yield aport()
 

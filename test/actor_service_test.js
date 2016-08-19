@@ -4,8 +4,10 @@
  */
 'use strict'
 
-const actorService = require('../lib/services/actor_service.js')
+const ActorService = require('../lib/services/actor_service.js')
+const sgStorage = require('sg-storage')
 const assert = require('assert')
+const uuid = require('uuid')
 const co = require('co')
 
 describe('actor-service', () => {
@@ -18,7 +20,28 @@ describe('actor-service', () => {
   }))
 
   it('Actor service', () => co(function * () {
-
+    let storage = sgStorage(`${__dirname}/../tmp/testing-actor-service`)
+    let service = new ActorService(storage)
+    assert.ok(service)
+    let socketId = uuid.v4()
+    let key = 'hoge'
+    yield service.setupActor(socketId, key)
+    yield service.updateSpec(socketId, 'yo', {
+      name: 'Yo module',
+      version: '1.0.0',
+      methods: {}
+    })
+    {
+      let { $specs } = yield service.find(key)
+      assert.ok($specs.yo)
+    }
+    yield service.delSpec(socketId, 'yo')
+    {
+      let { $specs } = yield service.find(key)
+      assert.ok(!$specs.yo)
+    }
+    yield service.teardownActor(socketId, key)
+    yield storage.end()
   }))
 })
 

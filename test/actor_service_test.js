@@ -31,7 +31,15 @@ describe('actor-service', () => {
       version: '1.0.0',
       methods: {}
     })
+    {
+      let { $specs } = yield service.find(key)
+      assert.ok($specs.yo)
+    }
     yield service.delSpec(socketId, 'yo')
+    {
+      let { $specs } = yield service.find(key)
+      assert.ok(!$specs.yo)
+    }
     yield service.teardownActor(socketId, key)
     yield storage.end()
   }))

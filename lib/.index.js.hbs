@@ -1,17 +1,19 @@
 /**
  * {{pkg.description}}
  * @module {{pkg.name}}
+ * @version {{pkg.version}}
  */
 
 'use strict'
 
-const sugoHub = require('./sugo_hub')
+const SugoHub = require('./sugo_hub')
+const create = require('./create')
 const constants = require('./constants')
 
-let lib = sugoHub.bind(this)
+let lib = create.bind(this)
 
-Object.assign(lib, sugoHub, constants, {
-  sugoHub
+Object.assign(lib, SugoHub, constants, {
+  SugoHub
 })
 
 module.exports = lib

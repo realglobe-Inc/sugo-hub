@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const sugoHub = require('../lib/sugo_hub')
+const SugoHub = require('../lib/sugo_hub')
 const sugoActor = require('sugo-actor')
 const { Module } = sugoActor
 const sugoCaller = require('sugo-caller')
@@ -16,8 +16,7 @@ const assert = require('assert')
 const co = require('co')
 const http = require('http')
 const { modularize } = require('sugo-actor/module')
-const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = sugoHub
-
+const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = SugoHub
 describe('sugo-hub', function () {
   this.timeout(12000)
   let request = arequest.create({ jar: true })
@@ -33,7 +32,7 @@ describe('sugo-hub', function () {
     let port = yield aport()
     let observed = []
 
-    let hub = yield sugoHub({
+    let hub = yield new SugoHub({
       port,
       storage: `${__dirname}/../tmp/testing-hub-storage`,
       interceptors: {
@@ -42,7 +41,7 @@ describe('sugo-hub', function () {
           yield asleep(10)
         })
       }
-    })
+    }).listen(port)
 
     class YoPerson {
       sayYo () {
@@ -151,21 +150,22 @@ describe('sugo-hub', function () {
 
   it('Create from custom http server.', () => co(function * () {
     let port = 9872
-    let hub = yield sugoHub({
+    let hub = yield new SugoHub({
       port,
       server: http.createServer((req, res, next) => {
       })
-    })
+    }).listen(port)
     assert.equal(hub.port, port)
     yield hub.close()
   }))
 
   it('Transport built in types', () => co(function * () {
     let port = yield aport()
-    let hub = yield sugoHub({
+    let hub = yield new SugoHub({
       port,
       storage: `${__dirname}/../tmp/testing-hub-storage`
-    })
+    }).listen(port)
+
     let actor01 = sugoActor({
       port,
       key: 'actor01',
@@ -200,14 +200,13 @@ describe('sugo-hub', function () {
   it('Use auth', () => co(function * () {
     let port = yield aport()
 
-    let hub = yield sugoHub({
-      port,
+    let hub = yield new SugoHub({
       storage: `${__dirname}/../tmp/testing-auth-storage`,
       authenticate: (socket, data) => co(function * () {
         let { token } = data
         return token === 'hogehogehoge'
       })
-    })
+    }).listen(port)
 
     {
       let actor01 = sugoActor({

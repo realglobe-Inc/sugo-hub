@@ -6,6 +6,7 @@
 
 const { readmeMdBud } = require('ape-tmpl')
 const pkg = require('./package.json')
+
 const { HubUrls } = require('sugo-constants')
 const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = HubUrls
 

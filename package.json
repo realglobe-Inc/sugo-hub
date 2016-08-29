@@ -1,7 +1,7 @@
 {
   "name": "sugo-hub",
   "version": "3.0.18",
-  "description": "Cloud server of SUGOS",
+  "description": "Hub server of SUGOS",
   "main": "lib",
   "browser": {
     "./agent": "shim/browser/agent",
@@ -50,6 +50,7 @@
     "ababel": "^1.1.2",
     "ababel-es2015": "^1.0.6",
     "amocha": "^1.0.14",
+    "ape-doc": "^2.0.4",
     "ape-formatting": "^1.0.2",
     "ape-releasing": "^4.0.4",
     "ape-reporting": "^3.0.2",

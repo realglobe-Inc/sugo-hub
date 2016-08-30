@@ -97,8 +97,8 @@ Requirements
        style="height:40px"
   /></a>
 
-+ [Node.js ( >=6 )][node_download_url]
-+ [npm ( >=3 )][npm_url]
++ [Node.js ( >=6.x )][node_download_url]
++ [npm ( >=3.x )][npm_url]
 
 [node_download_url]: https://nodejs.org/en/download/
 [npm_url]: https://docs.npmjs.com/
@@ -142,14 +142,14 @@ const co = require('co')
 
 co(function * () {
   // Start sugo-hub server
-  let cloud = yield sugoHub({
-    // Options
-    port: 3000
+  let hub = sugoHub({
+    // Options here
   })
 
-  console.log(`SUGO Cloud started at port: ${cloud.port}`)
-}).catch((err) => {
-  /* ... */})
+  yield hub.listen(3000)
+
+  console.log(`SUGO Cloud started at port: ${hub.port}`)
+}).catch((err) => console.error(err))
 
 ```
 
@@ -192,8 +192,7 @@ const sugoHub = require('sugo-hub')
 const co = require('co')
 
 co(function * () {
-  let cloud = yield sugoHub({
-    port: 3000,
+  let hub = sugoHub({
     // Using redis server as storage
     storage: {
       // Redis setup options (see https://github.com/NodeRedis/node_redis)
@@ -208,7 +207,9 @@ co(function * () {
     static: [ /* ... */ ]
   })
 
-  console.log(`SUGO Cloud started at port: ${cloud.port}`)
+  yield hub.listen(3000)
+
+  console.log(`SUGO Cloud started at port: ${hub.port}`)
 }).catch((err) => console.error(err))
 
 ```
@@ -231,8 +232,7 @@ const sugoHub = require('sugo-hub')
 const co = require('co')
 
 co(function * () {
-  let cloud = yield sugoHub({
-    port: 3000,
+  let hub = sugoHub({
     storage: { /* ... */ },
     // HTTP route handler with koa
     endpoints: {
@@ -248,7 +248,9 @@ co(function * () {
     static: [ /* ... */ ]
   })
 
-  console.log(`SUGO Cloud started at port: ${cloud.port}`)
+  yield hub.listen(3000)
+
+  console.log(`SUGO Cloud started at port: ${hub.port}`)
 }).catch((err) => console.error(err))
 
 ```
@@ -273,8 +275,7 @@ const sugoHub = require('sugo-hub')
 const co = require('co')
 
 co(function * () {
-  let cloud = yield sugoHub({
-    port: 3000,
+  let hub = sugoHub({
     storage: { /* ... */ },
     // HTTP route handler with koa
     endpoints: { /* ... */ },
@@ -291,7 +292,9 @@ co(function * () {
     ]
   })
 
-  console.log(`SUGO Cloud started at port: ${cloud.port}`)
+  yield hub.listen(3000)
+
+  console.log(`SUGO Cloud started at port: ${hub.port}`)
 }).catch((err) => console.error(err))
 
 ```
@@ -316,8 +319,7 @@ const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = sugoHub
 const co = require('co')
 
 co(function * () {
-  let cloud = yield sugoHub({
-    port: 3000,
+  let hub = sugoHub({
     storage: { /* ... */ },
     endpoints: { /* ... */ },
     /**
@@ -335,7 +337,9 @@ co(function * () {
     static: [ /* ... */ ]
   })
 
-  console.log(`SUGO Cloud started at port: ${cloud.port}`)
+  yield hub.listen(3000)
+
+  console.log(`SUGO Cloud started at port: ${hub.port}`)
 }).catch((err) => console.error(err))
 
 ```

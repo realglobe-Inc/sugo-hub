@@ -12,11 +12,11 @@ const co = require('co')
 
 co(function * () {
   // Start sugo-hub server
-  let cloud = yield sugoHub({
-    // Options
-    port: 3000
+  let hub = sugoHub({
+    // Options here
   })
 
-  console.log(`SUGO Cloud started at port: ${cloud.port}`)
-}).catch((err) => {
-  /* ... */})
+  yield hub.listen(3000)
+
+  console.log(`SUGO Cloud started at port: ${hub.port}`)
+}).catch((err) => console.error(err))

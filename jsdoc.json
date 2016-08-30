@@ -1,0 +1,1683 @@
+{
+  "functions": [
+    {
+      "name": "agent",
+      "access": "",
+      "virtual": false,
+      "description": "Browser side agent for spot",
+      "parameters": [],
+      "examples": []
+    },
+    {
+      "name": "sugoHub",
+      "access": "",
+      "virtual": false,
+      "description": "Create a hub instance. Just an alias of `new SugoCaller(config)`",
+      "parameters": [],
+      "examples": [
+        "co(function * () {\n  let cloud = yield sugoHub({\n  // Options here\n  }).listen(3000)\n}).catch((err) => console.error(err))"
+      ],
+      "returns": {
+        "type": "SugoHub",
+        "description": "- A SugoHub instance"
+      }
+    },
+    {
+      "name": "ioInterceptor",
+      "access": "",
+      "virtual": false,
+      "description": "Compose multiple socket io middleware into one",
+      "parameters": [
+        {
+          "name": "handlers",
+          "type": "function",
+          "description": "",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "function",
+        "description": ""
+      }
+    },
+    {
+      "name": "newStorage",
+      "access": "",
+      "virtual": false,
+      "description": "Create a new storage",
+      "parameters": [
+        {
+          "name": "config",
+          "type": [
+            "Object",
+            "string"
+          ],
+          "description": "Storage config",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": []
+    },
+    {
+      "name": "validateSpec",
+      "access": "",
+      "virtual": false,
+      "description": "Validate a spec data",
+      "parameters": [
+        {
+          "name": "spec",
+          "type": "Object",
+          "description": "",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": []
+    }
+  ],
+  "classes": [
+    {
+      "name": "SugoHub",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "SugoHub",
+        "description": "Hub server of SUGOS",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "Object",
+            "description": "Optional settings",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.storage",
+            "type": [
+              "string",
+              "Object"
+            ],
+            "description": "Storage options",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "config.keys",
+            "type": "string",
+            "description": "Koa keys",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.endpoints",
+            "type": "Object",
+            "description": "Endpoint settings",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "config.context",
+            "type": "Object",
+            "description": "Koa context prototype",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "config.public",
+            "type": "string",
+            "description": "Public directories.",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.port",
+            "type": "number",
+            "description": "Port number",
+            "default": 3000,
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.invalidateInterval",
+            "type": "number",
+            "description": "Interval for invalidate loop",
+            "default": 3000,
+            "optional": true,
+            "nullable": ""
+          }
+        ],
+        "examples": []
+      }
+    },
+    {
+      "name": "ActorEndpoint",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ActorEndpoint",
+        "description": "Define an endpoint for actor",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "list",
+          "access": "",
+          "virtual": false,
+          "description": "Endpoint for list actor data",
+          "parameters": [],
+          "examples": []
+        }
+      ]
+    },
+    {
+      "name": "CallerEndpoint",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "CallerEndpoint",
+        "description": "Define an endpoint for caller",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "list",
+          "access": "",
+          "virtual": false,
+          "description": "Endpoint for list caller data",
+          "parameters": [],
+          "examples": []
+        }
+      ]
+    },
+    {
+      "name": "Endpoint",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "Endpoint",
+        "description": "Abstract endpoint",
+        "parameters": [],
+        "examples": []
+      }
+    },
+    {
+      "name": "ActorEntity",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ActorEntity",
+        "description": "Entity for spot",
+        "parameters": [],
+        "examples": []
+      }
+    },
+    {
+      "name": "CallerEntity",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "CallerEntity",
+        "description": "Entity for caller",
+        "parameters": [],
+        "examples": []
+      }
+    },
+    {
+      "name": "Entity",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": true,
+      "fires": "",
+      "constructor": {
+        "name": "Entity",
+        "description": "Abstract entity",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "set",
+          "access": "",
+          "virtual": false,
+          "description": "Set values",
+          "parameters": [
+            {
+              "name": "values",
+              "type": "Object",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        },
+        {
+          "name": "del",
+          "access": "",
+          "virtual": false,
+          "description": "Delete value",
+          "parameters": [
+            {
+              "name": "propName",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        }
+      ]
+    },
+    {
+      "name": "ObserverEntity",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ObserverEntity",
+        "description": "Entity for observer",
+        "parameters": [],
+        "examples": []
+      }
+    },
+    {
+      "name": "ActorNamespace",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ActorNamespace",
+        "description": "Namespace for actor",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "handleConnection",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
+        }
+      ]
+    },
+    {
+      "name": "CallerNamespace",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "CallerNamespace",
+        "description": "Namespace for caller",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "handleConnection",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
+        }
+      ]
+    },
+    {
+      "name": "Namespace",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "Namespace",
+        "description": "Handle for socket.io namespace",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "ack",
+          "access": "",
+          "virtual": false,
+          "description": "Handle and callback as socket.IO acknowledge",
+          "parameters": [
+            {
+              "name": "handler",
+              "type": "function",
+              "description": "Data handler function",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "function",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "ObserverNamespace",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ObserverNamespace",
+        "description": "Namespace for observer",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "handleConnection",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
+        }
+      ]
+    },
+    {
+      "name": "SocketPool",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "SocketPool",
+        "description": "Hold sockets",
+        "parameters": [],
+        "examples": []
+      }
+    },
+    {
+      "name": "ActorService",
+      "description": "",
+      "extends": [
+        "Service"
+      ],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ActorService",
+        "description": "",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "setupActor",
+          "access": "",
+          "virtual": false,
+          "description": "Setup a actor.",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "Id of socket.",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key to of actor",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": "- Created actor."
+          }
+        },
+        {
+          "name": "teardownActor",
+          "access": "",
+          "virtual": false,
+          "description": "Teardown a actor.",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "Id of socket.",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key to of actor",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": "- Created actor."
+          }
+        },
+        {
+          "name": "updateSpec",
+          "access": "",
+          "virtual": false,
+          "description": "Handle \"spec\" event",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "Id of socket.",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "description": "Spec name",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "spec",
+              "type": "Object",
+              "description": "Spec data",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": "- Created actor."
+          }
+        },
+        {
+          "name": "delSpec",
+          "access": "",
+          "virtual": false,
+          "description": "Handle \"despec\" event",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "Id of socket.",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "description": "Spec name",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        },
+        {
+          "name": "info",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
+        },
+        {
+          "name": "findBySocketId",
+          "access": "",
+          "virtual": false,
+          "description": "Find by socket id",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "save",
+          "access": "",
+          "virtual": false,
+          "description": "Save entity to storage",
+          "parameters": [
+            {
+              "name": "entity",
+              "type": "Entity",
+              "description": "Entity to save",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "find",
+          "access": "",
+          "virtual": false,
+          "description": "Get entity by key",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of the entity",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            },
+            {
+              "name": "options.strict",
+              "type": "boolean",
+              "description": "Throw error if not found",
+              "default": "",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Entity>",
+            "description": ""
+          }
+        },
+        {
+          "name": "findByIndex",
+          "access": "",
+          "virtual": false,
+          "description": "Find entity bin index.",
+          "parameters": [
+            {
+              "name": "indexKey",
+              "type": "string",
+              "description": "Key of the index.",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "indexValue",
+              "type": "string",
+              "description": "Value of the index",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Find options",
+              "default": "",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Entity>",
+            "description": ""
+          }
+        },
+        {
+          "name": "destroy",
+          "access": "",
+          "virtual": false,
+          "description": "Destroy entity",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of the entity",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<number>",
+            "description": ""
+          }
+        },
+        {
+          "name": "info",
+          "access": "",
+          "virtual": false,
+          "description": "Get info",
+          "parameters": [],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": ""
+          }
+        },
+        {
+          "name": "invalidate",
+          "access": "",
+          "virtual": false,
+          "description": "Invalidate sockets",
+          "parameters": [
+            {
+              "name": "validator",
+              "type": "function",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "_indicesWithKeyValue",
+          "access": "private",
+          "virtual": false,
+          "description": "Get indices with key and value",
+          "parameters": [
+            {
+              "name": "indexKey",
+              "type": "",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "indexValue",
+              "type": "",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "_entitiesWithKey",
+          "access": "private",
+          "virtual": false,
+          "description": "Get entities with key",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "CallerService",
+      "description": "",
+      "extends": [
+        "Service"
+      ],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "CallerService",
+        "description": "",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "joinToActor",
+          "access": "",
+          "virtual": false,
+          "description": "Join to a actor",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "Connecting socket",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "actor",
+              "type": "ActorEntity",
+              "description": "Actor to join",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": "caller instance"
+          }
+        },
+        {
+          "name": "leaveFromActor",
+          "access": "",
+          "virtual": false,
+          "description": "Leave from a actor.",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "Connecting socket",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "actor",
+              "type": "ActorEntity",
+              "description": "Actor to leave",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": "caller instance"
+          }
+        },
+        {
+          "name": "info",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
+        },
+        {
+          "name": "findBySocketId",
+          "access": "",
+          "virtual": false,
+          "description": "Find by socket id",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "save",
+          "access": "",
+          "virtual": false,
+          "description": "Save entity to storage",
+          "parameters": [
+            {
+              "name": "entity",
+              "type": "Entity",
+              "description": "Entity to save",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "find",
+          "access": "",
+          "virtual": false,
+          "description": "Get entity by key",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of the entity",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            },
+            {
+              "name": "options.strict",
+              "type": "boolean",
+              "description": "Throw error if not found",
+              "default": "",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Entity>",
+            "description": ""
+          }
+        },
+        {
+          "name": "findByIndex",
+          "access": "",
+          "virtual": false,
+          "description": "Find entity bin index.",
+          "parameters": [
+            {
+              "name": "indexKey",
+              "type": "string",
+              "description": "Key of the index.",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "indexValue",
+              "type": "string",
+              "description": "Value of the index",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Find options",
+              "default": "",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Entity>",
+            "description": ""
+          }
+        },
+        {
+          "name": "destroy",
+          "access": "",
+          "virtual": false,
+          "description": "Destroy entity",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of the entity",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<number>",
+            "description": ""
+          }
+        },
+        {
+          "name": "info",
+          "access": "",
+          "virtual": false,
+          "description": "Get info",
+          "parameters": [],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": ""
+          }
+        },
+        {
+          "name": "invalidate",
+          "access": "",
+          "virtual": false,
+          "description": "Invalidate sockets",
+          "parameters": [
+            {
+              "name": "validator",
+              "type": "function",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "_indicesWithKeyValue",
+          "access": "private",
+          "virtual": false,
+          "description": "Get indices with key and value",
+          "parameters": [
+            {
+              "name": "indexKey",
+              "type": "",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "indexValue",
+              "type": "",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "_entitiesWithKey",
+          "access": "private",
+          "virtual": false,
+          "description": "Get entities with key",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "ObserverService",
+      "description": "",
+      "extends": [
+        "Service"
+      ],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ObserverService",
+        "description": "",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "startObserving",
+          "access": "",
+          "virtual": false,
+          "description": "Start observing",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "Connecting socket",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "stopObserving",
+          "access": "",
+          "virtual": false,
+          "description": "Stop observing",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "Connecting socket",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "findBySocketId",
+          "access": "",
+          "virtual": false,
+          "description": "Find by socket id",
+          "parameters": [
+            {
+              "name": "socketId",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "save",
+          "access": "",
+          "virtual": false,
+          "description": "Save entity to storage",
+          "parameters": [
+            {
+              "name": "entity",
+              "type": "Entity",
+              "description": "Entity to save",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "find",
+          "access": "",
+          "virtual": false,
+          "description": "Get entity by key",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of the entity",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            },
+            {
+              "name": "options.strict",
+              "type": "boolean",
+              "description": "Throw error if not found",
+              "default": "",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Entity>",
+            "description": ""
+          }
+        },
+        {
+          "name": "findByIndex",
+          "access": "",
+          "virtual": false,
+          "description": "Find entity bin index.",
+          "parameters": [
+            {
+              "name": "indexKey",
+              "type": "string",
+              "description": "Key of the index.",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "indexValue",
+              "type": "string",
+              "description": "Value of the index",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Find options",
+              "default": "",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Entity>",
+            "description": ""
+          }
+        },
+        {
+          "name": "destroy",
+          "access": "",
+          "virtual": false,
+          "description": "Destroy entity",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of the entity",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<number>",
+            "description": ""
+          }
+        },
+        {
+          "name": "info",
+          "access": "",
+          "virtual": false,
+          "description": "Get info",
+          "parameters": [],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": ""
+          }
+        },
+        {
+          "name": "invalidate",
+          "access": "",
+          "virtual": false,
+          "description": "Invalidate sockets",
+          "parameters": [
+            {
+              "name": "validator",
+              "type": "function",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "_indicesWithKeyValue",
+          "access": "private",
+          "virtual": false,
+          "description": "Get indices with key and value",
+          "parameters": [
+            {
+              "name": "indexKey",
+              "type": "",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "indexValue",
+              "type": "",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "_entitiesWithKey",
+          "access": "private",
+          "virtual": false,
+          "description": "Get entities with key",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Service",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": true,
+      "fires": "",
+      "constructor": {
+        "name": "Service",
+        "description": "Abstract service",
+        "parameters": [
+          {
+            "name": "storage",
+            "type": "Object",
+            "description": "SgStorage instance",
+            "default": "",
+            "optional": "",
+            "nullable": ""
+          },
+          {
+            "name": "options",
+            "type": "Object",
+            "description": "Optional settings",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.prefix",
+            "type": "string",
+            "description": "Prefix of keys service use",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.indices",
+            "type": "string",
+            "description": "Name of index keys",
+            "default": "[]",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.entity",
+            "type": "string",
+            "description": "Name of entity",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          }
+        ],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "save",
+          "access": "",
+          "virtual": false,
+          "description": "Save entity to storage",
+          "parameters": [
+            {
+              "name": "entity",
+              "type": "Entity",
+              "description": "Entity to save",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "find",
+          "access": "",
+          "virtual": false,
+          "description": "Get entity by key",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of the entity",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Optional settings",
+              "default": "{}",
+              "optional": true,
+              "nullable": ""
+            },
+            {
+              "name": "options.strict",
+              "type": "boolean",
+              "description": "Throw error if not found",
+              "default": "",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Entity>",
+            "description": ""
+          }
+        },
+        {
+          "name": "findByIndex",
+          "access": "",
+          "virtual": false,
+          "description": "Find entity bin index.",
+          "parameters": [
+            {
+              "name": "indexKey",
+              "type": "string",
+              "description": "Key of the index.",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "indexValue",
+              "type": "string",
+              "description": "Value of the index",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Find options",
+              "default": "",
+              "optional": true,
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Entity>",
+            "description": ""
+          }
+        },
+        {
+          "name": "destroy",
+          "access": "",
+          "virtual": false,
+          "description": "Destroy entity",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "Key of the entity",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<number>",
+            "description": ""
+          }
+        },
+        {
+          "name": "info",
+          "access": "",
+          "virtual": false,
+          "description": "Get info",
+          "parameters": [],
+          "examples": [],
+          "returns": {
+            "type": "Promise.<Object>",
+            "description": ""
+          }
+        },
+        {
+          "name": "invalidate",
+          "access": "",
+          "virtual": false,
+          "description": "Invalidate sockets",
+          "parameters": [
+            {
+              "name": "validator",
+              "type": "function",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "_indicesWithKeyValue",
+          "access": "private",
+          "virtual": false,
+          "description": "Get indices with key and value",
+          "parameters": [
+            {
+              "name": "indexKey",
+              "type": "",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "indexValue",
+              "type": "",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        },
+        {
+          "name": "_entitiesWithKey",
+          "access": "private",
+          "virtual": false,
+          "description": "Get entities with key",
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "Promise",
+            "description": ""
+          }
+        }
+      ]
+    }
+  ]
+}

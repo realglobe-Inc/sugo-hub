@@ -17,6 +17,7 @@ const co = require('co')
 const http = require('http')
 const { modularize } = require('sugo-actor/module')
 const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = SugoHub
+
 describe('sugo-hub', function () {
   this.timeout(12000)
   let request = arequest.create({ jar: true })
@@ -33,7 +34,6 @@ describe('sugo-hub', function () {
     let observed = []
 
     let hub = yield new SugoHub({
-      port,
       storage: `${__dirname}/../tmp/testing-hub-storage`,
       interceptors: {
         [ACTOR_URL]: (socket) => co(function * () {
@@ -151,7 +151,6 @@ describe('sugo-hub', function () {
   it('Create from custom http server.', () => co(function * () {
     let port = 9872
     let hub = yield new SugoHub({
-      port,
       server: http.createServer((req, res, next) => {
       })
     }).listen(port)
@@ -162,7 +161,6 @@ describe('sugo-hub', function () {
   it('Transport built in types', () => co(function * () {
     let port = yield aport()
     let hub = yield new SugoHub({
-      port,
       storage: `${__dirname}/../tmp/testing-hub-storage`
     }).listen(port)
 

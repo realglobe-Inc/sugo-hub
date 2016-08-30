@@ -10,14 +10,15 @@ Hub server of SUGOS
 ## Functions
 
 <a name="sugo-hub-function-sugo-hub" />
-### sugoHub() -> `SugoHub`
+### sugoHub() -> `Promise.<SugoHub>`
 
 Create a hub instance. Just an alias of `new SugoCaller(config)`
 ```javascript
 co(function * () {
-  let cloud = yield sugoHub({
+  let cloud = sugoHub({
   // Options here
-  }).listen(3000)
+  })
+  yield hub.listen(3000)
 }).catch((err) => console.error(err))
 ```
 
@@ -41,7 +42,6 @@ Constructor of SugoHub class
 | options.endpoints | Object | Endpoint settings |
 | config.context | Object | Koa context prototype |
 | config.public | string | Public directories. |
-| options.port | number | Port number |
 | options.invalidateInterval | number | Interval for invalidate loop |
 
 

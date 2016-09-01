@@ -15,7 +15,7 @@
       "description": "Create a hub instance. Just an alias of `new SugoCaller(config)`",
       "parameters": [],
       "examples": [
-        "co(function * () {\n  let cloud = sugoHub({\n  // Options here\n  })\n  yield hub.listen(3000)\n}).catch((err) => console.error(err))"
+        "co(function * () {\n  let hub = sugoHub({\n  // Options here\n  })\n  yield hub.listen(3000)\n}).catch((err) => console.error(err))"
       ],
       "returns": {
         "type": "Promise.<SugoHub>",

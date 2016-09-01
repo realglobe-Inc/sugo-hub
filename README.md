@@ -46,7 +46,7 @@ Hub server of SUGOS
 <a name="overview"></a>
 
 
-SUGO-Hub works as a hub to connect [SUGO-Actors][sugo_actor_url] and [SUGO-Callers][sugo_caller_url].
+SUGO-Hub works as a hub to connect [SUGO-Actor][sugo_actor_url]s and [SUGO-Caller][sugo_caller_url]s.
 
 
 

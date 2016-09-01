@@ -182,7 +182,7 @@ It is recommended to setup redis server for storage.
 #!/usr/bin/env node
 
 /**
- * This is an example to setup cloud server with advanced options
+ * This is an example to setup hub server with advanced options
  */
 
 'use strict'
@@ -222,7 +222,7 @@ SUGO-Hub uses [Koa][koa_url] as http framework. You can define custom koa handle
 #!/usr/bin/env node
 
 /**
- * This is an example to setup cloud server with advanced options
+ * This is an example to setup hub server with advanced options
  */
 
 'use strict'
@@ -265,7 +265,7 @@ Note that static middlewares are provided as build-in middleware and you can ser
 #!/usr/bin/env node
 
 /**
- * This is an example to setup cloud server with advanced options
+ * This is an example to setup hub server with advanced options
  */
 
 'use strict'
@@ -308,7 +308,7 @@ By providing `authenticate` filed, you can authenticate sockets connecting.
 #!/usr/bin/env node
 
 /**
- * This is an example to setup cloud server with interceptors
+ * This is an example to setup hub server with interceptors
  */
 
 'use strict'

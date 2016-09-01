@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * This is an example to setup cloud server with advanced options
+ * This is an example to setup hub server with advanced options
  */
 
 'use strict'

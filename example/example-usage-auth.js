@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * This is an example to setup cloud server with interceptors
+ * This is an example to setup hub server with interceptors
  */
 
 'use strict'

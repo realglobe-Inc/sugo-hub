@@ -67,6 +67,7 @@
     "filedel": "^2.0.3",
     "injectmock": "^2.0.0",
     "markdown-toc": "^0.12.15",
+    "sg-check": "^1.0.6",
     "sg-socket-client": "^1.2.17",
     "sg-templates": "^1.2.2",
     "sg-travis": "^1.1.29",

@@ -16,6 +16,7 @@ const assert = require('assert')
 const co = require('co')
 const http = require('http')
 const { modularize } = require('sugo-actor/module')
+const { hasBin } = require('sg-check')
 const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = SugoHub
 
 describe('sugo-hub', function () {
@@ -85,9 +86,11 @@ describe('sugo-hub', function () {
     {
       let connection = yield caller01.connect(actor01.key)
       {
-        let bash = connection.get('bash')
-        let payload = yield bash.spawn('ls', [ '-la' ])
-        assert.equal(payload, 0, 'Exit with 0')
+        if (yield hasBin('ls')) {
+          let bash = connection.get('bash')
+          let payload = yield bash.spawn('ls', [ '-la' ])
+          assert.equal(payload, 0, 'Exit with 0')
+        }
       }
       {
         let yo = connection.get('yo')

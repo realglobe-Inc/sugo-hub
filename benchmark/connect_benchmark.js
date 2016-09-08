@@ -80,8 +80,7 @@ function checkRedis () {
 function startHub (port) {
   return co(function * () {
     debug('Starts SUGO Hub')
-    return yield sugoHub({
-      port,
+    let server = sugoHub({
       storage: {
         redis: {
           url: 'redis://127.0.0.1:6379',
@@ -89,6 +88,8 @@ function startHub (port) {
         }
       }
     })
+    yield server.listen(port)
+    return server
   })
 }
 

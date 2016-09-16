@@ -453,7 +453,7 @@
           "name": "setupActor",
           "access": "",
           "virtual": false,
-          "description": "Setup a actor.",
+          "description": "Setup an actor.",
           "parameters": [
             {
               "name": "socketId",
@@ -490,7 +490,7 @@
           "name": "teardownActor",
           "access": "",
           "virtual": false,
-          "description": "Teardown a actor.",
+          "description": "Teardown an actor.",
           "parameters": [
             {
               "name": "socketId",
@@ -835,7 +835,7 @@
           "name": "joinToActor",
           "access": "",
           "virtual": false,
-          "description": "Join to a actor",
+          "description": "Join to an actor",
           "parameters": [
             {
               "name": "socketId",
@@ -864,7 +864,7 @@
           "name": "leaveFromActor",
           "access": "",
           "virtual": false,
-          "description": "Leave from a actor.",
+          "description": "Leave from an actor.",
           "parameters": [
             {
               "name": "socketId",

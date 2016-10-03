@@ -40,7 +40,7 @@
     "sg-socket-constants": "^1.3.9",
     "sg-storage": "^2.0.2",
     "sg-validator": "^1.0.4",
-    "socket.io-redis": "^1.0.0",
+    "socket.io-redis": "1.0.0",
     "socketio-auth": "0.0.5",
     "stringcase": "^3.1.1",
     "sugo-actor": "^4.4.5",

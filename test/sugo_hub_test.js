@@ -246,6 +246,26 @@ describe('sugo-hub', function () {
     assert.equal(hub.port, port)
     yield hub.close()
   }))
+
+  it('Using redis', () => co(function * () {
+    try {
+      let hub = new SugoHub({
+        storage: {
+          redis: {
+            host: '127.0.0.1',
+            port: '6379',
+            db: 1
+          }
+        }
+      })
+      let port = yield aport()
+      yield hub.listen(port)
+      yield asleep(200)
+      yield hub.close()
+    } catch (e) {
+      console.error(e)
+    }
+  }))
 })
 
 /* global describe, before, after, it */

@@ -46,6 +46,7 @@ Constructor of SugoHub class
 | config.context | Object | Koa context prototype |
 | config.public | string | Public directories. |
 | options.invalidateInterval | number | Interval for invalidate loop |
+| options.socketIoOptions | Object | Option object of Socket.IO constructor |
 
 
 

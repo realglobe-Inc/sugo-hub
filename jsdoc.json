@@ -151,6 +151,14 @@
             "default": 3000,
             "optional": true,
             "nullable": ""
+          },
+          {
+            "name": "options.socketIoOptions",
+            "type": "Object",
+            "description": "Option object of Socket.IO constructor",
+            "default": "",
+            "optional": true,
+            "nullable": ""
           }
         ],
         "examples": []

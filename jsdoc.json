@@ -763,6 +763,14 @@
               "default": "",
               "optional": "",
               "nullable": ""
+            },
+            {
+              "name": "onDestroy",
+              "type": "function",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
             }
           ],
           "examples": [],
@@ -1075,6 +1083,14 @@
               "default": "",
               "optional": "",
               "nullable": ""
+            },
+            {
+              "name": "onDestroy",
+              "type": "function",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
             }
           ],
           "examples": [],
@@ -1363,6 +1379,14 @@
               "default": "",
               "optional": "",
               "nullable": ""
+            },
+            {
+              "name": "onDestroy",
+              "type": "function",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
             }
           ],
           "examples": [],
@@ -1614,6 +1638,14 @@
           "parameters": [
             {
               "name": "validator",
+              "type": "function",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            },
+            {
+              "name": "onDestroy",
               "type": "function",
               "description": "",
               "default": "",

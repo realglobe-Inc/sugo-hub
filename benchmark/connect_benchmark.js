@@ -6,7 +6,7 @@
  */
 'use strict'
 
-process.env.DEBUG = process.env.DEBUG || 'sg:hub:benchmark,sg:hub'
+process.env.DEBUG = process.env.DEBUG || 'sg:hub:benchmark,sg:hub,sg:hub:*'
 
 const sugoHub = require('../lib')
 const sugoActor = require('sugo-actor')
@@ -142,9 +142,10 @@ function createCallers (callerUrl, number) {
 
 function connectCallers (callers) {
   return co(function * () {
-    debug('Connect callers')
+    debug('Connect callers', callers.length)
     let promises = callers.map((caller, i) => co(function * () {
       let key = actorKey(i)
+      debug(`Caller connecting to: ${JSON.stringify(key)}`)
       let connected = yield caller.connect(key)
       debug(`Caller connected to: ${JSON.stringify(key)}`)
       return connected
@@ -154,11 +155,12 @@ function connectCallers (callers) {
 }
 
 function disconnectCallers (callers) {
-  debug('Disconnect callers.')
+  debug('Disconnect callers', callers.length)
   let promises = callers.map((caller, i) => co(function * () {
     let key = actorKey(i)
+    debug(`Caller disconnecting from: ${JSON.stringify(key)}`)
     let disconnected = yield caller.disconnect(key)
-    debug(`Caller disconnect from: ${JSON.stringify(key)}`)
+    debug(`Caller disconnected from: ${JSON.stringify(key)}`)
     return disconnected
   }))
   return Promise.all(promises)

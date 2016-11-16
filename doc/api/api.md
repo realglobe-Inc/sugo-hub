@@ -1,4 +1,4 @@
-# sugo-hub@4.0.11
+# sugo-hub@4.0.12
 
 Hub server of SUGOS
 

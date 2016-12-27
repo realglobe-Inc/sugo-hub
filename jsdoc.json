@@ -64,6 +64,35 @@
       "examples": []
     },
     {
+      "name": "hubLogger",
+      "access": "",
+      "virtual": false,
+      "description": "Define a logger for hub",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "string",
+          "description": "Log filename",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "Object",
+        "description": "- A logger instance"
+      }
+    },
+    {
+      "name": "hubLogger",
+      "access": "",
+      "virtual": false,
+      "description": "hubLogger",
+      "parameters": [],
+      "examples": []
+    },
+    {
       "name": "validateSpec",
       "access": "",
       "virtual": false,
@@ -157,6 +186,14 @@
             "type": "Object",
             "description": "Option object of Socket.IO constructor",
             "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.logFile",
+            "type": "string",
+            "description": "Log filename",
+            "default": "'var/log/sugo-hub-log.log'",
             "optional": true,
             "nullable": ""
           }
@@ -426,20 +463,6 @@
           "examples": []
         }
       ]
-    },
-    {
-      "name": "SocketPool",
-      "description": "",
-      "extends": [],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "SocketPool",
-        "description": "Hold sockets",
-        "parameters": [],
-        "examples": []
-      }
     },
     {
       "name": "ActorService",

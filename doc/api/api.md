@@ -47,6 +47,7 @@ Constructor of SugoHub class
 | config.public | string | Public directories. |
 | options.invalidateInterval | number | Interval for invalidate loop |
 | options.socketIoOptions | Object | Option object of Socket.IO constructor |
+| options.logFile | string | Log filename |
 
 
 

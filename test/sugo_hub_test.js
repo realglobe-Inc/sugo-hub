@@ -41,7 +41,9 @@ describe('sugo-hub', function () {
           assert.equal(socket.nsp.name, '/actors')
           yield asleep(10)
         })
-      }
+      },
+      // minimumAliveDuration: 0,
+      // invalidateInterval: 1
     }).listen(port)
 
     class YoPerson {

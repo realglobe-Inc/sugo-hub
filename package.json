@@ -1,6 +1,6 @@
 {
   "name": "sugo-hub",
-  "version": "4.0.14",
+  "version": "5.0.0",
   "description": "Hub server of SUGOS",
   "main": "lib",
   "browser": {

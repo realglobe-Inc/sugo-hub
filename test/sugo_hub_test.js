@@ -42,7 +42,7 @@ describe('sugo-hub', function () {
           yield asleep(10)
         })
       },
-      minimumAliveDuration: 10,
+      minimumAliveDuration: 0,
       invalidateInterval: 1
     }).listen(port)
 

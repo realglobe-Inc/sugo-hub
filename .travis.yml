@@ -1,6 +1,10 @@
 language: node_js
 services:
   - redis-server
+addons:
+  apt:
+    packages:
+      - redis-server
 node_js:
 - '6'
 before_install:

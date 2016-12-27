@@ -42,7 +42,7 @@ describe('sugo-hub', function () {
           yield asleep(10)
         })
       },
-      minimumAliveDuration: 0,
+      minimumAliveDuration: 10,
       invalidateInterval: 1
     }).listen(port)
 
@@ -76,7 +76,9 @@ describe('sugo-hub', function () {
     let caller02 = sugoCaller({ host: `localhost:${port}` })
 
     yield actor01.connect()
+    yield asleep(10)
     yield actor02.connect()
+    yield asleep(10)
 
     let observer01 = sugoObserver((data) => {
       observed.push(data)

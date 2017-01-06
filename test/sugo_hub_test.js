@@ -42,8 +42,6 @@ describe('sugo-hub', function () {
           yield asleep(10)
         })
       },
-      minimumAliveDuration: 0,
-      invalidateInterval: 1
     }).listen(port)
 
     class YoPerson {
@@ -101,11 +99,8 @@ describe('sugo-hub', function () {
         assert.equal((yield yo.sayYo()), 'yo!')
       }
 
-      yield hub.invalidateCallers()
       yield connection.disconnect()
     }
-
-    yield hub.invalidateActors()
 
     // Try to connect invalid actor
     {

@@ -41,7 +41,7 @@ describe('sugo-hub', function () {
           assert.equal(socket.nsp.name, '/actors')
           yield asleep(10)
         })
-      },
+      }
     }).listen(port)
 
     class YoPerson {
@@ -51,13 +51,16 @@ describe('sugo-hub', function () {
     }
     const YoPersonModule = modularize(YoPerson)
 
+    let emitter = new Module({})
+
     let actor01 = sugoActor({
       host: `localhost:${port}`,
       key: 'my-actor-01',
       force: true,
       modules: {
         bash: new (require('sugo-actor/misc/mocks/mock-module-bash.js'))(),
-        yo: new YoPersonModule()
+        yo: new YoPersonModule(),
+        emitter
       }
     })
 
@@ -97,6 +100,21 @@ describe('sugo-hub', function () {
       {
         let yo = connection.get('yo')
         assert.equal((yield yo.sayYo()), 'yo!')
+      }
+      {
+        let receiver = connection.get('emitter')
+        let shouldNull = yield new Promise((resolve, reject) => {
+          let timer = setInterval(() => {
+            resolve(new Error('Caller didn\'t receive event from actor.'))
+          }, 2000)
+          receiver.on('some event', (data) => {
+            assert.equal(data, 'some message')
+            clearTimeout(timer)
+            resolve()
+          })
+          emitter.emit('some event', 'some message')
+        })
+        assert.ifError(shouldNull)
       }
 
       yield connection.disconnect()

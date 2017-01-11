@@ -12,7 +12,7 @@
       "name": "sugoHub",
       "access": "",
       "virtual": false,
-      "description": "Create a hub instance. Just an alias of `new SugoCaller(config)`",
+      "description": "Create a hub instance. Just an alias of `new SugoHub(config)`",
       "parameters": [],
       "examples": [
         "co(function * () {\n  let hub = sugoHub({\n  // Options here\n  })\n  yield hub.listen(3000)\n}).catch((err) => console.error(err))"
@@ -83,14 +83,6 @@
         "type": "Object",
         "description": "- A logger instance"
       }
-    },
-    {
-      "name": "hubLogger",
-      "access": "",
-      "virtual": false,
-      "description": "hubLogger",
-      "parameters": [],
-      "examples": []
     },
     {
       "name": "validateSpec",
@@ -191,9 +183,12 @@
           },
           {
             "name": "options.logFile",
-            "type": "string",
-            "description": "Log filename",
-            "default": "'var/log/sugo-hub-log.log'",
+            "type": [
+              "string",
+              "number"
+            ],
+            "description": "File name to save logs.",
+            "default": "",
             "optional": true,
             "nullable": ""
           }
@@ -266,7 +261,9 @@
     {
       "name": "ActorEntity",
       "description": "",
-      "extends": [],
+      "extends": [
+        "Entity"
+      ],
       "access": "",
       "virtual": false,
       "fires": "",
@@ -275,7 +272,43 @@
         "description": "Entity for spot",
         "parameters": [],
         "examples": []
-      }
+      },
+      "functions": [
+        {
+          "name": "set",
+          "access": "",
+          "virtual": false,
+          "description": "Set values",
+          "parameters": [
+            {
+              "name": "values",
+              "type": "Object",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        },
+        {
+          "name": "del",
+          "access": "",
+          "virtual": false,
+          "description": "Delete value",
+          "parameters": [
+            {
+              "name": "propName",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        }
+      ]
     },
     {
       "name": "CallerEntity",
@@ -344,7 +377,9 @@
     {
       "name": "ObserverEntity",
       "description": "",
-      "extends": [],
+      "extends": [
+        "Entity"
+      ],
       "access": "",
       "virtual": false,
       "fires": "",
@@ -353,12 +388,50 @@
         "description": "Entity for observer",
         "parameters": [],
         "examples": []
-      }
+      },
+      "functions": [
+        {
+          "name": "set",
+          "access": "",
+          "virtual": false,
+          "description": "Set values",
+          "parameters": [
+            {
+              "name": "values",
+              "type": "Object",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        },
+        {
+          "name": "del",
+          "access": "",
+          "virtual": false,
+          "description": "Delete value",
+          "parameters": [
+            {
+              "name": "propName",
+              "type": "string",
+              "description": "",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": []
+        }
+      ]
     },
     {
       "name": "ActorNamespace",
       "description": "",
-      "extends": [],
+      "extends": [
+        "Namespace"
+      ],
       "access": "",
       "virtual": false,
       "fires": "",
@@ -376,13 +449,36 @@
           "description": "",
           "parameters": [],
           "examples": []
+        },
+        {
+          "name": "ack",
+          "access": "",
+          "virtual": false,
+          "description": "Handle and callback as socket.IO acknowledge",
+          "parameters": [
+            {
+              "name": "handler",
+              "type": "function",
+              "description": "Data handler function",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "function",
+            "description": ""
+          }
         }
       ]
     },
     {
       "name": "CallerNamespace",
       "description": "",
-      "extends": [],
+      "extends": [
+        "Namespace"
+      ],
       "access": "",
       "virtual": false,
       "fires": "",
@@ -400,6 +496,27 @@
           "description": "",
           "parameters": [],
           "examples": []
+        },
+        {
+          "name": "ack",
+          "access": "",
+          "virtual": false,
+          "description": "Handle and callback as socket.IO acknowledge",
+          "parameters": [
+            {
+              "name": "handler",
+              "type": "function",
+              "description": "Data handler function",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "function",
+            "description": ""
+          }
         }
       ]
     },
@@ -443,13 +560,15 @@
     {
       "name": "ObserverNamespace",
       "description": "",
-      "extends": [],
+      "extends": [
+        "Namespace"
+      ],
       "access": "",
       "virtual": false,
       "fires": "",
       "constructor": {
         "name": "ObserverNamespace",
-        "description": "Namespace for observer",
+        "description": "Namespace for observers",
         "parameters": [],
         "examples": []
       },
@@ -461,6 +580,27 @@
           "description": "",
           "parameters": [],
           "examples": []
+        },
+        {
+          "name": "ack",
+          "access": "",
+          "virtual": false,
+          "description": "Handle and callback as socket.IO acknowledge",
+          "parameters": [
+            {
+              "name": "handler",
+              "type": "function",
+              "description": "Data handler function",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "function",
+            "description": ""
+          }
         }
       ]
     },
@@ -475,7 +615,7 @@
       "fires": "",
       "constructor": {
         "name": "ActorService",
-        "description": "",
+        "description": "Service for actors",
         "parameters": [],
         "examples": []
       },
@@ -865,7 +1005,7 @@
       "fires": "",
       "constructor": {
         "name": "CallerService",
-        "description": "",
+        "description": "Service callers",
         "parameters": [],
         "examples": []
       },
@@ -1185,7 +1325,7 @@
       "fires": "",
       "constructor": {
         "name": "ObserverService",
-        "description": "",
+        "description": "Service for observers",
         "parameters": [],
         "examples": []
       },
@@ -1479,7 +1619,7 @@
       "fires": "",
       "constructor": {
         "name": "Service",
-        "description": "Abstract service",
+        "description": "Abstract service. Service classes provides access to stored entities.",
         "parameters": [
           {
             "name": "storage",

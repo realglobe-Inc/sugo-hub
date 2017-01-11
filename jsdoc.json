@@ -185,10 +185,10 @@
             "name": "options.logFile",
             "type": [
               "string",
-              "number"
+              "boolean"
             ],
             "description": "File name to save logs.",
-            "default": "",
+            "default": false,
             "optional": true,
             "nullable": ""
           }

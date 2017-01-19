@@ -75,6 +75,7 @@ describe('sugo-hub', function () {
 
     let caller01 = sugoCaller({ host: `localhost:${port}` })
     let caller02 = sugoCaller({ host: `localhost:${port}` })
+    let caller03 = sugoCaller({ host: `localhost:${port}` })
 
     yield actor01.connect()
     yield asleep(10)
@@ -154,6 +155,16 @@ describe('sugo-hub', function () {
       assert.ok(data)
       assert.ok(included)
       data.forEach((data) => assert.equal(data.type, 'callers'))
+    }
+
+    // When socket hang up
+    {
+      yield caller03.connect(actor01.key)
+      let { sockets } = caller03
+      for (let name of Object.keys(sockets)) {
+        let socket = sockets[ name ]
+        socket.disconnect()
+      }
     }
 
     yield actor01.disconnect()

@@ -16,13 +16,10 @@ install:
 - npm install
 script:
 - ./ci/build.js
+- ./ci/shim.js
 - ./ci/test.js
-- ./ci/cover.js
-- ./ci/report.js
 - ./ci/benchmark.js
 - ./ci/doc.js
 after_success:
 - ./ci/travis/publish.js
 - ./ci/travis/push_sugos.js
-env:
-  secure: "jaUkjTt7CTj5GOmpQ7aFlW/7QlCa5uf7tvQvbjSKhrFyJnSxcD7vybGM3yqb7UAKr2vMr3cQXh4Y1zY+aL9oR7FrSBlr9uY9CqdoYY588KPMEziO6pc6ZTThUOLs4OwoSAQy2YpvlDfTGBScUGVKv3vCJTmJmjORlarpypD7SpDkAkyvk4LbVXx0Kdj01E+bppkbQYBskM34t/8i7x5K5Lmb17uo7grz4iqVhTAEn73rFizSgOVyzwy5M+/D1S/S4TCecQTJzGpCGHHrAeQiOeIYlsxMvff90DTmylj4egnN6qnYZ6UjmemWQPp9FOOlfOWYfMtGm48LQi5Yu3VzSDOf9X9hY6O7ITzTxpEsCky8DUf37StlmSaQgvG5azCD81xUiE9gHW57/TNm7tRIEySGIK+gEgdloI4wjP7nbmQsKk5Z6GeHH/Ffd3Lq+WD3JyJTny2hsl6Rg3+DkIubdf7VWgvRslSUxBV89YueAvBEQg0LrgKtx16tLagYGT5rHPyykJVcKv6Dah52ZfnNIHTOw/uHjma94DO5dviumDs33lX5wqkK9X0sG+OPuZOBPJHJgl1IvE3/nSJBSP4Q4YuUIezeei+C0MAfgPDgQfNcaoPgss3hrcx1Ps3aL/5evf+SfjJQ7xhIENOJnQE5jnQXeWzUm2upz0EhATSqHrU="

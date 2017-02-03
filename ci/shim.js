@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Compile to browser source
+ * Generate shim scripts
  */
 
 'use strict'
@@ -12,7 +12,7 @@ const apeTasking = require('ape-tasking')
 const co = require('co')
 const ababelES2015 = require('ababel-es2015')
 
-apeTasking.runTasks('browser', [
+apeTasking.runTasks('shim', [
   () => co(function * () {
     let patterns = [ 'agent.js', 'constants.js' ]
     for (let pattern of patterns) {

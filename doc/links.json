@@ -1,7 +1,8 @@
 {
-  "sugos": "https://github.com/realglobe-Inc/sugos",
-  "sugo-actor": "https://github.com/realglobe-Inc/sugo-actor",
-  "sugo-caller": "https://github.com/realglobe-Inc/sugo-caller",
-  "sugo-observer": "https://github.com/realglobe-Inc/sugo-observer",
-  "Koa":"https://github.com/koajs/koa"
+  "SUGO-Actor": "https://github.com/realglobe-Inc/sugo-actor",
+  "SUGO-Caller": "https://github.com/realglobe-Inc/sugo-caller",
+  "SUGO-Observer": "https://github.com/realglobe-Inc/sugo-observer",
+  "Koa": "https://github.com/koajs/koa",
+  "SUGOS": "https://github.com/realglobe-Inc/sugos",
+  "Realglobe, Inc.": "http://realglobe.jp"
 }

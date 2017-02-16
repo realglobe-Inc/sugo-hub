@@ -317,7 +317,6 @@ By providing `authenticate` filed, you can authenticate sockets connecting.
 'use strict'
 
 const sugoHub = require('sugo-hub')
-const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = sugoHub
 
 const co = require('co')
 

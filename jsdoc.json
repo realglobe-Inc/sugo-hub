@@ -18,7 +18,7 @@
         "co(function * () {\n  let hub = sugoHub({\n  // Options here\n  })\n  yield hub.listen(3000)\n}).catch((err) => console.error(err))"
       ],
       "returns": {
-        "type": "Promise.<SugoHub>",
+        "type": "SugoHub",
         "description": "- A SugoHub instance"
       }
     },

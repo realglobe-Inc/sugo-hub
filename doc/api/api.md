@@ -1,4 +1,4 @@
-# sugo-hub@5.2.1
+# sugo-hub@5.2.2
 
 Hub server of SUGOS
 
@@ -11,7 +11,7 @@ Hub server of SUGOS
 
 <a class='md-heading-link' name="sugo-hub-function-sugo-hub" ></a>
 
-### sugoHub() -> `Promise.<SugoHub>`
+### sugoHub() -> `SugoHub`
 
 Create a hub instance. Just an alias of `new SugoHub(config)`
 ```javascript

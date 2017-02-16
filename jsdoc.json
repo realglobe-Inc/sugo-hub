@@ -166,14 +166,6 @@
             "nullable": ""
           },
           {
-            "name": "options.invalidateInterval",
-            "type": "number",
-            "description": "Interval for invalidate loop",
-            "default": 3000,
-            "optional": true,
-            "nullable": ""
-          },
-          {
             "name": "options.socketIoOptions",
             "type": "Object",
             "description": "Option object of Socket.IO constructor",

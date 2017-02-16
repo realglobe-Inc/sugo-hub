@@ -70,7 +70,7 @@ Table of Contents
   * [Define HTTP Endpoints](#define-http-endpoints)
   * [Define HTTP Middlewares](#define-http-middlewares)
   * [Use Authentication](#use-authentication)
-  * [Register local actors](#register-local-actors)
+  * [Register Local Actors](#register-local-actors)
 - [License](#license)
 - [Links](#links)
 
@@ -347,7 +347,7 @@ co(function * () {
 ```
 
 
-### Register local actors
+### Register Local Actors
 
 If you want to use actors on the same environment with hub, pass actors instances to `localActors` option of hub.
 
@@ -374,6 +374,7 @@ co(function * () {
 
     /**
      * Local actors for the hub
+     * @type {Object<string, SugoActor>}
      */
     localActors: {
       actor01: sugoActor({
@@ -391,6 +392,7 @@ co(function * () {
   yield hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
+
 }).catch((err) => console.error(err))
 
 ```

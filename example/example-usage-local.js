@@ -20,6 +20,7 @@ co(function * () {
 
     /**
      * Local actors for the hub
+     * @type {Object<string, SugoActor>}
      */
     localActors: {
       actor01: sugoActor({

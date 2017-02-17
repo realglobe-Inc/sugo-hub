@@ -23,8 +23,7 @@ co(function * () {
      * @type {Object<string, SugoActor>}
      */
     localActors: {
-      actor01: sugoActor({
-        key: 'my-actor-01',
+      'my-actor-01': sugoActor({
         modules: {
           say: {
             sayYes: () => 'Yes from actor01'

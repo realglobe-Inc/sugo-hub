@@ -6,5 +6,6 @@
   * [Define HTTP Endpoints](#define-http-endpoints)
   * [Define HTTP Middlewares](#define-http-middlewares)
   * [Use Authentication](#use-authentication)
+  * [Register Local Actors](#register-local-actors)
 - [License](#license)
 - [Links](#links)

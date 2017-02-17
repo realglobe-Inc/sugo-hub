@@ -23,6 +23,22 @@
       }
     },
     {
+      "name": "authAdaptor",
+      "access": "",
+      "virtual": false,
+      "description": "Adaptor for auth",
+      "parameters": [],
+      "examples": []
+    },
+    {
+      "name": "redisAdaptor",
+      "access": "",
+      "virtual": false,
+      "description": "Define redis adaptor for sockets",
+      "parameters": [],
+      "examples": []
+    },
+    {
       "name": "ioInterceptor",
       "access": "",
       "virtual": false,

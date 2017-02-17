@@ -392,7 +392,6 @@ co(function * () {
   yield hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-
 }).catch((err) => console.error(err))
 
 ```

@@ -1,4 +1,4 @@
-# sugo-hub@5.2.3
+# sugo-hub@5.3.0
 
 Hub server of SUGOS
 
@@ -46,6 +46,7 @@ Constructor of SugoHub class
 | config.context | Object | Koa context prototype |
 | config.public | string | Public directories. |
 | options.socketIoOptions | Object | Option object of Socket.IO constructor |
+| options.localActors | Object | Local actor instances |
 | options.logFile | string,boolean | File name to save logs. |
 
 

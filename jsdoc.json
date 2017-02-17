@@ -101,6 +101,27 @@
       }
     },
     {
+      "name": "localMixin",
+      "access": "",
+      "virtual": false,
+      "description": "Mixin to setup local connections",
+      "parameters": [
+        {
+          "name": "BaseClass",
+          "type": "function",
+          "description": "Sub hub class",
+          "default": "",
+          "optional": "",
+          "nullable": ""
+        }
+      ],
+      "examples": [],
+      "returns": {
+        "type": "function",
+        "description": "- Mixed class"
+      }
+    },
+    {
       "name": "validateSpec",
       "access": "",
       "virtual": false,
@@ -185,6 +206,14 @@
             "name": "options.socketIoOptions",
             "type": "Object",
             "description": "Option object of Socket.IO constructor",
+            "default": "",
+            "optional": true,
+            "nullable": ""
+          },
+          {
+            "name": "options.localActors",
+            "type": "Object",
+            "description": "Local actor instances",
             "default": "",
             "optional": true,
             "nullable": ""

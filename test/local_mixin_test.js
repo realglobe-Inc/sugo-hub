@@ -34,8 +34,7 @@ describe('local-mixin', function () {
     let hub = yield new SugoHub({
       storage: `${__dirname}/../tmp/testing-local-storage`,
       localActors: {
-        actor01: sugoActor({
-          key: 'my-actor-01',
+        'my-actor-01': sugoActor({
           modules: {
             say: {
               sayYes: () => 'Yes from actor01'
@@ -46,7 +45,7 @@ describe('local-mixin', function () {
     }).listen(port)
 
     {
-      let actor01 = yield caller01.connect(hub.localActors.actor01.key)
+      let actor01 = yield caller01.connect(hub.localActors[ 'my-actor-01' ].key)
       assert.ok(actor01)
       let say = actor01.get('say')
       let yes = yield say.sayYes()

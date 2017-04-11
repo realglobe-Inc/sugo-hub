@@ -1,11 +1,11 @@
-# sugo-hub@5.3.1
+# sugo-hub@5.3.2
 
 Hub server of SUGOS
 
 + Functions
   + [sugoHub()](#sugo-hub-function-sugo-hub)
-+ [SugoHub](sugo-hub-classes) Class
-  + [new SugoHub(options)](#sugo-hub-classes-sugo-hub-constructor)
++ [`SugoHub`](#sugo-hub-class) Class
+  + [new SugoHub(options)](#sugo-hub-class-sugo-hub-constructor)
 
 ## Functions
 
@@ -14,6 +14,8 @@ Hub server of SUGOS
 ### sugoHub() -> `SugoHub`
 
 Create a hub instance. Just an alias of `new SugoHub(config)`
+**Example**:
+
 ```javascript
 co(function * () {
   let hub = sugoHub({
@@ -24,14 +26,16 @@ co(function * () {
 ```
 
 
-<a class='md-heading-link' name="sugo-hub-classes"></a>
+<a class='md-heading-link' name="sugo-hub-class"></a>
 
-## SugoHub Class
+## `SugoHub` Class
 
 Hub server of SUGOS
 
 
-<a class='md-heading-link' name="sugo-hub-classes-sugo-hub-constructor" ></a>
+
+
+<a class='md-heading-link' name="sugo-hub-class-sugo-hub-constructor" ></a>
 
 ### new SugoHub(options)
 

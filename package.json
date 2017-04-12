@@ -1,6 +1,6 @@
 {
   "name": "sugo-hub",
-  "version": "5.3.3",
+  "version": "5.4.0",
   "description": "Hub server of SUGOS",
   "main": "lib",
   "browser": {
@@ -37,7 +37,7 @@
     "moment": "^2.17.1",
     "redis": "^2.6.3",
     "sg-schemas": "^2.1.3",
-    "sg-server": "^1.4.2",
+    "sg-server": "^1.5.1",
     "sg-socket": "^1.0.15",
     "sg-socket-constants": "^1.3.9",
     "sg-storage": "^2.0.2",

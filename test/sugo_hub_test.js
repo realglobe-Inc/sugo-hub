@@ -18,6 +18,8 @@ const http = require('http')
 const { modularize } = require('sugo-actor/module')
 const { hasBin } = require('sg-check')
 const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = SugoHub
+const { RemoteEvents } = require('sg-socket-constants')
+const { JOIN, LEAVE } = RemoteEvents
 
 describe('sugo-hub', function () {
   this.timeout(12000)
@@ -82,6 +84,16 @@ describe('sugo-hub', function () {
     yield actor02.connect()
     yield asleep(10)
 
+    actor01.joinedCallers = {}
+    actor01.socket.on(JOIN, ({ caller, messages }) => {
+      actor01.joinedCallers[ caller.key ] = caller
+      assert.ok(caller)
+    })
+    actor01.socket.on(LEAVE, ({ caller, messages }) => {
+      delete actor01.joinedCallers[ caller.key ]
+      assert.ok(caller)
+    })
+
     let observer01 = sugoObserver((data) => {
       observed.push(data)
     }, { port })
@@ -90,7 +102,9 @@ describe('sugo-hub', function () {
 
     // Perform an action
     {
+      assert.equal(Object.keys(actor01.joinedCallers).length, 0)
       let connection = yield caller01.connect(actor01.key)
+      assert.equal(Object.keys(actor01.joinedCallers).length, 1)
       {
         if (yield hasBin('ls')) {
           let bash = connection.get('bash')
@@ -118,7 +132,9 @@ describe('sugo-hub', function () {
         assert.ifError(shouldNull)
       }
 
+      assert.equal(Object.keys(actor01.joinedCallers).length, 1)
       yield connection.disconnect()
+      assert.equal(Object.keys(actor01.joinedCallers).length, 0)
     }
 
     // Try to connect invalid actor

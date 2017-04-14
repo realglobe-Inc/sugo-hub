@@ -234,6 +234,184 @@
       }
     },
     {
+      "name": "ActorConnector",
+      "description": "",
+      "extends": [
+        "Connector"
+      ],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ActorConnector",
+        "description": "Connector for actor",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "handleConnection",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
+        },
+        {
+          "name": "ack",
+          "access": "",
+          "virtual": false,
+          "description": "Handle and callback as socket.IO acknowledge",
+          "parameters": [
+            {
+              "name": "handler",
+              "type": "function",
+              "description": "Data handler function",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "function",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "CallerConnector",
+      "description": "",
+      "extends": [
+        "Connector"
+      ],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "CallerConnector",
+        "description": "Connector for caller",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "handleConnection",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
+        },
+        {
+          "name": "ack",
+          "access": "",
+          "virtual": false,
+          "description": "Handle and callback as socket.IO acknowledge",
+          "parameters": [
+            {
+              "name": "handler",
+              "type": "function",
+              "description": "Data handler function",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "function",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Connector",
+      "description": "",
+      "extends": [],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "Connector",
+        "description": "Handle for socket.io connector",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "ack",
+          "access": "",
+          "virtual": false,
+          "description": "Handle and callback as socket.IO acknowledge",
+          "parameters": [
+            {
+              "name": "handler",
+              "type": "function",
+              "description": "Data handler function",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "function",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "ObserverConnector",
+      "description": "",
+      "extends": [
+        "Connector"
+      ],
+      "access": "",
+      "virtual": false,
+      "fires": "",
+      "constructor": {
+        "name": "ObserverConnector",
+        "description": "Connector for observers",
+        "parameters": [],
+        "examples": []
+      },
+      "functions": [
+        {
+          "name": "handleConnection",
+          "access": "",
+          "virtual": false,
+          "description": "",
+          "parameters": [],
+          "examples": []
+        },
+        {
+          "name": "ack",
+          "access": "",
+          "virtual": false,
+          "description": "Handle and callback as socket.IO acknowledge",
+          "parameters": [
+            {
+              "name": "handler",
+              "type": "function",
+              "description": "Data handler function",
+              "default": "",
+              "optional": "",
+              "nullable": ""
+            }
+          ],
+          "examples": [],
+          "returns": {
+            "type": "function",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
       "name": "ActorEndpoint",
       "description": "",
       "extends": [],
@@ -460,184 +638,6 @@
             }
           ],
           "examples": []
-        }
-      ]
-    },
-    {
-      "name": "ActorNamespace",
-      "description": "",
-      "extends": [
-        "Namespace"
-      ],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "ActorNamespace",
-        "description": "Namespace for actor",
-        "parameters": [],
-        "examples": []
-      },
-      "functions": [
-        {
-          "name": "handleConnection",
-          "access": "",
-          "virtual": false,
-          "description": "",
-          "parameters": [],
-          "examples": []
-        },
-        {
-          "name": "ack",
-          "access": "",
-          "virtual": false,
-          "description": "Handle and callback as socket.IO acknowledge",
-          "parameters": [
-            {
-              "name": "handler",
-              "type": "function",
-              "description": "Data handler function",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "function",
-            "description": ""
-          }
-        }
-      ]
-    },
-    {
-      "name": "CallerNamespace",
-      "description": "",
-      "extends": [
-        "Namespace"
-      ],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "CallerNamespace",
-        "description": "Namespace for caller",
-        "parameters": [],
-        "examples": []
-      },
-      "functions": [
-        {
-          "name": "handleConnection",
-          "access": "",
-          "virtual": false,
-          "description": "",
-          "parameters": [],
-          "examples": []
-        },
-        {
-          "name": "ack",
-          "access": "",
-          "virtual": false,
-          "description": "Handle and callback as socket.IO acknowledge",
-          "parameters": [
-            {
-              "name": "handler",
-              "type": "function",
-              "description": "Data handler function",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "function",
-            "description": ""
-          }
-        }
-      ]
-    },
-    {
-      "name": "Namespace",
-      "description": "",
-      "extends": [],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "Namespace",
-        "description": "Handle for socket.io namespace",
-        "parameters": [],
-        "examples": []
-      },
-      "functions": [
-        {
-          "name": "ack",
-          "access": "",
-          "virtual": false,
-          "description": "Handle and callback as socket.IO acknowledge",
-          "parameters": [
-            {
-              "name": "handler",
-              "type": "function",
-              "description": "Data handler function",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "function",
-            "description": ""
-          }
-        }
-      ]
-    },
-    {
-      "name": "ObserverNamespace",
-      "description": "",
-      "extends": [
-        "Namespace"
-      ],
-      "access": "",
-      "virtual": false,
-      "fires": "",
-      "constructor": {
-        "name": "ObserverNamespace",
-        "description": "Namespace for observers",
-        "parameters": [],
-        "examples": []
-      },
-      "functions": [
-        {
-          "name": "handleConnection",
-          "access": "",
-          "virtual": false,
-          "description": "",
-          "parameters": [],
-          "examples": []
-        },
-        {
-          "name": "ack",
-          "access": "",
-          "virtual": false,
-          "description": "Handle and callback as socket.IO acknowledge",
-          "parameters": [
-            {
-              "name": "handler",
-              "type": "function",
-              "description": "Data handler function",
-              "default": "",
-              "optional": "",
-              "nullable": ""
-            }
-          ],
-          "examples": [],
-          "returns": {
-            "type": "function",
-            "description": ""
-          }
         }
       ]
     },

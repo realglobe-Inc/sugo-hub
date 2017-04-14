@@ -12,7 +12,7 @@ const sugoObserver = require('sugo-observer')
 const arequest = require('arequest')
 const aport = require('aport')
 const asleep = require('asleep')
-const assert = require('assert')
+const { ok, equal, ifError } = require('assert')
 const co = require('co')
 const http = require('http')
 const { modularize } = require('sugo-actor/module')
@@ -40,7 +40,7 @@ describe('sugo-hub', function () {
       storage: `${__dirname}/../tmp/testing-hub-storage`,
       interceptors: {
         [ACTOR_URL]: (socket) => co(function * () {
-          assert.equal(socket.nsp.name, '/actors')
+          equal(socket.nsp.name, '/actors')
           yield asleep(10)
         })
       }
@@ -87,11 +87,11 @@ describe('sugo-hub', function () {
     actor01.joinedCallers = {}
     actor01.socket.on(JOIN, ({ caller, messages }) => {
       actor01.joinedCallers[ caller.key ] = caller
-      assert.ok(caller)
+      ok(caller)
     })
     actor01.socket.on(LEAVE, ({ caller, messages }) => {
       delete actor01.joinedCallers[ caller.key ]
-      assert.ok(caller)
+      ok(caller)
     })
 
     let observer01 = sugoObserver((data) => {
@@ -102,19 +102,19 @@ describe('sugo-hub', function () {
 
     // Perform an action
     {
-      assert.equal(Object.keys(actor01.joinedCallers).length, 0)
+      equal(Object.keys(actor01.joinedCallers).length, 0)
       let connection = yield caller01.connect(actor01.key)
-      assert.equal(Object.keys(actor01.joinedCallers).length, 1)
+      equal(Object.keys(actor01.joinedCallers).length, 1)
       {
         if (yield hasBin('ls')) {
           let bash = connection.get('bash')
           let payload = yield bash.spawn('ls', [ '-la' ])
-          assert.equal(payload, 0, 'Exit with 0')
+          equal(payload, 0, 'Exit with 0')
         }
       }
       {
         let yo = connection.get('yo')
-        assert.equal((yield yo.sayYo()), 'yo!')
+        equal((yield yo.sayYo()), 'yo!')
       }
       {
         let receiver = connection.get('emitter')
@@ -123,18 +123,18 @@ describe('sugo-hub', function () {
             resolve(new Error('Caller didn\'t receive event from actor.'))
           }, 2000)
           receiver.on('some event', (data) => {
-            assert.equal(data, 'some message')
+            equal(data, 'some message')
             clearTimeout(timer)
             resolve()
           })
           emitter.emit('some event', 'some message')
         })
-        assert.ifError(shouldNull)
+        ifError(shouldNull)
       }
 
-      assert.equal(Object.keys(actor01.joinedCallers).length, 1)
+      equal(Object.keys(actor01.joinedCallers).length, 1)
       yield connection.disconnect()
-      assert.equal(Object.keys(actor01.joinedCallers).length, 0)
+      equal(Object.keys(actor01.joinedCallers).length, 0)
     }
 
     // Try to connect invalid actor
@@ -146,31 +146,31 @@ describe('sugo-hub', function () {
       } catch (err) {
         caught = err
       }
-      assert.ok(caught)
+      ok(caught)
     }
 
     // Get actors info
     {
       let { body, statusCode } = yield request(`http://localhost:${port}/actors`)
-      assert.equal(statusCode, 200)
-      assert.ok(body)
+      equal(statusCode, 200)
+      ok(body)
       let { meta, data, included } = body
-      assert.ok(meta)
-      assert.ok(data)
-      assert.ok(included)
-      data.forEach((data) => assert.equal(data.type, 'actors'))
+      ok(meta)
+      ok(data)
+      ok(included)
+      data.forEach((data) => equal(data.type, 'actors'))
     }
 
     // Get callers info
     {
       let { body, statusCode } = yield request(`http://localhost:${port}/callers`)
-      assert.equal(statusCode, 200)
-      assert.ok(body)
+      equal(statusCode, 200)
+      ok(body)
       let { meta, data, included } = body
-      assert.ok(meta)
-      assert.ok(data)
-      assert.ok(included)
-      data.forEach((data) => assert.equal(data.type, 'callers'))
+      ok(meta)
+      ok(data)
+      ok(included)
+      data.forEach((data) => equal(data.type, 'callers'))
     }
 
     // When socket hang up
@@ -190,7 +190,7 @@ describe('sugo-hub', function () {
 
     yield asleep(400)
 
-    assert.ok(observed.length > 0)
+    ok(observed.length > 0)
 
     yield hub.close()
   }))
@@ -201,7 +201,7 @@ describe('sugo-hub', function () {
       server: http.createServer((req, res, next) => {
       })
     }).listen(port)
-    assert.equal(hub.port, port)
+    equal(hub.port, port)
     yield hub.close()
   }))
 
@@ -218,7 +218,7 @@ describe('sugo-hub', function () {
         withType: new Module({
           receiveInstances (data) {
             let { date01 } = data
-            assert.ok(date01 instanceof Date)
+            ok(date01 instanceof Date)
           },
           getInstances () {
             return {
@@ -235,7 +235,7 @@ describe('sugo-hub', function () {
       let withType = actor01.get('withType')
       yield withType.receiveInstances({ date01: new Date() })
       let { date02 } = yield withType.getInstances()
-      assert.ok(date02 instanceof Date)
+      ok(date02 instanceof Date)
       yield actor01.disconnect()
     }
     yield actor01.disconnect()
@@ -284,10 +284,10 @@ describe('sugo-hub', function () {
       } catch (err) {
         caught = err
       }
-      assert.ok(!!caught)
+      ok(!!caught)
     }
 
-    assert.equal(hub.port, port)
+    equal(hub.port, port)
     yield hub.close()
   }))
 
@@ -309,6 +309,66 @@ describe('sugo-hub', function () {
     } catch (e) {
       console.error(e)
     }
+  }))
+
+  // https://github.com/realglobe-Inc/sugo-hub/issues/22
+  it('issues/22', () => co(function * () {
+    let hub1Port = yield aport()
+    let hub2Port = yield aport()
+
+    function launchHub (port) {
+      return co(function * () {
+        let hub = new SugoHub({
+          storage: {
+            redis: {
+              host: '127.0.0.1',
+              port: '6379',
+              db: 2,
+              requestsTimeout: 3000
+            }
+          }
+        })
+        yield hub.listen(port)
+        return hub
+      })
+    }
+
+    let hub1 = yield launchHub(hub1Port)
+    let hub2 = yield launchHub(hub2Port)
+
+    let actor = sugoActor({
+      key: 'actor-01',
+      protocol: 'http',
+      host: `localhost:${hub1Port}`,
+      modules: {
+        pinger: new Module({
+          ping () {
+            return 'pong from actor'
+          }
+        })
+      }
+    })
+    yield actor.connect()
+
+    {
+      let caller = sugoCaller({
+        protocol: 'http',
+        host: `localhost:${hub2Port}`
+      })
+      let actor = yield caller.connect('actor-01')
+      let pinger = actor.get('pinger')
+      let pong = yield pinger.ping()
+      equal(pong, 'pong from actor')
+
+      yield caller.disconnect()
+    }
+
+    yield actor.disconnect()
+
+    yield asleep(100)
+
+    yield hub1.close()
+    yield hub2.close()
   }))
 })
 

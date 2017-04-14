@@ -1,14 +1,16 @@
 /**
- * Test case for namespace.
+ * Test case for connector.
  * Runs with mocha.
  */
 'use strict'
 
-const Namespace = require('../lib/namespaces/namespace.js')
+const connector = require('../lib/connectors/connector.js')
 const assert = require('assert')
 const co = require('co')
 
-describe('namespace', () => {
+describe('connector', function () {
+  this.timeout(3000)
+
   before(() => co(function * () {
 
   }))
@@ -17,9 +19,8 @@ describe('namespace', () => {
 
   }))
 
-  it('Namespace', () => co(function * () {
-    let namespace = new Namespace()
-    assert.ok(namespace)
+  it('Connector', () => co(function * () {
+
   }))
 })
 

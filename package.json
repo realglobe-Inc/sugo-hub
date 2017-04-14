@@ -73,7 +73,7 @@
     "sg-socket-client": "^1.2.17",
     "sg-templates": "^1.2.2",
     "sugo-actor": "realglobe-Inc/sugo-actor",
-    "sugo-caller": "realglobe-Inc/sugo-caller#v4",
+    "sugo-caller": "realglobe-Inc/sugo-caller",
     "sugo-observer": "^2.0.8",
     "sugos-assets": "^2.0.4",
     "sugos-travis": "^2.0.7",

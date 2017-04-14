@@ -310,6 +310,65 @@ describe('sugo-hub', function () {
       console.error(e)
     }
   }))
+
+  // https://github.com/realglobe-Inc/sugo-hub/issues/22
+  // it('issues/22', () => co(function * () {
+  //   let hub1Port = yield aport()
+  //   let hub2Port = yield aport()
+  //
+  //   function launchHub (port) {
+  //     return co(function * () {
+  //       let hub = new SugoHub({
+  //         storage: {
+  //           redis: {
+  //             host: '127.0.0.1',
+  //             port: '6379',
+  //             db: 2,
+  //             requestsTimeout: 5000
+  //           }
+  //         }
+  //       })
+  //       yield hub.listen(port)
+  //       return hub
+  //     })
+  //   }
+  //
+  //   let hub1 = yield launchHub(hub1Port)
+  //   let hub2 = yield launchHub(hub2Port)
+  //
+  //   {
+  //     let actor = sugoActor({
+  //       key: 'actor-01',
+  //       protocol: 'http',
+  //       host: `localhost:${hub1Port}`,
+  //       modules: {
+  //         pinger: new Module({
+  //           ping () {
+  //             console.log('Called ping')
+  //             return 'pong'
+  //           }
+  //         })
+  //       }
+  //     })
+  //     yield actor.connect()
+  //   }
+  //
+  //   {
+  //     let caller = sugoCaller({
+  //       protocol: 'http',
+  //       host: `localhost:${hub2Port}`
+  //     })
+  //     let actor = yield caller.connect('actor-01')
+  //     let pinger = actor.get('pinger')
+  //     let pong = yield pinger.ping()
+  //     console.log(pong)
+  //   }
+  //
+  //   yield asleep(100)
+  //
+  //   yield hub1.close()
+  //   yield hub2.close()
+  // }))
 })
 
 /* global describe, before, after, it */

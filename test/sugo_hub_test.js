@@ -370,6 +370,55 @@ describe('sugo-hub', function () {
     yield hub1.close()
     yield hub2.close()
   }))
+
+  it('A lot of performs', () => co(function * () {
+    let port = yield aport()
+    let hub = new SugoHub({
+      storage: `${__dirname}/../var/testing-a-lot-of-performs`
+    })
+    yield hub.listen(port)
+
+    let actor = sugoActor({
+      key: 'actor-hoge',
+      protocol: 'http',
+      host: `localhost:${port}`,
+      modules: {
+        pinger: new Module({
+          ping () {
+            return co(function * () {
+              yield asleep(100)
+              return 'pong from actor'
+            })
+          }
+        })
+      }
+    })
+
+    yield actor.connect()
+
+    {
+      let caller = sugoCaller({
+        protocol: 'http',
+        host: `localhost:${port}`
+      })
+      let actor = yield caller.connect('actor-hoge')
+      let pinger = actor.get('pinger')
+      let promises = []
+
+      for (let i = 0; i < 2; i++) {
+        promises.push(
+          pinger.ping()
+        )
+      }
+      yield Promise.all(promises)
+
+      yield caller.disconnect()
+    }
+
+    yield actor.disconnect()
+
+    yield hub.close()
+  }))
 })
 
 /* global describe, before, after, it */

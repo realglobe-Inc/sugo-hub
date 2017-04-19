@@ -419,6 +419,50 @@ describe('sugo-hub', function () {
 
     yield hub.close()
   }))
+
+  it('Detect gone', () => co(function * () {
+    let port = yield aport()
+    let hub = new SugoHub({
+      storage: `${__dirname}/../var/detect-gone`
+    })
+    yield hub.listen(port)
+
+    let actor = sugoActor({
+      key: 'actor-foo',
+      port,
+      modules: {
+        say: new Module({
+          hiWithDelay () {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => resolve('hi!'), 500)
+            })
+          }
+        })
+      }
+    })
+
+    yield actor.connect()
+
+    {
+      let caller = sugoCaller({ port })
+      let actor = yield caller.connect('actor-foo')
+
+      let say = actor.get('say')
+
+      say.hiWithDelay()
+
+      yield asleep(100)
+
+      // Force disconnect
+      caller.sockets['actor-foo'].disconnect()
+
+      yield asleep(300)
+    }
+
+    yield actor.disconnect()
+
+    yield hub.close()
+  }))
 })
 
 /* global describe, before, after, it */

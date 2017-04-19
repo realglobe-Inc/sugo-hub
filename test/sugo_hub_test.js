@@ -22,7 +22,7 @@ const { RemoteEvents } = require('sg-socket-constants')
 const { JOIN, LEAVE } = RemoteEvents
 
 describe('sugo-hub', function () {
-  this.timeout(12000)
+  this.timeout(18000)
   let request = arequest.create({ jar: true })
   before(() => co(function * () {
 
@@ -405,7 +405,7 @@ describe('sugo-hub', function () {
       let pinger = actor.get('pinger')
       let promises = []
 
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < 100; i++) {
         promises.push(
           pinger.ping()
         )

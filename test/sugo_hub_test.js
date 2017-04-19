@@ -493,7 +493,7 @@ describe('sugo-hub', function () {
     })
 
     yield actor.connect()
-
+    let notices = {}
     let caught
     let caller = sugoCaller({ port })
     {
@@ -503,6 +503,10 @@ describe('sugo-hub', function () {
         caught = thrown
       })
       yield asleep(10)
+
+      caller.sockets[ 'actor-foo' ].on(NOTICE, ({ name, data }) => {
+        notices[ name ] = data
+      })
     }
 
     yield actor.disconnect()
@@ -514,6 +518,8 @@ describe('sugo-hub', function () {
 
     ok(caught)
     equal(caught.name, 'ActorGone')
+
+    ok(notices[ 'ActorGone' ])
   }))
 })
 

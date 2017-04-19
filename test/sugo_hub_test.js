@@ -19,10 +19,10 @@ const { modularize } = require('sugo-actor/module')
 const { hasBin } = require('sg-check')
 const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = SugoHub
 const { RemoteEvents } = require('sg-socket-constants')
-const { JOIN, LEAVE } = RemoteEvents
+const { JOIN, LEAVE, NOTICE } = RemoteEvents
 
 describe('sugo-hub', function () {
-  this.timeout(18000)
+  this.timeout(21000)
   let request = arequest.create({ jar: true })
   before(() => co(function * () {
 
@@ -443,6 +443,11 @@ describe('sugo-hub', function () {
 
     yield actor.connect()
 
+    let notices = {}
+    actor.socket.on(NOTICE, ({ name, data }) => {
+      notices[ name ] = data
+    })
+
     {
       let caller = sugoCaller({ port })
       let actor = yield caller.connect('actor-foo')
@@ -462,6 +467,8 @@ describe('sugo-hub', function () {
     yield actor.disconnect()
 
     yield hub.close()
+
+    ok(notices[ 'CallerGone' ])
   }))
 
   it('Detect actor gone', () => co(function * () {
@@ -486,6 +493,7 @@ describe('sugo-hub', function () {
     })
 
     yield actor.connect()
+
     let caught
     let caller = sugoCaller({ port })
     {

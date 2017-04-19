@@ -39,7 +39,7 @@
     "sg-schemas": "^2.1.3",
     "sg-server": "^1.5.1",
     "sg-socket": "^1.0.15",
-    "sg-socket-constants": "^1.5.1",
+    "sg-socket-constants": "^1.6.2",
     "sg-storage": "^2.0.2",
     "sg-validator": "^1.0.4",
     "socket.io-redis": "^4.0.0",

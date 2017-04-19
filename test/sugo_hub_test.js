@@ -420,10 +420,10 @@ describe('sugo-hub', function () {
     yield hub.close()
   }))
 
-  it('Detect gone', () => co(function * () {
+  it('Detect caller gone', () => co(function * () {
     let port = yield aport()
     let hub = new SugoHub({
-      storage: `${__dirname}/../var/detect-gone`
+      storage: `${__dirname}/../var/detect-caller-gone`
     })
     yield hub.listen(port)
 
@@ -434,7 +434,7 @@ describe('sugo-hub', function () {
         say: new Module({
           hiWithDelay () {
             return new Promise((resolve, reject) => {
-              setTimeout(() => resolve('hi!'), 500)
+              setTimeout(() => resolve('hi!'), 50)
             })
           }
         })
@@ -451,17 +451,61 @@ describe('sugo-hub', function () {
 
       say.hiWithDelay()
 
-      yield asleep(100)
+      yield asleep(10)
 
       // Force disconnect
-      caller.sockets['actor-foo'].disconnect()
+      caller.sockets[ 'actor-foo' ].disconnect()
 
-      yield asleep(300)
+      yield asleep(30)
     }
 
     yield actor.disconnect()
 
     yield hub.close()
+  }))
+
+  it('Detect actor gone', () => co(function * () {
+    let port = yield aport()
+    let hub = new SugoHub({
+      storage: `${__dirname}/../var/detect-actor-gone`
+    })
+    yield hub.listen(port)
+
+    let actor = sugoActor({
+      key: 'actor-foo',
+      port,
+      modules: {
+        say: new Module({
+          hiWithDelay () {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => resolve('hi!'), 50)
+            })
+          }
+        })
+      }
+    })
+
+    yield actor.connect()
+    let caught
+    let caller = sugoCaller({ port })
+    {
+      let actor = yield caller.connect('actor-foo')
+      let say = actor.get('say')
+      say.hiWithDelay().catch((thrown) => {
+        caught = thrown
+      })
+      yield asleep(10)
+    }
+
+    yield actor.disconnect()
+
+    yield asleep(80)
+    yield caller.disconnect()
+
+    yield hub.close()
+
+    ok(caught)
+    equal(caught.name, 'ActorGone')
   }))
 })
 

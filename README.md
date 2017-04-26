@@ -138,18 +138,18 @@ Usage
 
 const sugoHub = require('sugo-hub')
 
-const co = require('co')
-
-co(function * () {
+async function tryExample () {
   // Start sugo-hub server
   let hub = sugoHub({
     // Options here
   })
 
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+
+tryExample().catch((err) => console.error(err))
 
 ```
 
@@ -185,16 +185,14 @@ It is recommended to setup redis server for storage.
 #!/usr/bin/env node
 
 /**
- * This is an example to setup hub server with advanced options
+ * This is an example to setup hub server with redis
  */
 
 'use strict'
 
 const sugoHub = require('sugo-hub')
 
-const co = require('co')
-
-co(function * () {
+async function tryRedisExample () {
   let hub = sugoHub({
     // Using redis server as storage
     storage: {
@@ -210,10 +208,11 @@ co(function * () {
     static: [ /* ... */ ]
   })
 
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+tryRedisExample().catch((err) => console.error(err))
 
 ```
 
@@ -225,16 +224,14 @@ SUGO-Hub uses [Koa][koa_url] as http framework. You can define custom koa handle
 #!/usr/bin/env node
 
 /**
- * This is an example to setup hub server with advanced options
+ * This is an example to setup hub server with endpoints
  */
 
 'use strict'
 
 const sugoHub = require('sugo-hub')
 
-const co = require('co')
-
-co(function * () {
+async function tryExample () {
   let hub = sugoHub({
     storage: { /* ... */ },
     // HTTP route handler with koa
@@ -251,10 +248,11 @@ co(function * () {
     static: [ /* ... */ ]
   })
 
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+tryExample().catch((err) => console.error(err))
 
 ```
 
@@ -268,26 +266,24 @@ Note that static middlewares are provided as build-in middleware and you can ser
 #!/usr/bin/env node
 
 /**
- * This is an example to setup hub server with advanced options
+ * This is an example to setup hub server with middlewares
  */
 
 'use strict'
 
 const sugoHub = require('sugo-hub')
 
-const co = require('co')
-
-co(function * () {
+async function tryMiddleareExample () {
   let hub = sugoHub({
     storage: { /* ... */ },
     // HTTP route handler with koa
     endpoints: { /* ... */ },
     // Custom koa middlewares
     middlewares: [
-      co.wrap(function * customMiddleware (ctx, next) {
+      async function customMiddleware (ctx, next) {
         /* ... */
-        yield next()
-      })
+        await next()
+      }
     ],
     // Directory names to server static files
     static: [
@@ -295,10 +291,11 @@ co(function * () {
     ]
   })
 
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+tryMiddleareExample().catch((err) => console.error(err))
 
 ```
 
@@ -311,16 +308,14 @@ By providing `authenticate` filed, you can authenticate sockets connecting.
 #!/usr/bin/env node
 
 /**
- * This is an example to setup hub server with interceptors
+ * This is an example to setup hub server with aut
  */
 
 'use strict'
 
 const sugoHub = require('sugo-hub')
 
-const co = require('co')
-
-co(function * () {
+async function tryAuthExample () {
   let hub = sugoHub({
     storage: { /* ... */ },
     endpoints: { /* ... */ },
@@ -339,10 +334,12 @@ co(function * () {
     static: [ /* ... */ ]
   })
 
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+
+tryAuthExample().catch((err) => console.error(err))
 
 ```
 
@@ -363,9 +360,7 @@ If you want to use actors on the same environment with hub, pass actors instance
 const sugoHub = require('sugo-hub')
 const sugoActor = require('sugo-actor')
 
-const co = require('co')
-
-co(function * () {
+async function tryLocalExample () {
   let hub = sugoHub({
     storage: { /* ... */ },
     endpoints: { /* ... */ },
@@ -388,10 +383,12 @@ co(function * () {
   })
 
   // Local actors automatically connect to the hub when it start listening
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+
+tryLocalExample().catch((err) => console.error(err))
 
 ```
 

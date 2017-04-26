@@ -1,16 +1,14 @@
 #!/usr/bin/env node
 
 /**
- * This is an example to setup hub server with advanced options
+ * This is an example to setup hub server with redis
  */
 
 'use strict'
 
 const sugoHub = require('sugo-hub')
 
-const co = require('co')
-
-co(function * () {
+async function tryRedisExample () {
   let hub = sugoHub({
     // Using redis server as storage
     storage: {
@@ -26,7 +24,8 @@ co(function * () {
     static: [ /* ... */ ]
   })
 
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+tryRedisExample().catch((err) => console.error(err))

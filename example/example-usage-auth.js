@@ -1,16 +1,14 @@
 #!/usr/bin/env node
 
 /**
- * This is an example to setup hub server with interceptors
+ * This is an example to setup hub server with aut
  */
 
 'use strict'
 
 const sugoHub = require('sugo-hub')
 
-const co = require('co')
-
-co(function * () {
+async function tryAuthExample () {
   let hub = sugoHub({
     storage: { /* ... */ },
     endpoints: { /* ... */ },
@@ -29,7 +27,9 @@ co(function * () {
     static: [ /* ... */ ]
   })
 
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+
+tryAuthExample().catch((err) => console.error(err))

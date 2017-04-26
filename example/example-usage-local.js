@@ -9,9 +9,7 @@
 const sugoHub = require('sugo-hub')
 const sugoActor = require('sugo-actor')
 
-const co = require('co')
-
-co(function * () {
+async function tryLocalExample () {
   let hub = sugoHub({
     storage: { /* ... */ },
     endpoints: { /* ... */ },
@@ -34,7 +32,9 @@ co(function * () {
   })
 
   // Local actors automatically connect to the hub when it start listening
-  yield hub.listen(3000)
+  await hub.listen(3000)
 
   console.log(`SUGO Cloud started at port: ${hub.port}`)
-}).catch((err) => console.error(err))
+}
+
+tryLocalExample().catch((err) => console.error(err))

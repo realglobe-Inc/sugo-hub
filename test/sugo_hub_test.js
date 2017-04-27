@@ -22,7 +22,7 @@ const { RemoteEvents } = require('sg-socket-constants')
 const { JOIN, LEAVE, NOTICE } = RemoteEvents
 
 describe('sugo-hub', function () {
-  this.timeout(21000)
+  this.timeout(42000)
   let request = arequest.create({ jar: true })
   before(() => co(function * () {
 

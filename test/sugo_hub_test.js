@@ -520,6 +520,8 @@ describe('sugo-hub', function () {
     equal(caught.name, 'ActorGone')
 
     ok(notices[ 'ActorGone' ])
+
+    yield asleep(80)
   }))
 })
 

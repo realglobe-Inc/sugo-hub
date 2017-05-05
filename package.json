@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/realglobe-Inc/sugo-hub#readme",
   "dependencies": {
+    "asleep": "^1.0.3",
     "asenv": "^1.1.0",
     "aslogger": "^1.0.2",
     "brequest": "^1.0.1",
@@ -61,7 +62,6 @@
     "ape-updating": "^4.0.5",
     "aport": "^1.0.0",
     "arequest": "^2.0.7",
-    "asleep": "^1.0.3",
     "aslogger": "^1.0.2",
     "cli-table": "^0.3.1",
     "coz": "^6.0.20",

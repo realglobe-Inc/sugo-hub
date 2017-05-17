@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # sugo-hub@6.0.8
+=======
+# sugo-hub@7.0.0
+>>>>>>> 1871a127bff06d68d362584e5e938aa2646012b4
 
 Hub server of SUGOS
 

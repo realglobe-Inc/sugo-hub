@@ -19,11 +19,6 @@ describe('new-storage', () => {
 
   it('New storage', () => co(function * () {
     assert.ok(newStorage)
-
-    let version = newStorage.redisVersion()
-    if (version) {
-      assert.equal(typeof version, 'string')
-    }
   }))
 })
 

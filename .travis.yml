@@ -6,7 +6,7 @@ addons:
     packages:
       - redis-server
 node_js:
-- '7'
+- '8'
 before_install:
 - npm i npm-cli-login -g
 - echo "NPM_USER=${NPM_USER}"

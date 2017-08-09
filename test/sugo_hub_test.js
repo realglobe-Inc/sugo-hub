@@ -305,7 +305,26 @@ describe('sugo-hub', function () {
       })
       let port = await aport()
       await hub.listen(port)
-      await asleep(200)
+      await asleep(100)
+
+      const actor = sugoActor({
+        key: 'actor-xxxx',
+        protocol: 'http',
+        host: `localhost:${port}`,
+        modules: {
+          pinger: new Module({
+            ping () {
+              return 'pong from actor'
+            }
+          })
+        }
+      })
+
+      await actor.connect()
+
+      await asleep(100)
+
+      await actor.disconnect()
       await hub.close()
     } catch (e) {
       console.error(e)
@@ -314,32 +333,29 @@ describe('sugo-hub', function () {
 
   // https://github.com/realglobe-Inc/sugo-hub/issues/22
   it('issues/22', async () => {
-    let hub1Port = await aport()
-    let hub2Port = await aport()
+    const hub1Port = await aport()
+    const hub2Port = await aport()
 
-    function launchHub (port) {
-      return async () => {
-        let hub = new SugoHub({
-          storage: {
-            redis: {
-              host: '127.0.0.1',
-              port: '6379',
-              db: 2,
-              requestsTimeout: 3000
-            }
+    async function launchHub (port) {
+      const hub = new SugoHub({
+        storage: {
+          redis: {
+            host: '127.0.0.1',
+            port: '6379',
+            db: 2,
+            requestsTimeout: 3000
           }
-        })
-        await hub.listen(port)
-        return hub
-      }
+        }
+      })
+      await hub.listen(port)
+      return hub
     }
 
-    let hub1 = await launchHub(hub1Port)
-    let hub2 = await launchHub(hub2Port)
+    const hub1 = await launchHub(hub1Port)
+    const hub2 = await launchHub(hub2Port)
 
-    let actor = sugoActor({
+    const actor = sugoActor({
       key: 'actor-01',
-      protocol: 'http',
       host: `localhost:${hub1Port}`,
       modules: {
         pinger: new Module({
@@ -352,7 +368,7 @@ describe('sugo-hub', function () {
     await actor.connect()
 
     {
-      let caller = sugoCaller({
+      const caller = sugoCaller({
         protocol: 'http',
         host: `localhost:${hub2Port}`
       })

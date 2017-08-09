@@ -6,23 +6,23 @@
 
 const ObserverEntity = require('../lib/entities/observer_entity.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('observer-entity', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Observer entity', () => co(function * () {
+  it('Observer entity', async () => {
     let entity = new ObserverEntity({
       key: '123456'
     })
     assert.ok(entity.key)
-  }))
+  })
 })
 
 /* global describe, before, after, it */

@@ -6,18 +6,18 @@
 
 const ActorEntity = require('../lib/entities/actor_entity.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('actor-entity', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Actor entity', () => co(function * () {
+  it('Actor entity', async () => {
     let entity = new ActorEntity({ key: 'bar' })
     assert.equal(entity.key, 'bar')
     entity.addCaller({ key: 's1' })
@@ -25,7 +25,7 @@ describe('actor-entity', () => {
     entity.addCaller({ key: 's3' })
     entity.removeCaller({ key: 's2' })
     assert.deepEqual(entity.callers, [ 's1', 's3' ])
-  }))
+  })
 })
 
 /* global describe, before, after, it */

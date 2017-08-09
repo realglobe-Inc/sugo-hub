@@ -6,20 +6,20 @@
 
 const newStorage = require('../lib/helpers/new_storage.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('new-storage', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('New storage', () => co(function * () {
+  it('New storage', async () => {
     assert.ok(newStorage)
-  }))
+  })
 })
 
 /* global describe, before, after, it */

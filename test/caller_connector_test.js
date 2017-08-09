@@ -6,22 +6,22 @@
 
 const callerConnector = require('../lib/connectors/caller_connector.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('caller-connector', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Caller connector', () => co(function * () {
+  it('Caller connector', async () => {
 
-  }))
+  })
 })
 
 /* global describe, before, after, it */

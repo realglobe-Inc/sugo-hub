@@ -6,43 +6,43 @@
 
 const SugoHub = require('../lib/sugo_hub')
 const sugoActor = require('sugo-actor')
-const { Module } = sugoActor
+const {Module} = sugoActor
 const sugoCaller = require('sugo-caller')
 const sugoObserver = require('sugo-observer')
 const arequest = require('arequest')
 const aport = require('aport')
 const asleep = require('asleep')
-const { ok, equal, ifError } = require('assert')
-const co = require('co')
+const {ok, equal, ifError} = require('assert')
+
 const http = require('http')
-const { modularize } = require('sugo-actor/module')
-const { hasBin } = require('sg-check')
-const { ACTOR_URL, CALLER_URL, OBSERVER_URL } = SugoHub
-const { RemoteEvents } = require('sg-socket-constants')
-const { JOIN, LEAVE, NOTICE } = RemoteEvents
+const {modularize} = require('sugo-actor/module')
+const {hasBin} = require('sg-check')
+const {ACTOR_URL, CALLER_URL, OBSERVER_URL} = SugoHub
+const {RemoteEvents} = require('sg-socket-constants')
+const {JOIN, LEAVE, NOTICE} = RemoteEvents
 
 describe('sugo-hub', function () {
   this.timeout(4800 * 1000)
-  let request = arequest.create({ jar: true })
-  before(() => co(function * () {
+  let request = arequest.create({jar: true})
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Sugo hub', () => co(function * () {
-    let port = yield aport()
+  it('Sugo hub', async () => {
+    let port = await aport()
     let observed = []
 
-    let hub = yield new SugoHub({
+    let hub = await new SugoHub({
       storage: `${__dirname}/../tmp/testing-hub-storage`,
       interceptors: {
-        [ACTOR_URL]: (socket) => co(function * () {
+        [ACTOR_URL]: async (socket) => {
           equal(socket.nsp.name, '/actors')
-          yield asleep(10)
-        })
+          await asleep(10)
+        }
       }
     }).listen(port)
 
@@ -51,6 +51,7 @@ describe('sugo-hub', function () {
         return 'yo!'
       }
     }
+
     const YoPersonModule = modularize(YoPerson)
 
     let emitter = new Module({})
@@ -75,50 +76,50 @@ describe('sugo-hub', function () {
       }
     })
 
-    let caller01 = sugoCaller({ host: `localhost:${port}` })
-    let caller02 = sugoCaller({ host: `localhost:${port}` })
-    let caller03 = sugoCaller({ host: `localhost:${port}` })
+    let caller01 = sugoCaller({host: `localhost:${port}`})
+    let caller02 = sugoCaller({host: `localhost:${port}`})
+    let caller03 = sugoCaller({host: `localhost:${port}`})
 
-    yield actor01.connect()
-    yield asleep(10)
-    yield actor02.connect()
-    yield asleep(10)
+    await actor01.connect()
+    await asleep(10)
+    await actor02.connect()
+    await asleep(10)
 
     actor01.joinedCallers = {}
-    actor01.socket.on(JOIN, ({ caller, messages }) => {
-      actor01.joinedCallers[ caller.key ] = caller
+    actor01.socket.on(JOIN, ({caller, messages}) => {
+      actor01.joinedCallers[caller.key] = caller
       ok(caller)
     })
-    actor01.socket.on(LEAVE, ({ caller, messages }) => {
-      delete actor01.joinedCallers[ caller.key ]
+    actor01.socket.on(LEAVE, ({caller, messages}) => {
+      delete actor01.joinedCallers[caller.key]
       ok(caller)
     })
 
     let observer01 = sugoObserver((data) => {
       observed.push(data)
-    }, { port })
+    }, {port})
 
-    yield observer01.start()
+    await observer01.start()
 
     // Perform an action
     {
       equal(Object.keys(actor01.joinedCallers).length, 0)
-      let connection = yield caller01.connect(actor01.key)
+      let connection = await caller01.connect(actor01.key)
       equal(Object.keys(actor01.joinedCallers).length, 1)
       {
-        if (yield hasBin('ls')) {
+        if (await hasBin('ls')) {
           let bash = connection.get('bash')
-          let payload = yield bash.spawn('ls', [ '-la' ])
+          let payload = await bash.spawn('ls', ['-la'])
           equal(payload, 0, 'Exit with 0')
         }
       }
       {
         let yo = connection.get('yo')
-        equal((yield yo.sayYo()), 'yo!')
+        equal((await yo.sayYo()), 'yo!')
       }
       {
         let receiver = connection.get('emitter')
-        let shouldNull = yield new Promise((resolve, reject) => {
+        let shouldNull = await new Promise((resolve, reject) => {
           let timer = setInterval(() => {
             resolve(new Error('Caller didn\'t receive event from actor.'))
           }, 2000)
@@ -133,7 +134,7 @@ describe('sugo-hub', function () {
       }
 
       equal(Object.keys(actor01.joinedCallers).length, 1)
-      yield connection.disconnect()
+      await connection.disconnect()
       equal(Object.keys(actor01.joinedCallers).length, 0)
     }
 
@@ -141,8 +142,8 @@ describe('sugo-hub', function () {
     {
       let connection, caught
       try {
-        connection = yield caller02.connect('___invalid_actor_key___')
-        yield connection.disconnect()
+        connection = await caller02.connect('___invalid_actor_key___')
+        await connection.disconnect()
       } catch (err) {
         caught = err
       }
@@ -151,10 +152,10 @@ describe('sugo-hub', function () {
 
     // Get actors info
     {
-      let { body, statusCode } = yield request(`http://localhost:${port}/actors`)
+      let {body, statusCode} = await request(`http://localhost:${port}/actors`)
       equal(statusCode, 200)
       ok(body)
-      let { meta, data, included } = body
+      let {meta, data, included} = body
       ok(meta)
       ok(data)
       ok(included)
@@ -163,10 +164,10 @@ describe('sugo-hub', function () {
 
     // Get callers info
     {
-      let { body, statusCode } = yield request(`http://localhost:${port}/callers`)
+      let {body, statusCode} = await request(`http://localhost:${port}/callers`)
       equal(statusCode, 200)
       ok(body)
-      let { meta, data, included } = body
+      let {meta, data, included} = body
       ok(meta)
       ok(data)
       ok(included)
@@ -175,39 +176,39 @@ describe('sugo-hub', function () {
 
     // When socket hang up
     {
-      yield caller03.connect(actor01.key)
-      let { sockets } = caller03
+      await caller03.connect(actor01.key)
+      let {sockets} = caller03
       for (let name of Object.keys(sockets)) {
-        let socket = sockets[ name ]
+        let socket = sockets[name]
         socket.disconnect()
       }
     }
 
-    yield actor01.disconnect()
-    yield actor02.disconnect()
+    await actor01.disconnect()
+    await actor02.disconnect()
 
-    yield observer01.stop()
+    await observer01.stop()
 
-    yield asleep(400)
+    await asleep(400)
 
     ok(observed.length > 0)
 
-    yield hub.close()
-  }))
+    await hub.close()
+  })
 
-  it('Create from custom http server.', () => co(function * () {
+  it('Create from custom http server.', async () => {
     let port = 9872
-    let hub = yield new SugoHub({
+    let hub = await new SugoHub({
       server: http.createServer((req, res, next) => {
       })
     }).listen(port)
     equal(hub.port, port)
-    yield hub.close()
-  }))
+    await hub.close()
+  })
 
-  it('Transport built in types', () => co(function * () {
-    let port = yield aport()
-    let hub = yield new SugoHub({
+  it('Transport built in types', async () => {
+    let port = await aport()
+    let hub = await new SugoHub({
       storage: `${__dirname}/../tmp/testing-hub-storage`
     }).listen(port)
 
@@ -217,7 +218,7 @@ describe('sugo-hub', function () {
       modules: {
         withType: new Module({
           receiveInstances (data) {
-            let { date01 } = data
+            let {date01} = data
             ok(date01 instanceof Date)
           },
           getInstances () {
@@ -228,29 +229,29 @@ describe('sugo-hub', function () {
         })
       }
     })
-    yield actor01.connect()
+    await actor01.connect()
     {
-      let caller01 = sugoCaller({ port })
-      let actor01 = yield caller01.connect('actor01')
+      let caller01 = sugoCaller({port})
+      let actor01 = await caller01.connect('actor01')
       let withType = actor01.get('withType')
-      yield withType.receiveInstances({ date01: new Date() })
-      let { date02 } = yield withType.getInstances()
+      await withType.receiveInstances({date01: new Date()})
+      let {date02} = await withType.getInstances()
       ok(date02 instanceof Date)
-      yield actor01.disconnect()
+      await actor01.disconnect()
     }
-    yield actor01.disconnect()
-    yield hub.close()
-  }))
+    await actor01.disconnect()
+    await hub.close()
+  })
 
-  it('Use auth', () => co(function * () {
-    let port = yield aport()
+  it('Use auth', async () => {
+    let port = await aport()
 
-    let hub = yield new SugoHub({
+    let hub = await new SugoHub({
       storage: `${__dirname}/../tmp/testing-auth-storage`,
-      authenticate: (socket, data) => co(function * () {
-        let { token } = data
+      authenticate: async (socket, data) => {
+        let {token} = data
         return token === 'hogehogehoge'
-      })
+      }
     }).listen(port)
 
     {
@@ -261,11 +262,11 @@ describe('sugo-hub', function () {
         auth: {
           token: 'hogehogehoge'
         },
-        modules: { hoge: new Module(() => {}) }
+        modules: {hoge: new Module(() => {})}
       })
 
-      yield actor01.connect()
-      yield actor01.disconnect()
+      await actor01.connect()
+      await actor01.disconnect()
     }
 
     {
@@ -276,11 +277,11 @@ describe('sugo-hub', function () {
         auth: {
           token: '__invalid_token__'
         },
-        modules: { fuge: new Module(() => {}) }
+        modules: {fuge: new Module(() => {})}
       })
       let caught
       try {
-        yield actor02.connect()
+        await actor02.connect()
       } catch (err) {
         caught = err
       }
@@ -288,10 +289,10 @@ describe('sugo-hub', function () {
     }
 
     equal(hub.port, port)
-    yield hub.close()
-  }))
+    await hub.close()
+  })
 
-  it('Using redis', () => co(function * () {
+  it('Using redis', async () => {
     try {
       let hub = new SugoHub({
         storage: {
@@ -302,22 +303,22 @@ describe('sugo-hub', function () {
           }
         }
       })
-      let port = yield aport()
-      yield hub.listen(port)
-      yield asleep(200)
-      yield hub.close()
+      let port = await aport()
+      await hub.listen(port)
+      await asleep(200)
+      await hub.close()
     } catch (e) {
       console.error(e)
     }
-  }))
+  })
 
   // https://github.com/realglobe-Inc/sugo-hub/issues/22
-  it('issues/22', () => co(function * () {
-    let hub1Port = yield aport()
-    let hub2Port = yield aport()
+  it('issues/22', async () => {
+    let hub1Port = await aport()
+    let hub2Port = await aport()
 
     function launchHub (port) {
-      return co(function * () {
+      return async () => {
         let hub = new SugoHub({
           storage: {
             redis: {
@@ -328,13 +329,13 @@ describe('sugo-hub', function () {
             }
           }
         })
-        yield hub.listen(port)
+        await hub.listen(port)
         return hub
-      })
+      }
     }
 
-    let hub1 = yield launchHub(hub1Port)
-    let hub2 = yield launchHub(hub2Port)
+    let hub1 = await launchHub(hub1Port)
+    let hub2 = await launchHub(hub2Port)
 
     let actor = sugoActor({
       key: 'actor-01',
@@ -348,35 +349,35 @@ describe('sugo-hub', function () {
         })
       }
     })
-    yield actor.connect()
+    await actor.connect()
 
     {
       let caller = sugoCaller({
         protocol: 'http',
         host: `localhost:${hub2Port}`
       })
-      let actor = yield caller.connect('actor-01')
+      let actor = await caller.connect('actor-01')
       let pinger = actor.get('pinger')
-      let pong = yield pinger.ping()
+      let pong = await pinger.ping()
       equal(pong, 'pong from actor')
 
-      yield caller.disconnect()
+      await caller.disconnect()
     }
 
-    yield actor.disconnect()
+    await actor.disconnect()
 
-    yield asleep(100)
+    await asleep(100)
 
-    yield hub1.close()
-    yield hub2.close()
-  }))
+    await hub1.close()
+    await hub2.close()
+  })
 
-  it('A lot of performs', () => co(function * () {
-    let port = yield aport()
+  it('A lot of performs', async () => {
+    let port = await aport()
     let hub = new SugoHub({
       storage: `${__dirname}/../var/testing-a-lot-of-performs`
     })
-    yield hub.listen(port)
+    await hub.listen(port)
 
     let actor = sugoActor({
       key: 'actor-hoge',
@@ -384,24 +385,22 @@ describe('sugo-hub', function () {
       host: `localhost:${port}`,
       modules: {
         pinger: new Module({
-          ping () {
-            return co(function * () {
-              yield asleep(100)
-              return 'pong from actor'
-            })
+          async ping () {
+            await asleep(100)
+            return 'pong from actor'
           }
         })
       }
     })
 
-    yield actor.connect()
+    await actor.connect()
 
     {
       let caller = sugoCaller({
         protocol: 'http',
         host: `localhost:${port}`
       })
-      let actor = yield caller.connect('actor-hoge')
+      let actor = await caller.connect('actor-hoge')
       let pinger = actor.get('pinger')
       let promises = []
 
@@ -410,22 +409,22 @@ describe('sugo-hub', function () {
           pinger.ping()
         )
       }
-      yield Promise.all(promises)
+      await Promise.all(promises)
 
-      yield caller.disconnect()
+      await caller.disconnect()
     }
 
-    yield actor.disconnect()
+    await actor.disconnect()
 
-    yield hub.close()
-  }))
+    await hub.close()
+  })
 
-  it('Detect caller gone', () => co(function * () {
-    let port = yield aport()
+  it('Detect caller gone', async () => {
+    let port = await aport()
     let hub = new SugoHub({
       storage: `${__dirname}/../var/detect-caller-gone`
     })
-    yield hub.listen(port)
+    await hub.listen(port)
 
     let actor = sugoActor({
       key: 'actor-foo',
@@ -441,42 +440,42 @@ describe('sugo-hub', function () {
       }
     })
 
-    yield actor.connect()
+    await actor.connect()
 
     let notices = {}
-    actor.socket.on(NOTICE, ({ name, data }) => {
-      notices[ name ] = data
+    actor.socket.on(NOTICE, ({name, data}) => {
+      notices[name] = data
     })
 
     {
-      let caller = sugoCaller({ port })
-      let actor = yield caller.connect('actor-foo')
+      let caller = sugoCaller({port})
+      let actor = await caller.connect('actor-foo')
 
       let say = actor.get('say')
 
       say.hiWithDelay()
 
-      yield asleep(10)
+      await asleep(10)
 
       // Force disconnect
-      caller.sockets[ 'actor-foo' ].disconnect()
+      caller.sockets['actor-foo'].disconnect()
 
-      yield asleep(30)
+      await asleep(30)
     }
 
-    yield actor.disconnect()
+    await actor.disconnect()
 
-    yield hub.close()
+    await hub.close()
 
-    ok(notices[ 'CallerGone' ])
-  }))
+    ok(notices['CallerGone'])
+  })
 
-  it('Detect actor gone', () => co(function * () {
-    let port = yield aport()
+  it('Detect actor gone', async () => {
+    let port = await aport()
     let hub = new SugoHub({
       storage: `${__dirname}/../var/detect-actor-gone`
     })
-    yield hub.listen(port)
+    await hub.listen(port)
 
     let actor = sugoActor({
       key: 'actor-foo',
@@ -492,37 +491,37 @@ describe('sugo-hub', function () {
       }
     })
 
-    yield actor.connect()
+    await actor.connect()
     let notices = {}
     let caught
-    let caller = sugoCaller({ port })
+    let caller = sugoCaller({port})
     {
-      let actor = yield caller.connect('actor-foo')
+      let actor = await caller.connect('actor-foo')
       let say = actor.get('say')
       say.hiWithDelay().catch((thrown) => {
         caught = thrown
       })
-      yield asleep(10)
+      await asleep(10)
 
-      caller.sockets[ 'actor-foo' ].on(NOTICE, ({ name, data }) => {
-        notices[ name ] = data
+      caller.sockets['actor-foo'].on(NOTICE, ({name, data}) => {
+        notices[name] = data
       })
     }
 
-    yield actor.disconnect()
+    await actor.disconnect()
 
-    yield asleep(80)
-    yield caller.disconnect()
+    await asleep(80)
+    await caller.disconnect()
 
-    yield hub.close()
+    await hub.close()
 
     ok(caught)
     equal(caught.name, 'ActorGone')
 
-    ok(notices[ 'ActorGone' ])
+    ok(notices['ActorGone'])
 
-    yield asleep(80)
-  }))
+    await asleep(80)
+  })
 })
 
 /* global describe, before, after, it */

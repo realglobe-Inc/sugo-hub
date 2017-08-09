@@ -6,22 +6,22 @@
 
 const invocationService = require('../lib/services/invocation_service.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('invocation-service', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Invocation service', () => co(function * () {
+  it('Invocation service', async () => {
 
-  }))
+  })
 })
 
 /* global describe, before, after, it */

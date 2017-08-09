@@ -6,51 +6,51 @@
 
 const Service = require('../lib/services/service.js')
 const assert = require('assert')
-const co = require('co')
+
 const sgStorage = require('sg-storage')
 
 describe('service', () => {
   let storage = sgStorage(`${__dirname}/../tmp/testing-service-storage`)
-  before(() => co(function * () {
-  }))
+  before(async () => {
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Service', () => co(function * () {
+  it('Service', async () => {
     let service = new Service(storage, {
       indices: [ 'socketId' ]
     })
     assert.ok(service)
-    yield service.save({
+    await service.save({
       key: 'hoge',
       value: 'This is hoge',
       socketId: 0
     })
-    yield service.save({
+    await service.save({
       key: 'fuge',
       value: 'This is fuge',
       socketId: 1
     })
-    let hoge = yield service.find('hoge')
+    let hoge = await service.find('hoge')
     assert.ok(hoge)
     assert.equal(hoge.value, 'This is hoge')
-    let nullFound = yield service.find(null)
+    let nullFound = await service.find(null)
     assert.equal(nullFound, null)
-    let fuge = yield service.find('fuge')
+    let fuge = await service.find('fuge')
     assert.ok(fuge)
     assert.equal(fuge.value, 'This is fuge')
-    let destroyed = yield service.destroy('fuge')
+    let destroyed = await service.destroy('fuge')
     assert.equal(destroyed, 1)
-    destroyed = yield service.destroy('fuge')
+    destroyed = await service.destroy('fuge')
     assert.equal(destroyed, 0)
-    fuge = yield service.find('fuge')
+    fuge = await service.find('fuge')
     assert.ok(!fuge)
-    hoge = yield service.findByIndex('socketId', 0)
+    hoge = await service.findByIndex('socketId', 0)
     assert.ok(hoge)
     assert.equal(hoge.value, 'This is hoge')
-  }))
+  })
 })
 
 /* global describe, before, after, it */

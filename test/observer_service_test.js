@@ -6,21 +6,21 @@
 
 const ObserverService = require('../lib/services/observer_service.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('observer-service', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Observer service', () => co(function * () {
+  it('Observer service', async () => {
     let service = new ObserverService()
     assert.ok(service)
-  }))
+  })
 })
 
 /* global describe, before, after, it */

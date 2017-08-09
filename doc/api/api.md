@@ -1,4 +1,4 @@
-# sugo-hub@7.0.1
+# sugo-hub@8.0.0
 
 Hub server of SUGOS
 
@@ -17,11 +17,11 @@ Create a hub instance. Just an alias of `new SugoHub(config)`
 **Example**:
 
 ```javascript
-co(function * () {
-  let hub = sugoHub({
+;(async () => {
+  const hub = sugoHub({
   // Options here
   })
-  yield hub.listen(3000)
+  await hub.listen(3000)
 }).catch((err) => console.error(err))
 ```
 

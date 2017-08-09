@@ -11,8 +11,8 @@ process.env.DEBUG = process.env.DEBUG || 'sg:hub:benchmark,sg:hub,sg:hub:*'
 const sugoHub = require('../lib')
 const sugoActor = require('sugo-actor')
 const sugoCaller = require('sugo-caller')
-const { execSync } = require('child_process')
-const { Module } = sugoActor
+const {execSync} = require('child_process')
+const {Module} = sugoActor
 const co = require('co')
 const aport = require('aport')
 const Table = require('cli-table')
@@ -39,8 +39,8 @@ co(function * () {
 
   checkRedis()
   let table = new Table({
-    head: [ 'Connections', 'Pong time(ms)' ],
-    colWidths: [ 20, 20 ]
+    head: ['Connections', 'Pong time(ms)'],
+    colWidths: [20, 20]
   })
   let server = yield startHub(port)
   for (let number of CONNECTION_NUMBERS) {
@@ -140,7 +140,7 @@ function createCallers (callerUrl, number) {
   return callers
 }
 
-function connectCallers (callers) {
+async function connectCallers (callers) {
   return co(function * () {
     debug('Connect callers', callers.length)
     let promises = callers.map((caller, i) => co(function * () {
@@ -189,7 +189,7 @@ function measurePingPong (connections) {
 
 function record (table, number, time) {
   debug(`connections: ${number}, time: ${time}ms`)
-  table.push([ number, time ])
+  table.push([number, time])
 }
 
 function report (table) {

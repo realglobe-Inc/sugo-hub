@@ -6,22 +6,22 @@
 
 const actorConnector = require('../lib/connectors/actor_connector.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('actor-connector', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Actor connector', () => co(function * () {
+  it('Actor connector', async () => {
 
-  }))
+  })
 })
 
 /* global describe, before, after, it */

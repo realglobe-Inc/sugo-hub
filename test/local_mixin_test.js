@@ -6,7 +6,7 @@
 
 const localMixin = require('../lib/mixins/local_mixin.js')
 const assert = require('assert')
-const co = require('co')
+
 const SugoHub = require('../lib/sugo_hub')
 const sugoActor = require('sugo-actor')
 const sugoCaller = require('sugo-caller')
@@ -16,22 +16,22 @@ const aport = require('aport')
 
 describe('local-mixin', function () {
   this.timeout(3000)
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Local mixin', () => co(function * () {
-    let port = yield aport()
+  it('Local mixin', async () => {
+    let port = await aport()
 
     let caller01 = sugoCaller({
       port
     })
 
-    let hub = yield new SugoHub({
+    let hub = await new SugoHub({
       storage: `${__dirname}/../tmp/testing-local-storage`,
       localActors: {
         'my-actor-01': sugoActor({
@@ -45,18 +45,18 @@ describe('local-mixin', function () {
     }).listen(port)
 
     {
-      let actor01 = yield caller01.connect(hub.localActors[ 'my-actor-01' ].key)
+      let actor01 = await caller01.connect(hub.localActors[ 'my-actor-01' ].key)
       assert.ok(actor01)
       let say = actor01.get('say')
-      let yes = yield say.sayYes()
+      let yes = await say.sayYes()
       assert.equal(yes, 'Yes from actor01')
-      yield actor01.disconnect()
+      await actor01.disconnect()
 
-      yield caller01.disconnect()
+      await caller01.disconnect()
     }
 
-    yield hub.close()
-  }))
+    await hub.close()
+  })
 })
 
 /* global describe, before, after, it */

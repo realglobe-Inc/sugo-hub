@@ -6,21 +6,21 @@
 
 const ActorEndpoint = require('../lib/endpoints/actor_endpoint.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('actor-endpoint', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Actor endpoint', () => co(function * () {
+  it('Actor endpoint', async () => {
     let endpoint = new ActorEndpoint()
     assert.ok(endpoint)
-  }))
+  })
 })
 
 /* global describe, before, after, it */

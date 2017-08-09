@@ -8,41 +8,41 @@ const ActorService = require('../lib/services/actor_service.js')
 const sgStorage = require('sg-storage')
 const assert = require('assert')
 const uuid = require('uuid')
-const co = require('co')
+
 
 describe('actor-service', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Actor service', () => co(function * () {
+  it('Actor service', async () => {
     let storage = sgStorage(`${__dirname}/../tmp/testing-actor-service`)
     let service = new ActorService(storage)
     assert.ok(service)
     let socketId = uuid.v4()
     let key = 'hoge'
-    yield service.setupActor(socketId, key)
-    yield service.updateSpec(socketId, 'yo', {
+    await service.setupActor(socketId, key)
+    await service.updateSpec(socketId, 'yo', {
       name: 'Yo module',
       version: '1.0.0',
       methods: {}
     })
     {
-      let { $specs } = yield service.find(key)
+      let { $specs } = await service.find(key)
       assert.ok($specs.yo)
     }
-    yield service.delSpec(socketId, 'yo')
+    await service.delSpec(socketId, 'yo')
     {
-      let { $specs } = yield service.find(key)
+      let { $specs } = await service.find(key)
       assert.ok(!$specs.yo)
     }
-    yield service.teardownActor(socketId, key)
-    yield storage.end()
-  }))
+    await service.teardownActor(socketId, key)
+    await storage.end()
+  })
 })
 
 /* global describe, before, after, it */

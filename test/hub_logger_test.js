@@ -6,22 +6,21 @@
 
 const hubLogger = require('../lib/logging/hub_logger.js')
 const assert = require('assert')
-const co = require('co')
 
 describe('hub-logger', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(() => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(() => {
 
-  }))
+  })
 
-  it('Hub logger', () => co(function * () {
+  it('Hub logger', () => {
 
-  }))
+  })
 })
 
 /* global describe, before, after, it */

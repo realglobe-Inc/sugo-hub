@@ -8,20 +8,20 @@ const authAdaptor = require('../lib/adaptors/auth_adaptor.js')
 const sgServer = require('sg-server')
 const sgSocket = require('sg-socket')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('auth-adaptor', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Auth adaptor', () => co(function * () {
+  it('Auth adaptor', async () => {
     let server = sgServer()
     let io = sgSocket(server, {})
     authAdaptor(io, {
@@ -29,7 +29,7 @@ describe('auth-adaptor', function () {
         return true
       }
     })
-  }))
+  })
 })
 
 /* global describe, before, after, it */

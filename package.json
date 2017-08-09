@@ -1,6 +1,6 @@
 {
   "name": "sugo-hub",
-  "version": "7.0.2",
+  "version": "8.0.0",
   "description": "Hub server of SUGOS",
   "main": "lib",
   "browser": {
@@ -31,7 +31,6 @@
     "asleep": "^1.0.3",
     "aslogger": "^1.0.2",
     "brequest": "^1.0.1",
-    "co": "^4.6.0",
     "debug": "^2.6.6",
     "inflection": "^1.10.0",
     "mkdirp": "^0.5.1",
@@ -64,6 +63,7 @@
     "arequest": "^2.0.7",
     "aslogger": "^1.0.2",
     "cli-table": "^0.3.1",
+    "co": "^4.6.0",
     "coz": "^6.0.20",
     "filecopy": "^3.0.0",
     "filedel": "^2.0.5",
@@ -72,15 +72,16 @@
     "sg-check": "^1.0.6",
     "sg-socket-client": "^2.0.1",
     "sg-templates": "^1.2.2",
-    "sugo-actor": "github:realglobe-inc/sugo-actor",
-    "sugo-caller": "github:realglobe-inc/sugo-caller",
-    "sugo-observer": "github:realglobe-inc/sugo-observer",
+    "sugo-actor": "*",
+    "sugo-caller": "*",
+    "sugo-observer": "*",
     "sugos-assets": "^2.0.4",
     "sugos-travis": "^2.0.7",
+    "the-script-jsdoc": "^1.0.8",
     "writeout": "^2.2.0"
   },
   "engines": {
-    "node": ">=6",
+    "node": ">=7.6",
     "npm": ">=4"
   }
 }

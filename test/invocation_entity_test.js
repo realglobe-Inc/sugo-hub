@@ -6,22 +6,21 @@
 
 const invocationEntity = require('../lib/entities/invocation_entity.js')
 const assert = require('assert')
-const co = require('co')
 
 describe('invocation-entity', function () {
   this.timeout(3000)
 
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Invocation entity', () => co(function * () {
+  it('Invocation entity', async () => {
 
-  }))
+  })
 })
 
 /* global describe, before, after, it */

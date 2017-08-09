@@ -6,20 +6,20 @@
 
 const callerService = require('../lib/services/caller_service.js')
 const assert = require('assert')
-const co = require('co')
+
 
 describe('terminal-service', () => {
-  before(() => co(function * () {
+  before(async () => {
 
-  }))
+  })
 
-  after(() => co(function * () {
+  after(async () => {
 
-  }))
+  })
 
-  it('Terminal service', () => co(function * () {
+  it('Terminal service', async () => {
 
-  }))
+  })
 })
 
 /* global describe, before, after, it */

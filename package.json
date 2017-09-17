@@ -71,7 +71,7 @@
     "sg-check": "^1.0.6",
     "sg-socket-client": "^2.0.1",
     "sg-templates": "^1.2.2",
-    "sugo-actor": "^7.0.3",
+    "sugo-actor": "^7.0.4",
     "sugo-caller": "^6.0.1",
     "sugo-observer": "^2.0.16",
     "sugos-assets": "^2.0.4",

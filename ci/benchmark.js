@@ -13,7 +13,7 @@ const { fork } = require('child_process')
 runTasks('benchmark', [
   () => new Promise((resolve, reject) => {
     let forked = fork('./benchmark/connect_benchmark.js', {
-      stdio: 'pipe'
+      stdio: 'inherit'
     })
     forked.on('close', () => resolve())
     forked.on('error', (err) => reject(err))

@@ -29,7 +29,7 @@
   "dependencies": {
     "asenv": "^2.0.0",
     "asleep": "^1.0.3",
-    "aslogger": "^1.0.2",
+    "aslogger": "^2.0.0",
     "brequest": "^1.0.1",
     "debug": "^3.0.1",
     "inflection": "^1.10.0",

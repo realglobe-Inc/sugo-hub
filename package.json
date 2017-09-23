@@ -67,17 +67,17 @@
     "filecopy": "^4.0.0",
     "filedel": "^4.0.0",
     "injectmock": "^2.0.0",
-    "markdown-toc": "^1.1.0",
+    "markdown-toc": "^1.2.0",
     "sg-check": "^1.0.6",
     "sg-socket-client": "^3.1.1",
     "sg-templates": "^1.2.2",
-    "sugo-actor": "^7.0.4",
+    "sugo-actor": "^7.0.6",
     "sugo-caller": "^6.0.1",
     "sugo-observer": "^2.0.16",
     "sugos-assets": "^2.0.4",
     "sugos-travis": "^2.0.7",
     "the-script-jsdoc": "^2.0.0",
-    "writeout": "^2.2.0"
+    "writeout": "^2.2.1"
   },
   "engines": {
     "node": ">=7.6",

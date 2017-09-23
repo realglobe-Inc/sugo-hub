@@ -25,13 +25,13 @@ describe('local-mixin', function () {
   })
 
   it('Local mixin', async () => {
-    let port = await aport()
+    const port = await aport()
 
-    let caller01 = sugoCaller({
+    const caller01 = sugoCaller({
       port
     })
 
-    let hub = await new SugoHub({
+    const hub = await new SugoHub({
       storage: `${__dirname}/../tmp/testing-local-storage`,
       localActors: {
         'my-actor-01': sugoActor({
@@ -45,10 +45,10 @@ describe('local-mixin', function () {
     }).listen(port)
 
     {
-      let actor01 = await caller01.connect(hub.localActors[ 'my-actor-01' ].key)
+      const actor01 = await caller01.connect(hub.localActors['my-actor-01'].key)
       assert.ok(actor01)
-      let say = actor01.get('say')
-      let yes = await say.sayYes()
+      const say = actor01.get('say')
+      const yes = await say.sayYes()
       assert.equal(yes, 'Yes from actor01')
       await actor01.disconnect()
 

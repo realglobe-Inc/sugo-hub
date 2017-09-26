@@ -123,6 +123,14 @@
             }
         },
         {
+            "name": "clusterMixin",
+            "access": "",
+            "virtual": false,
+            "description": "Mixin to setup cluster",
+            "parameters": [],
+            "examples": []
+        },
+        {
             "name": "localMixin",
             "access": "",
             "virtual": false,

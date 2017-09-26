@@ -10,6 +10,7 @@ const {Module} = sugoActor
 const sugoCaller = require('sugo-caller')
 const sugoObserver = require('sugo-observer')
 const arequest = require('arequest')
+const {fork} = require('child_process')
 const aport = require('aport')
 const asleep = require('asleep')
 const {ok, equal, ifError} = require('assert')
@@ -540,7 +541,7 @@ describe('sugo-hub', function () {
   })
 
   it('Using cluster', async () => {
-    const {fork} = require('child_process')
+
 
     const port = await aport()
 
@@ -548,7 +549,8 @@ describe('sugo-hub', function () {
       require.resolve('../misc/mocks/mock-server.js'),
       [],
       {
-        env: Object.assign({}, process.env, {port})
+        env: Object.assign({}, process.env, {port}),
+        stdio: 'inherit'
       }
     )
 
@@ -568,8 +570,6 @@ describe('sugo-hub', function () {
     }
 
     await caller01.disconnect()
-
-    server.kill()
   })
 })
 

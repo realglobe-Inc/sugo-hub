@@ -3,7 +3,7 @@
 'use strict'
 
 const SugoHub = require('../../lib/sugo_hub')
-
+const asleep = require('asleep')
 const sugoActor = require('sugo-actor')
 const {Module} = sugoActor
 
@@ -23,6 +23,10 @@ const {Module} = sugoActor
   })
 
   await hub.listenAsCluster(port)
+
+  process.on('message', (m) => {
+    console.log('CHILD got message:', m)
+  })
 
 })().catch((e) => console.error(e))
 

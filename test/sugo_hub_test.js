@@ -538,6 +538,39 @@ describe('sugo-hub', function () {
 
     await asleep(80)
   })
+
+  it('Using cluster', async () => {
+    const {fork} = require('child_process')
+
+    const port = await aport()
+
+    const server = fork(
+      require.resolve('../misc/mocks/mock-server.js'),
+      [],
+      {
+        env: Object.assign({}, process.env, {port})
+      }
+    )
+
+    await asleep(2200)
+
+    const caller01 = sugoCaller({
+      port
+    })
+
+    {
+      const actor01 = await caller01.connect('my-actor-01')
+      ok(actor01)
+      const say = actor01.get('say')
+      const yes = await say.sayYes()
+      equal(yes, 'Yes from actor01')
+      await actor01.disconnect()
+    }
+
+    await caller01.disconnect()
+
+    server.kill()
+  })
 })
 
 /* global describe, before, after, it */

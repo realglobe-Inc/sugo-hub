@@ -25,8 +25,7 @@ const CONNECTION_NUMBERS = [
   50,
   100,
   300,
-  500,
-  1000
+  500
 ]
 
 co(function * () {

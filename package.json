@@ -50,7 +50,7 @@
     "winston": "^2.4.0"
   },
   "devDependencies": {
-    "ababel": "^2.0.1",
+    "ababel": "^2.0.3",
     "ababel-es2015": "^2.0.1",
     "amocha": "^4.0.0",
     "ape-doc": "^2.0.4",

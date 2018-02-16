@@ -62,6 +62,7 @@ co(function * () {
   process.exit(0)
   logger.info(`...done! ( ${new Date() - startAt}ms )`)
   yield server.close()
+  process.exit(0)
 }).catch((err) => {
   console.error(err)
   process.exit(1)

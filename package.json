@@ -50,7 +50,7 @@
     "winston": "^2.4.0"
   },
   "devDependencies": {
-    "ababel": "^4.0.6",
+    "ababel": "^4.0.7",
     "ababel-es2015": "^2.0.1",
     "amocha": "^5.0.0",
     "ape-doc": "^2.0.4",
@@ -64,7 +64,7 @@
     "cli-table": "^0.3.1",
     "co": "^4.6.0",
     "coz": "^6.0.20",
-    "eslint": "^4.17.0",
+    "eslint": "^4.18.1",
     "filecopy": "^4.0.1",
     "filedel": "^4.0.0",
     "injectmock": "^2.0.0",

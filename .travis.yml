@@ -18,7 +18,7 @@ script:
 - ./ci/build.js
 - ./ci/shim.js
 - ./ci/test.js
-- ./ci/benchmark.js
+# - ./ci/benchmark.js
 - ./ci/doc.js
 after_success:
 - ./ci/travis/publish.js

@@ -541,8 +541,6 @@ describe('sugo-hub', function () {
   })
 
   it('Using cluster', async () => {
-
-
     const port = await aport()
 
     const server = fork(
@@ -570,6 +568,8 @@ describe('sugo-hub', function () {
     }
 
     await caller01.disconnect()
+
+    await server.kill()
   })
 })
 

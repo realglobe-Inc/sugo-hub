@@ -396,9 +396,8 @@ describe('sugo-hub', function () {
     })
     await hub.listen(port)
 
-    let actor = sugoActor({
+    const actor = sugoActor({
       key: 'actor-hoge',
-      protocol: 'http',
       host: `localhost:${port}`,
       modules: {
         pinger: new Module({

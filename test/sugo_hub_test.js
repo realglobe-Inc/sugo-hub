@@ -55,9 +55,9 @@ describe('sugo-hub', function () {
 
     const YoPersonModule = modularize(YoPerson)
 
-    let emitter = new Module({})
+    const emitter = new Module({})
 
-    let actor01 = sugoActor({
+    const actor01 = sugoActor({
       host: `localhost:${port}`,
       key: 'my-actor-01',
       force: true,
@@ -373,9 +373,9 @@ describe('sugo-hub', function () {
         protocol: 'http',
         host: `localhost:${hub2Port}`
       })
-      let actor = await caller.connect('actor-01')
-      let pinger = actor.get('pinger')
-      let pong = await pinger.ping()
+      const actor = await caller.connect('actor-01')
+      const pinger = actor.get('pinger')
+      const pong = await pinger.ping()
       equal(pong, 'pong from actor')
 
       await caller.disconnect()

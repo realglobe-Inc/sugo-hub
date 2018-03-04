@@ -920,7 +920,7 @@
                     ],
                     "examples": [],
                     "returns": {
-                        "type": "Promise.<Entity>",
+                        "type": "Promise.<Service.Entity>",
                         "description": ""
                     }
                 },
@@ -1240,7 +1240,7 @@
                     ],
                     "examples": [],
                     "returns": {
-                        "type": "Promise.<Entity>",
+                        "type": "Promise.<Service.Entity>",
                         "description": ""
                     }
                 },
@@ -1465,7 +1465,7 @@
                     ],
                     "examples": [],
                     "returns": {
-                        "type": "Promise.<Entity>",
+                        "type": "Promise.<Service.Entity>",
                         "description": ""
                     }
                 },
@@ -1761,7 +1761,7 @@
                     ],
                     "examples": [],
                     "returns": {
-                        "type": "Promise.<Entity>",
+                        "type": "Promise.<Service.Entity>",
                         "description": ""
                     }
                 },
@@ -2025,7 +2025,7 @@
                     ],
                     "examples": [],
                     "returns": {
-                        "type": "Promise.<Entity>",
+                        "type": "Promise.<Service.Entity>",
                         "description": ""
                     }
                 },

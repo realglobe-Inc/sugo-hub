@@ -500,7 +500,7 @@ describe('sugo-hub', function () {
         say: new Module({
           hiWithDelay () {
             return new Promise((resolve, reject) => {
-              setTimeout(() => resolve('hi!'), 50)
+              setTimeout(() => resolve('hi!'), 500)
             })
           }
         })
@@ -514,26 +514,23 @@ describe('sugo-hub', function () {
     {
       let actor = await caller.connect('actor-foo')
       let say = actor.get('say')
-      say.hiWithDelay().catch((thrown) => {
+      void say.hiWithDelay().catch((thrown) => {
         caught = thrown
       })
-      await asleep(10)
 
       caller.sockets['actor-foo'].on(NOTICE, ({name, data}) => {
         notices[name] = data
       })
     }
-
     await actor.disconnect()
 
-    await asleep(80)
+    await asleep(180)
     await caller.disconnect()
 
     await hub.close()
-
+    await asleep(180)
     ok(caught)
     equal(caught.name, 'ActorGone')
-
     ok(notices['ActorGone'])
 
     await asleep(80)
@@ -566,6 +563,7 @@ describe('sugo-hub', function () {
       await actor01.disconnect()
     }
 
+    await asleep(100)
     await caller01.disconnect()
 
     await server.kill()

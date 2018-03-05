@@ -429,9 +429,9 @@ describe('sugo-hub', function () {
 
       await caller.disconnect()
     }
-
+    await asleep(100)
     await actor.disconnect()
-
+    await asleep(100)
     await hub.close()
   })
 

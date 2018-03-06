@@ -390,8 +390,8 @@ describe('sugo-hub', function () {
   })
 
   it('A lot of performs', async () => {
-    let port = await aport()
-    let hub = new SugoHub({
+    const port = await aport()
+    const hub = new SugoHub({
       storage: `${__dirname}/../var/testing-a-lot-of-performs`
     })
     await hub.listen(port)
@@ -420,13 +420,13 @@ describe('sugo-hub', function () {
       let pinger = actor.get('pinger')
       let promises = []
 
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 50; i++) {
         promises.push(
           pinger.ping()
         )
       }
       await Promise.all(promises)
-
+      await asleep(10)
       await caller.disconnect()
     }
     await asleep(100)
